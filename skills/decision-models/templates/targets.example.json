@@ -1,0 +1,6 @@
+{
+  "api": "the HTTP API service: endpoints, authentication, rate limits and the database layer",
+  "web": "the browser front end: pages, styling, client-side state and accessibility",
+  "cli": "the command-line tool: flags, output formatting and shell completion",
+  "docs": "user guides, reference documentation and examples"
+}

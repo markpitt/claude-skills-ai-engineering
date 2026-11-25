@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Ask a System One decision model about a state. Thin shim over the C# file-based app beside it,
+# decide.cs, so it can sit on PATH; see `decide --help`.
+set -Eeuo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly SCRIPT_DIR
+readonly APP="$SCRIPT_DIR/decide.cs"
+
+if ! command -v dotnet > /dev/null 2>&1; then
+  printf 'decide: dotnet 10 or later is required (dotnet run --file)\n' >&2
+  exit 2
+fi
+
+# Run from the app's own directory so a caller's global.json (a repo pinning another SDK) does not
+# decide which SDK builds it; the app switches back to the caller's directory itself. The first
+# run builds and caches the app (a few seconds); later runs reuse the build.
+export DECIDE_CALLER_DIR="$PWD"
+cd "$SCRIPT_DIR"
+exec dotnet run --file "$APP" -- "$@"

@@ -50,8 +50,12 @@ cp -r skills/<skill-name> ~/.claude/skills/    # personal, all projects
 cp -r skills/<skill-name> .claude/skills/      # this project only
 ```
 
-For Claude Desktop, build the skill's zip with `mise run skill:package:all` in claude-skills and
-upload it under Settings, Capabilities, Skills.
+For Claude Desktop, zip the skill directory's contents and upload the zip under Settings,
+Capabilities, Skills:
+
+```bash
+cd skills/<skill-name> && zip -r ../../<skill-name>.zip .
+```
 
 ## Licence
 

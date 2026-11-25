@@ -1,0 +1,19 @@
+# Sandbox profile (sourced by scripts/sandbox.sh). Copy to ~/.config/sandboxed-agent/<name>/profile.
+NAME=myapp                       # launcher names: myapp-agent, myapp-sandbox; agent config in ~/.myapp-agent
+ROOT=/srv/myapp                  # the folder the agent works in
+#WORKDIR=/srv/myapp/repo         # where the agent starts: ROOT (default) or a directory under it
+ROOT_MODE=ro                     # ro: change things through an API, not the files. rw: edit files in place
+NET=none                         # none | proxy | host   (least privilege first)
+PROXY_ADDR=127.0.0.1:8888        # NET=proxy: host-side allowlisting proxy the bridge connects to
+
+# Hidden from the agent (globs relative to ROOT). Directories become empty, files become empty.
+BLANK=( '**/.env' '**/.env.*' 'secrets.*' '**/*.pem' '**/*.key' 'data' 'logs' )
+# Readable but not writable even in an rw root.
+READONLY=( )
+
+# Environment variable NAMES passed in from the env file; the values never go in this file.
+PASS_ENV=( MYAPP_API_URL MYAPP_API_TOKEN )
+EXTRA_RO=( )                     # "host-path:sandbox-path" extra read-only binds (a directory holding a unix socket works: connect() needs no write access)
+EXTRA_RW=( )                     # "host-path:sandbox-path" extra WRITABLE binds, for a spool the host drains; the agent cannot replace the mount point. Create the source first; put the destination under /run, not ~
+TOOLS=( )                        # extra directories on PATH inside
+SHARE_PID=0                      # 1: keep the host's process namespace (ps, kill reach host processes); only for a host-administering agent

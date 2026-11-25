@@ -1,0 +1,11 @@
+{
+  "migration_without_rollback": {
+    "type": "noul",
+    "instructions": "Does this diff add or change a database migration without a matching rollback or down step?"
+  },
+  "secret_risk": {
+    "type": "score",
+    "instructions": "How likely is it that this diff adds a credential, token or private key to the repository?",
+    "criteria": ["no configuration or credentials touched", "configuration touched, no secrets", "a value that looks like a placeholder secret", "a value that looks like a real secret"]
+  }
+}

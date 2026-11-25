@@ -1,0 +1,38 @@
+[
+  {
+    "id": "pump_on_low_tank",
+    "state": { "tank_level_pct": 12, "low_threshold_pct": 20, "pump_running": false },
+    "question": "The tank is below its low threshold and the pump is off. Should the pump start now?",
+    "expect": true
+  },
+  {
+    "id": "pump_off_full_tank",
+    "state": { "tank_level_pct": 96, "low_threshold_pct": 20, "pump_running": true },
+    "question": "The tank is nearly full and the pump is running. Should the pump keep running?",
+    "expect": false
+  },
+  {
+    "id": "heating_on_cold_room",
+    "state": { "room_c": 16.5, "target_c": 20, "heating_on": false },
+    "question": "The room is well below its target and the heating is off. Should the heating turn on?",
+    "expect": true
+  },
+  {
+    "id": "heating_off_at_target",
+    "state": { "room_c": 20.2, "target_c": 20, "heating_on": true },
+    "question": "The room is at its target and the heating is on. Should the heating turn on or stay on?",
+    "expect": false
+  },
+  {
+    "id": "alert_on_repeat_failure",
+    "state": { "service": "example-api", "failures_last_hour": 14, "deploys_last_hour": 0 },
+    "question": "The service has failed fourteen times in the last hour with no deploy. Should a person look at it now?",
+    "expect": true
+  },
+  {
+    "id": "no_alert_single_blip",
+    "state": { "service": "example-api", "failures_last_hour": 1, "deploys_last_hour": 0 },
+    "question": "The service has failed once in the last hour and nothing else has changed. Should a person look at it now?",
+    "expect": false
+  }
+]

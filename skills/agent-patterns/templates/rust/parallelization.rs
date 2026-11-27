@@ -110,7 +110,7 @@ pub struct Subtask {
 ///
 /// # Example
 /// ```rust
-/// let parallelizer = SectioningParallelizer::new(client, "claude-sonnet-4-20250514".to_string());
+/// let parallelizer = SectioningParallelizer::new(client, "claude-sonnet-5-5".to_string());
 /// let result = parallelizer.process_code_review(&code).await?;
 /// ```
 pub struct SectioningParallelizer {
@@ -453,7 +453,7 @@ impl GuardrailsParallelizer {
 
                 tokio::spawn(async move {
                     let response = client
-                        .create_message(&check_prompt, "claude-3-haiku-20240307", 10, None)
+                        .create_message(&check_prompt, "claude-haiku-5-5", 10, None)
                         .await
                         .unwrap_or_default();
 
@@ -509,7 +509,7 @@ pub async fn example_code_review() -> Result<()> {
         .context("ANTHROPIC_API_KEY environment variable not set")?;
 
     let client = Arc::new(AnthropicClient::new(api_key));
-    let parallelizer = SectioningParallelizer::new(client, "claude-sonnet-4-20250514".to_string());
+    let parallelizer = SectioningParallelizer::new(client, "claude-sonnet-5-5".to_string());
 
     let code = r#"
 fn get_user(id: i32) -> User {

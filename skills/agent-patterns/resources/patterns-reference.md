@@ -1,6 +1,6 @@
 # Agent Patterns Reference
 
-Comprehensive reference for all agent patterns from Anthropic's "Building Effective Agents" engineering guide.
+Full reference for all agent patterns from Anthropic's "Building Effective Agents" engineering guide.
 
 ## Contents
 
@@ -64,7 +64,7 @@ Input → LLM₁ → Output₁ → [Processing] → LLM₂ → Output₂ → ...
 ✅ Fixed subtask sequence
 ✅ Each step requires different expertise/prompting
 ✅ Validation needed between steps
-✅ Higher accuracy through specialization
+✅ Higher accuracy through specialisation
 
 **When NOT to Use:**
 ❌ Subtasks are unpredictable
@@ -86,7 +86,7 @@ Input → LLM₁ → Output₁ → [Processing] → LLM₂ → Output₂ → ...
    - Step 5: Write conclusion
    - Step 6: Proofread and format
 
-2. **Localization Pipeline**
+2. **Localisation Pipeline**
    - Step 1: Generate English content
    - Step 2: Extract translatable strings
    - Step 3: Translate to target language
@@ -111,7 +111,7 @@ async function promptChaining(input) {
 
 ### 2. Routing
 
-**Core Concept:** Classify input and route to specialized downstream processes.
+**Core Concept:** Classify input and route to specialised downstream processes.
 
 **Architecture:**
 ```
@@ -123,7 +123,7 @@ Input → Classifier LLM → Route Decision
 
 **Key Characteristics:**
 - Single classification step
-- Multiple specialized handlers
+- Multiple specialised handlers
 - Can route to different models or processes
 - Often combined with other patterns
 
@@ -131,7 +131,7 @@ Input → Classifier LLM → Route Decision
 ✅ Distinct input categories
 ✅ Categories benefit from different handling
 ✅ Classification accuracy is high
-✅ Cost/performance optimization opportunities
+✅ Cost/performance optimisation opportunities
 
 **When NOT to Use:**
 ❌ All inputs need the same handling
@@ -154,7 +154,7 @@ Input → Classifier LLM → Route Decision
 2. **Model Selection**
    - Simple question → Fast, cheap model
    - Complex analysis → Capable, expensive model
-   - Code generation → Specialized coding model
+   - Code generation → Specialised coding model
 
 3. **Content Moderation**
    - Safe content → Publish
@@ -204,7 +204,7 @@ Input → Split into Subtasks
 
 **Real-World Examples:**
 - Multiple guardrails running simultaneously
-- Analyzing different document sections
+- Analysing different document sections
 - Evaluating multiple performance aspects
 - Multi-language translation
 
@@ -279,34 +279,34 @@ Input → Orchestrator LLM ↔ Dynamic Planning
 ✅ Subtasks unknown until runtime
 ✅ Complex, multi-component problems
 ✅ Flexibility needed based on input
-✅ Workers can be specialized
+✅ Workers can be specialised
 
 **When NOT to Use:**
 ❌ Fixed, predictable workflow (use Prompt Chaining)
 ❌ Simple tasks (overhead not justified)
-❌ Workers can't be meaningfully specialized
+❌ Workers can't be meaningfully specialised
 
 **Implementation Considerations:**
 - Orchestrator prompt is critical
-- Worker specialization vs generalization
+- Worker specialisation vs generalisation
 - Result synthesis strategy
 - Error handling and retry logic
 - Cost monitoring (can be expensive)
 
 **Real-World Examples:**
 1. **Complex Code Changes**
-   - Orchestrator analyzes requirements
+   - Orchestrator analyses requirements
    - Delegates: file analysis, code generation, testing, documentation
    - Synthesizes changes into coherent PR
 
 2. **Research Tasks**
    - Orchestrator breaks down research question
    - Delegates: web search, data analysis, source verification
-   - Synthesizes into comprehensive report
+   - Synthesizes into full report
 
 3. **Multi-Document Processing**
    - Orchestrator determines document relationships
-   - Delegates: extraction, comparison, summarization
+   - Delegates: extraction, comparison, summarisation
    - Synthesizes into unified output
 
 **Code Skeleton:**
@@ -463,14 +463,14 @@ Input/Goal → Agent LLM ↔ [Planning Loop]
 1. **Environment Feedback** - "Ground truth" at each step
 2. **Stopping Conditions** - Prevent infinite loops
 3. **Sandboxing** - Contain potential damage
-4. **Monitoring** - Track agent behavior
+4. **Monitoring** - Track agent behaviour
 5. **Human Oversight** - Ability to intervene
 
 **Implementation Considerations:**
 - Cost can be 10-100x higher than simple patterns
 - Errors compound across steps
-- Requires robust tool design
-- Need comprehensive testing
+- Requires reliable tool design
+- Need full testing
 - Consider timeout and resource limits
 - Implement guardrails
 
@@ -493,11 +493,11 @@ Input/Goal → Agent LLM ↔ [Planning Loop]
 
 3. **Research Agent**
    - Formulate search queries
-   - Analyze results
+   - Analyse results
    - Follow relevant links
    - Synthesize information
    - Identify gaps
-   - Continue until comprehensive
+   - Continue until full
 
 **Code Skeleton:**
 ```
@@ -602,13 +602,13 @@ Input → Route → Simple → Prompt Chain
 Don't use sophisticated patterns when simple prompts suffice.
 
 ### ❌ Invisible Steps
-Don't hide agent reasoning—show planning and decisions.
+Don't hide agent reasoning: show planning and decisions.
 
 ### ❌ Poor Tool Design
-Don't rush tool interfaces—they're more critical than prompts.
+Don't rush tool interfaces: they're more critical than prompts.
 
 ### ❌ Unlimited Autonomy
-Don't allow agents to run indefinitely—always have stopping conditions.
+Don't allow agents to run indefinitely: always have stopping conditions.
 
 ### ❌ No Monitoring
 Don't deploy without logging, metrics, and alerting.

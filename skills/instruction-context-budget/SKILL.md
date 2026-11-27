@@ -3,7 +3,7 @@ name: instruction-context-budget
 description: Measures what a coding-agent harness always loads (CLAUDE.md and AGENTS.md chains, unscoped rules, memory indexes and skill descriptions) in bytes and estimated tokens per file, then trims rationale and history out of those files into companion files while keeping the imperatives. Tags the repository first, verifies that no removed line was lost, and re-checks the result with agent-instruction-load-audit. Use when a session starts with too much instruction text loaded, a memory index is over its cap, skill descriptions crowd the context, or asked to slim CLAUDE.md, rules or memory. Do NOT use to prove which files a session actually loaded (use agent-instruction-load-audit), to write new instruction content (use ai-coding-agent-setup), or to change what a skill does (use skill-creator).
 license: Apache-2.0
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   tags: "agents, context-window, instructions, claude-md, agents-md, rules, memory, token-budget, measurement, pi, omp"
 ---
 
@@ -91,7 +91,8 @@ WORK=$(mktemp -d)
 
 ## Evidence behind the technique
 
-Counts from the operator's session stores, taken for this skill, not transcript content:
+An example from the session stores of the machine this skill was built on, counted for the skill and
+not read for content. Your own figures will differ; what matters is how often compaction appears:
 
 - pi (`~/.pi/agent/sessions`): 49 session files, 36 compaction entries, 94 assistant messages with
   an error stop reason.
@@ -103,18 +104,22 @@ always-loaded set is a candidate, though the count alone does not show that inst
 
 ## Tests
 
-Run them through the sandbox wrapper, from a directory inside the repository:
+Run them inside a sandbox, from a directory inside the repository:
 
 ```bash
-mp-sandbox-test python3 -P "$SKILL_DIR/scripts/test_measure_context_budget.py" -v
+<sandbox> python3 -P "$SKILL_DIR/scripts/test_measure_context_budget.py" -v
 ```
+
+`<sandbox>` stands for whatever runs test code in isolation on your machine, for example a
+bubblewrap (`bwrap`) wrapper that makes only the repository writable. Leave it out to run the tests
+directly.
 
 The tests generate their fixtures at run time. They include a missing-root case that must exit 2, a
 dropped-line case that must exit 1, and a one-word rewording that must not pass.
 
 ## Limits
 
-- Tokens are estimates. Two harnesses that tokenize differently can disagree with the same bytes.
+- Tokens are estimates. Two harnesses that tokenise differently can disagree with the same bytes.
 - The script reads frontmatter with a small parser, not YAML. Unusual scalar forms (anchors, flow
   mappings) are not parsed, and the description is then counted as empty. Check the `skill-description`
   rows by eye when a skill uses them.

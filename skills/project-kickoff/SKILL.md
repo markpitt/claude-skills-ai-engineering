@@ -3,7 +3,7 @@ name: project-kickoff
 description: Turns a rough idea for a new product, venture or project into a short goal statement and a set of parallel workstreams (market and competitor research, MVP spec, name and design system, go-to-market, plus risks and a validation plan when they apply). Use when the user says "kick off this project", "start a new project from this idea", "here is an idea for a product", "set up the workstreams for this", "run project kickoff on the goal", or pastes a rough idea and asks what to do first. Starts one thread per workstream where the workspace supports parallel threads, and works through them in order in an ordinary chat. Do NOT use for planning a feature inside an existing codebase, for breaking down a single engineering task, or for a project that already has a spec and running workstreams.
 license: Apache-2.0
 metadata:
-  version: "1.0"
+  version: "1.0.0"
   tags: "project-kickoff, planning, product, research, workstreams"
 ---
 

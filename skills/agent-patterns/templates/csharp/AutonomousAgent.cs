@@ -79,7 +79,7 @@ namespace AgentPatterns
 
         public AutonomousAgent(
             AnthropicClient client,
-            string model = "claude-sonnet-4-20250514")
+            string model = "claude-sonnet-5-5")
         {
             _client = client;
             _model = model;

@@ -8,7 +8,7 @@ AGENTS.md is an open-standard file (governed by the Agentic AI Foundation / Linu
 
 ### 1. Project Overview
 
-A concise technical summary — not marketing copy. Include:
+A concise technical summary: not marketing copy. Include:
 
 - Primary tech stack (languages, frameworks, runtimes)
 - Core architectural pattern (monolith, microservices, monorepo, etc.)
@@ -188,7 +188,7 @@ Run frontend tests: `pnpm --filter @repo/frontend test`
 | Scope | Cross-platform (Codex, Cursor, Gemini CLI, Claude Code) | Claude Code CLI only | GitHub Copilot only |
 | File location | Repo root and nested directories | Repo root or `.claude/` | `.github/` directory |
 | Discovery | Hierarchical (closest file wins) | Flat (root file) | Flat (single file) |
-| Interoperability | High — referenced by other config files | Low | Low |
+| Interoperability | High: referenced by other config files | Low | Low |
 
 ### Convergence Trend (2026)
 
@@ -206,7 +206,7 @@ This avoids duplicating project knowledge across tool-specific files.
 
 ## AGENTS.md Template
 
-Copy and customize this template for any project:
+Copy and customise this template for any project:
 
 ```markdown
 # AGENTS.md — [Project Name]

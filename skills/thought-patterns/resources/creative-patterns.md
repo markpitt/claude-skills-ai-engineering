@@ -43,9 +43,9 @@ This resource covers thinking patterns used for generating ideas, exploring poss
 
 **When to Use**:
 - Selecting among alternatives
-- Finalizing decisions
+- Finalising decisions
 - Applying known methods
-- Optimizing solutions
+- Optimising solutions
 
 **Process**:
 1. Gather possible solutions

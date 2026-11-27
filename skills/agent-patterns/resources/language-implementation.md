@@ -72,7 +72,7 @@ async function callLLM(prompt: string, context: string): Promise<string> {
       'x-api-key': process.env.ANTHROPIC_API_KEY || ''
     },
     body: JSON.stringify({
-      model: 'claude-3-5-sonnet-20241022',
+      model: 'claude-sonnet-5-5',
       max_tokens: 2048,
       messages: [{ role: 'user', content: prompt + '\n\nContext: ' + context }]
     })
@@ -256,7 +256,7 @@ async def call_llm(prompt: str, context: str) -> str:
     client = anthropic.Anthropic()
     
     message = client.messages.create(
-        model="claude-3-5-sonnet-20241022",
+        model="claude-sonnet-5-5",
         max_tokens=2048,
         messages=[{
             "role": "user",
@@ -460,7 +460,7 @@ async fn call_llm(prompt: &str, context: &str) -> Result<String, Box<dyn std::er
         .post("https://api.anthropic.com/messages")
         .header("x-api-key", api_key)
         .json(&json!({
-            "model": "claude-3-5-sonnet-20241022",
+            "model": "claude-sonnet-5-5",
             "max_tokens": 2048,
             "messages": [{
                 "role": "user",
@@ -639,7 +639,7 @@ public class AnthropicLlmClient : ILlmClient
     {
         var request = new
         {
-            model = "claude-3-5-sonnet-20241022",
+            model = "claude-sonnet-5-5",
             max_tokens = 2048,
             messages = new[] {
                 new {

@@ -1,7 +1,7 @@
 """Tests for measure_context_budget.py. Fixtures are generated at run time in a temporary directory.
 
-Run through the sandbox wrapper for test runs:
-    mp-sandbox-test python3 -P claude-skills-ai-engineering/skills/instruction-context-budget/scripts/test_measure_context_budget.py -v
+Run inside a sandbox (for example a bubblewrap wrapper) for test runs:
+    python3 -P claude-skills-ai-engineering/skills/instruction-context-budget/scripts/test_measure_context_budget.py -v
 """
 
 from __future__ import annotations

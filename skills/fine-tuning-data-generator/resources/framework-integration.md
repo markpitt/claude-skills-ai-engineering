@@ -4,7 +4,7 @@
 
 ### Unsloth Integration
 
-Unsloth is optimized for efficient fine-tuning with ChatML format.
+Unsloth is optimised for efficient fine-tuning with ChatML format.
 
 **Setup:**
 ```python
@@ -123,8 +123,8 @@ trainer.train()
 
 **Important Notes:**
 - Chat template must match model expectations
-- Tokenizer may need custom chat template configuration
-- Ensure context window matches model limits
+- Tokeniser may need custom chat template configuration
+- Make sure context window matches model limits
 
 ### Custom Training Loops
 
@@ -214,7 +214,7 @@ dataloader = DataLoader(dataset, batch_size=8, shuffle=True)
 | Underfitting | Loss plateaus high | Increase epochs, increase dataset size |
 | GPU OOM | Out of memory error | Reduce batch size or max sequence length |
 | Loss NaN | Training explodes | Reduce learning rate, check for bad data |
-| Slow training | Taking much longer than expected | Check batch size, GPU utilization, data loading |
+| Slow training | Taking much longer than expected | Check batch size, GPU utilisation, data loading |
 
 ### Post-Training Evaluation
 
@@ -229,7 +229,7 @@ After training completes:
    - Generate sample outputs from fine-tuned model
    - Compare against training examples
    - Test on unseen examples similar to training data
-   - Check for memorization vs. generalization
+   - Check for memorisation vs. generalisation
 
 3. **Real-World Testing**:
    - Test with actual use cases
@@ -237,7 +237,7 @@ After training completes:
    - Get domain expert feedback
    - Measure task-specific metrics (if applicable)
 
-## Model Optimization
+## Model Optimisation
 
 ### Quantization
 

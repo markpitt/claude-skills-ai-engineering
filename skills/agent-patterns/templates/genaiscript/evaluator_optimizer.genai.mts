@@ -9,7 +9,7 @@
 script({
     title: "Evaluator-Optimizer Pattern",
     description: "Iteratively refine content through evaluation and feedback",
-    model: "claude-sonnet-4-20250514",
+    model: "claude-sonnet-5-5",
     parameters: {
         task: {
             type: "string",
@@ -123,7 +123,7 @@ ${_.CRITERIA}
             `
         }, {
             label: "initial_generation",
-            model: "claude-sonnet-4-20250514"
+            model: "claude-sonnet-5-5"
         })
 
         return response.text
@@ -162,7 +162,7 @@ Generate an improved version addressing all feedback:
             `
         }, {
             label: "improved_generation",
-            model: "claude-sonnet-4-20250514"
+            model: "claude-sonnet-5-5"
         })
 
         return response.text
@@ -207,7 +207,7 @@ Respond in JSON format:
         `
     }, {
         label: "evaluate",
-        model: "claude-sonnet-4-20250514",
+        model: "claude-sonnet-5-5",
         responseType: "json_object"
     })
 
@@ -416,7 +416,7 @@ Respond in JSON format:
             }
         }, {
             label: `confidence_attempt_${i + 1}`,
-            model: "claude-sonnet-4-20250514",
+            model: "claude-sonnet-5-5",
             responseType: "json_object"
         })
 

@@ -54,7 +54,7 @@ Provide enough tokens for the model to reason about tool usage.
 "func1" // No semantic value
 ```
 
-#### 2. Comprehensive Description
+#### 2. Full Description
 ```typescript
 {
   name: "search_codebase",
@@ -154,7 +154,7 @@ Provide enough tokens for the model to reason about tool usage.
 
 **Result:** This single change eliminated an entire category of errors.
 
-**Lesson:** Spend more time optimizing tool interfaces than prompts.
+**Lesson:** Spend more time optimising tool interfaces than prompts.
 
 ## Format Selection Examples
 
@@ -542,7 +542,7 @@ public List<SearchResult> SearchCodebase(SearchParams params)
 ## Checklist for Tool Design
 
 - [ ] Clear, semantic name
-- [ ] Comprehensive description with examples
+- [ ] Full description with examples
 - [ ] All parameters documented with examples
 - [ ] Edge cases documented
 - [ ] Error cases handled and documented

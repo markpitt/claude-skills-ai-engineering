@@ -5,7 +5,7 @@
 Turns a rough idea for a new product, venture or project into a short goal statement and a set of parallel workstreams (market and competitor research, MVP spec, name and design system, go-to-market, plus risks and a validation plan when they apply). Use when the user says "kick off this project", "start a new project from this idea", "here is an idea for a product", "set up the workstreams for this", "run project kickoff on the goal", or pastes a rough idea and asks what to do first. Starts one thread per workstream where the workspace supports parallel threads, and works through them in order in an ordinary chat. Do NOT use for planning a feature inside an existing codebase, for breaking down a single engineering task, or for a project that already has a spec and running workstreams.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 1.0
+- **Version:** 1.0.0
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -23,4 +23,4 @@ Settings, Capabilities, Skills. Released builds attach a ready-made zip.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

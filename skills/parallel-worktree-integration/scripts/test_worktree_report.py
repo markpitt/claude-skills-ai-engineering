@@ -1,7 +1,7 @@
 """Tests for worktree_report.py. Every repository is built at run time in a temporary directory.
 
-Run through the sandbox wrapper for test runs, from a directory inside the repository:
-    mp-sandbox-test python3 -P claude-skills-ai-engineering/skills/parallel-worktree-integration/scripts/test_worktree_report.py -v
+Run inside a sandbox (for example a bubblewrap wrapper) for test runs, from a directory inside the repository:
+    python3 -P claude-skills-ai-engineering/skills/parallel-worktree-integration/scripts/test_worktree_report.py -v
 """
 
 from __future__ import annotations

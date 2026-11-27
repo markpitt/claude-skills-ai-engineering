@@ -1,10 +1,10 @@
-# Specialized Problem-Solving Patterns
+# Specialised Problem-Solving Patterns
 
-This resource covers domain-specific and methodological patterns for user-centered design, constrained optimization, parallel analysis, and iterative development.
+This resource covers domain-specific and methodological patterns for user-centered design, constrained optimisation, parallel analysis, and iterative development.
 
 ## Design Thinking
 
-**Description**: Human-centered approach to innovation emphasizing empathy, ideation, and iterative prototyping.
+**Description**: Human-centered approach to innovation emphasising empathy, ideation, and iterative prototyping.
 
 **When to Use**:
 - User-centered problems
@@ -18,7 +18,7 @@ This resource covers domain-specific and methodological patterns for user-center
 ### 1. Empathize
 Understand user needs deeply:
 - Conduct interviews
-- Observe behavior in context
+- Observe behaviour in context
 - Build empathy maps
 - Identify pain points and desires
 - Challenge assumptions about users
@@ -62,7 +62,7 @@ Refine based on learning:
 - Converge on solution
 
 **Key Principles**:
-- Bias toward action
+- Bias towards action
 - Embrace experimentation
 - Radical collaboration
 - Mindfulness of process
@@ -79,7 +79,7 @@ Refine based on learning:
 **When to Use**:
 - Resource-limited situations
 - Focused creativity needed
-- Optimization problems
+- Optimisation problems
 - When constraints clarify direction
 - Budget/time restrictions
 
@@ -91,9 +91,9 @@ Refine based on learning:
    - Legal/regulatory bounds
    - Physical constraints
 
-2. **Categorize constraints**
+2. **Categorise constraints**
    - Hard constraints (cannot be violated)
-   - Soft constraints (prefer to honor)
+   - Soft constraints (prefer to honour)
    - Assumed constraints (may be questionable)
 
 3. **Treat constraints as creative challenges**
@@ -103,7 +103,7 @@ Refine based on learning:
 
 4. **Generate solutions within boundaries**
    - Work within hard constraints
-   - Optimize soft constraints
+   - Optimise soft constraints
    - Question assumed constraints
 
 5. **Question constraint validity**
@@ -115,7 +115,7 @@ Refine based on learning:
 **Creative Constraint Examples**:
 - "We only have one week" → Focus on MVP
 - "Budget is $100" → Find free alternatives
-- "Must fit in one screen" → Ruthless prioritization
+- "Must fit in one screen" → Ruthless prioritisation
 
 **Strengths**: Focus, creativity through limitation, realistic solutions.
 
@@ -131,7 +131,7 @@ Refine based on learning:
 - Complex multi-faceted problems
 - When single-thread insufficient
 - Exploring multiple hypotheses
-- Comprehensive analysis needed
+- Full analysis needed
 - Time permits deep exploration
 
 **Process**:
@@ -204,7 +204,7 @@ Refine based on learning:
    - What's unnecessary? (remove it)
 
 4. **Implement changes**
-   - Prioritize high-impact changes
+   - Prioritise high-impact changes
    - Make one change at a time if debugging
    - Document what changed and why
 
@@ -250,7 +250,7 @@ Refine based on learning:
 |---------|--------------|--------------|
 | Design Thinking | User empathy | "What do users need?" |
 | Constraint-Based | Focused creativity | "How can I work within limits?" |
-| Parallel Processing | Comprehensive analysis | "What am I missing?" |
+| Parallel Processing | Full analysis | "What am I missing?" |
 | Iterative Refinement | Progressive improvement | "How can this be better?" |
 
 ## Application Examples

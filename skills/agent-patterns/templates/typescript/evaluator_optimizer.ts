@@ -51,8 +51,8 @@ class EvaluatorOptimizer {
 
   constructor(
     client: Anthropic,
-    generatorModel: string = "claude-sonnet-4-20250514",
-    evaluatorModel: string = "claude-sonnet-4-20250514"
+    generatorModel: string = "claude-sonnet-5-5",
+    evaluatorModel: string = "claude-sonnet-5-5"
   ) {
     this.client = client;
     this.generatorModel = generatorModel;
@@ -268,7 +268,7 @@ class ConfidenceBasedOptimizer {
   private client: Anthropic;
   private model: string;
 
-  constructor(client: Anthropic, model: string = "claude-sonnet-4-20250514") {
+  constructor(client: Anthropic, model: string = "claude-sonnet-5-5") {
     this.client = client;
     this.model = model;
   }

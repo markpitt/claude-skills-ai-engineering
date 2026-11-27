@@ -62,7 +62,7 @@ Input → Generator LLM → Output₁
    - Criteria: Clarity, engagement, brand voice, call-to-action effectiveness, SEO
    - Evaluator feedback: "Opening paragraph is too technical, start with benefit"
 
-4. **Search Query Optimization**
+4. **Search Query Optimisation**
    - Criteria: Result relevance, specificity, recall, diversity
    - Evaluator feedback: "Results include competitor info, modify query to exclude..."
 
@@ -102,7 +102,7 @@ Input → Generator LLM → Output₁
 4. **Code Review and Improvement**
    - Input: Code to improve
    - Iteration 1:
-     - Generator: Analyze and generate improved version
+     - Generator: Analyse and generate improved version
      - Evaluator: Check functionality, readability, performance, tests
      - Feedback: Issues to fix
    - Iteration 2-N: Fix issues
@@ -496,6 +496,6 @@ async fn evaluator_optimizer(input: String) -> Result<String> {
 - [ ] Improvement tracking enables decision to stop early
 - [ ] Error handling for evaluator failures
 - [ ] Tested with sample inputs before deployment
-- [ ] Metrics tracked for learning and optimization
+- [ ] Metrics tracked for learning and optimisation
 - [ ] Different evaluators available for different content types
 

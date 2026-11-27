@@ -2,10 +2,10 @@
 
 # genaiscript
 
-Expert guidance for Microsoft's GenAIScript framework - a JavaScript/TypeScript-based system for building automatable LLM prompts and AI workflows. Use when creating, debugging, or optimising GenAIScript scripts, implementing prompts-as-code, working with tools and agents, configuring MCP servers, processing files (PDF, CSV, DOCX), defining schemas, setting up script tests and evals, or building AI automation workflows. Do NOT use for generic prompt engineering unrelated to GenAIScript, or for other LLM frameworks unless the user explicitly asks about migration.
+Writes, debugs and hardens scripts for Microsoft's GenAIScript, the JavaScript and TypeScript framework for prompts-as-code and LLM automation. Covers script structure, file context with def and env.files, structured output with responseSchema, tools and agents, MCP servers and toolsSha pinning, parsing PDF, CSV and DOCX, script tests and evals, retrieval, and model aliases. Use when creating, fixing or optimising a .genai.mjs or .genai.mts script, or when asked how to do something in GenAIScript, to "add tests to this script" or to "make this script safe against prompt injection". Do NOT use for generic prompt engineering with no GenAIScript code, or for other LLM frameworks unless the user is migrating to or from GenAIScript.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 3.0
+- **Version:** 4.0.0
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -33,4 +33,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

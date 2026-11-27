@@ -100,7 +100,7 @@ pub struct Route<T> {
 ///
 /// # Example
 /// ```rust
-/// let router = Router::new(client, "claude-sonnet-4-20250514".to_string());
+/// let router = Router::new(client, "claude-sonnet-5-5".to_string());
 /// router.add_route(Route {
 ///     category: "technical".to_string(),
 ///     description: "Technical issues".to_string(),
@@ -251,9 +251,9 @@ impl ModelRouter {
         let complexity = self.assess_complexity(input).await?;
 
         let model = match complexity {
-            Complexity::Simple => "claude-3-haiku-20240307",
-            Complexity::Moderate => "claude-sonnet-4-20250514",
-            Complexity::Complex => "claude-opus-4-20250514",
+            Complexity::Simple => "claude-haiku-5-5",
+            Complexity::Moderate => "claude-sonnet-5-5",
+            Complexity::Complex => "claude-opus-5-5",
         };
 
         self.client.create_message(input, model, 4096).await
@@ -291,7 +291,7 @@ pub async fn example_customer_service() -> Result<()> {
         .context("ANTHROPIC_API_KEY environment variable not set")?;
 
     let client = Arc::new(AnthropicClient::new(api_key));
-    let mut router: Router<String> = Router::new(client.clone(), "claude-sonnet-4-20250514".to_string());
+    let mut router: Router<String> = Router::new(client.clone(), "claude-sonnet-5-5".to_string());
 
     // Add routes
     router.add_route(Route {
@@ -306,7 +306,7 @@ pub async fn example_customer_service() -> Result<()> {
                             "You are a technical support specialist. Help with: {}",
                             input
                         ),
-                        "claude-sonnet-4-20250514",
+                        "claude-sonnet-5-5",
                         1024,
                     )
                     .await
@@ -329,7 +329,7 @@ pub async fn example_customer_service() -> Result<()> {
                             "You are a billing support specialist. Help with: {}",
                             input
                         ),
-                        "claude-sonnet-4-20250514",
+                        "claude-sonnet-5-5",
                         1024,
                     )
                     .await

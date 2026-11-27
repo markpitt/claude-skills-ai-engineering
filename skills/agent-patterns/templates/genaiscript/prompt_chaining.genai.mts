@@ -9,7 +9,7 @@
 script({
     title: "Prompt Chaining - Document Generation",
     description: "Generate a document using sequential prompt chaining",
-    model: "claude-3-5-sonnet-20241022",
+    model: "claude-sonnet-5-5",
     parameters: {
         topic: {
             type: "string",
@@ -25,7 +25,7 @@ const outline = await runPrompt((_) => {
     _.$`Create a detailed outline for an article about: ${_.TOPIC}`
 }, {
     label: "outline",
-    model: "claude-3-5-sonnet-20241022"
+    model: "claude-sonnet-5-5"
 })
 
 // Validate outline
@@ -47,7 +47,7 @@ Write in a professional tone with clear examples.
     `
 }, {
     label: "draft",
-    model: "claude-3-5-sonnet-20241022"
+    model: "claude-sonnet-5-5"
 })
 
 // Validate draft has substantial content
@@ -70,7 +70,7 @@ Fix any grammar, improve clarity, and ensure consistent tone.
     `
 }, {
     label: "final",
-    model: "claude-3-5-sonnet-20241022"
+    model: "claude-sonnet-5-5"
 })
 
 console.log("✓ Final article completed")

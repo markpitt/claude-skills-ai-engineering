@@ -45,7 +45,7 @@ async def augmented_llm_with_retrieval(query: str, client: Anthropic):
     # Generate response with context
     # SECURITY: System prompt explicitly marks retrieved content as untrusted data
     response = await client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
         max_tokens=4096,
         system=(
             "You are a helpful assistant. "
@@ -119,7 +119,7 @@ tools = [
 ]
 
 response = await client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
     max_tokens=4096,
     tools=tools,
     messages=[{"role": "user", "content": user_query}]
@@ -287,7 +287,7 @@ class AugmentedLLM:
     """A fully augmented LLM with retrieval, tools, and memory"""
     
     client: anthropic.Anthropic
-    model: str = "claude-sonnet-4-20250514"
+    model: str = "claude-sonnet-5-5"
     
     # Augmentations
     knowledge_base: "VectorStore" = None

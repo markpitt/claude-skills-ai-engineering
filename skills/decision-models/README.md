@@ -5,7 +5,7 @@
 Uses a System One decision model (OpenRouter, inception/mercury-decide:free) through the bundled `decide` tool: yes/no, choice and score questions about a text or JSON state, answered as probabilities. Use when a workflow needs a fast, cheap judgement such as CI failure triage, commit and changelog checks, routing an issue to the right repository or team, classifying review comments, calibrating those answers against real outcomes, adding an optional model decision to an app, or pointing decide at a local gateway in front of a llama-swap model and testing candidate models against a fixed question set. Do NOT use for generating text, writing review prose, serving the model itself (use local-llm-serving), or any check a parser, grep, build or test can answer exactly.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 1.2.0
+- **Version:** 1.2.1
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -39,4 +39,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

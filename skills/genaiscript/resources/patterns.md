@@ -5,7 +5,7 @@ Advanced patterns, recipes, and best practices for GenAIScript development.
 ## Table of Contents
 
 1. [Design Patterns](#design-patterns)
-2. [Performance Optimization](#performance-optimization)
+2. [Performance Optimisation](#performance-optimisation)
 3. [Error Handling](#error-handling)
 4. [Testing Strategies](#testing-strategies)
 5. [Modular Architecture](#modular-architecture)
@@ -51,7 +51,7 @@ $`Implement the top 3 recommendations from RECOMMENDATIONS.`
 
 ### 2. Template Method
 
-Define a reusable script structure with customizable steps.
+Define a reusable script structure with customisable steps.
 
 ```javascript
 // Base template
@@ -226,7 +226,7 @@ await createDocumentation(docType, env.files)
 
 ---
 
-## Performance Optimization
+## Performance Optimisation
 
 ### 1. Token Budgeting
 
@@ -720,7 +720,7 @@ $`Summarize all plugin RESULTS into a final report`
 
 ### 1. Logging and Debugging
 
-Add comprehensive logging.
+Add full logging.
 
 ```javascript
 function log(level, message, data = {}) {
@@ -864,7 +864,7 @@ const result = await analyzers[level](env.files)
 
 ---
 
-These patterns provide a solid foundation for building robust, maintainable GenAIScript applications.
+These patterns provide a solid foundation for building reliable, maintainable GenAIScript applications.
 
 ---
 

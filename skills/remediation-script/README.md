@@ -2,10 +2,10 @@
 
 # remediation-script
 
-Write a bash script for the human to run when a guard, sandbox or permission rule blocks the agent's own writes (moves, renames, deletes or bulk edits in a protected tree), then verify the end state once they report it has run. Use when a write is refused by a hook, sandbox, permission prompt or protected path and the change still needs making, or when a bulk file operation should be handed to a person as a reviewable script. Do NOT use for general Bash help or script review (use shell-guru), for a one-off command the agent is allowed to run, or for deciding whether a guard should be relaxed.
+Writes a bash script for the human to run when a guard, sandbox or permission rule blocks the agent's own writes (moves, renames, deletes or bulk edits in a protected tree), then verify the end state once they report it has run. Use when a write is refused by a hook, sandbox, permission prompt or protected path and the change still needs making, or when a bulk file operation should be handed to a person as a reviewable script. Do NOT use for general Bash help or script review (use shell-guru), for a one-off command the agent is allowed to run, or for deciding whether a guard should be relaxed.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 1.0.0
+- **Version:** 1.0.1
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -30,4 +30,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

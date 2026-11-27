@@ -16,7 +16,7 @@ class AnthropicClient {
 
   Future<String> createMessage({
     required String prompt,
-    String model = 'claude-sonnet-4-20250514',
+    String model = 'claude-sonnet-5-5',
     int maxTokens = 4096,
   }) async {
     final response = await httpClient.post(
@@ -109,7 +109,7 @@ class Router<T, R> {
 
   Router({
     required this.client,
-    this.model = 'claude-sonnet-4-20250514',
+    this.model = 'claude-sonnet-5-5',
     this.confidenceThreshold = 0.7,
     this.fallbackHandler,
   });
@@ -210,10 +210,10 @@ class ModelRouter {
 
   ModelRouter({
     required this.client,
-    this.fastModel = 'claude-3-haiku-20240307',
-    this.standardModel = 'claude-sonnet-4-20250514',
-    this.powerfulModel = 'claude-opus-4-20250514',
-    this.classificationModel = 'claude-sonnet-4-20250514',
+    this.fastModel = 'claude-haiku-5-5',
+    this.standardModel = 'claude-sonnet-5-5',
+    this.powerfulModel = 'claude-opus-5-5',
+    this.classificationModel = 'claude-sonnet-5-5',
   });
 
   /// Assess complexity of input
@@ -324,7 +324,7 @@ class TicketRouter {
 
   TicketRouter({
     required this.client,
-    this.model = 'claude-sonnet-4-20250514',
+    this.model = 'claude-sonnet-5-5',
   });
 
   Future<SupportTicket> routeTicket(SupportTicket ticket) async {

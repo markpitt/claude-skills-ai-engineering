@@ -132,7 +132,7 @@ char* call_anthropic_api(const char* api_key, const char* model,
 AutonomousAgent* agent_create(const char* api_key, const char* model) {
     AutonomousAgent* agent = (AutonomousAgent*)calloc(1, sizeof(AutonomousAgent));
     agent->api_key = strdup(api_key);
-    agent->model = model ? strdup(model) : strdup("claude-sonnet-4-20250514");
+    agent->model = model ? strdup(model) : strdup("claude-sonnet-5-5");
     agent->tool_count = 0;
     agent->conversation_count = 0;
     return agent;

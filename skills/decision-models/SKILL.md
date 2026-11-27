@@ -4,7 +4,7 @@ description: "Uses a System One decision model (OpenRouter, inception/mercury-de
 license: Apache-2.0
 compatibility: "Requires .NET 10 or later (`dotnet run --file`) and network access to openrouter.ai, with OPENROUTER_API_KEY set unless a proxy injects the key. A local gateway route (DECIDE_URL) replaces that network requirement; the model harness needs Python 3."
 metadata:
-  version: "1.2.0"
+  version: "1.2.1"
   tags: "decision-model, openrouter, triage, ci, calibration, local-llm, gateway, model-harness, silent-fallback"
 ---
 

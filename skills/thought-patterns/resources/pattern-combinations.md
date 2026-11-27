@@ -14,9 +14,9 @@ This document provides detailed examples of how to chain and combine thinking pa
 - [Example 3: Learning from a Failed Project](#example-3-learning-from-a-failed-project)
 - [Example 4: Innovative Solution to Resource Constraints](#example-4-innovative-solution-to-resource-constraints)
 - [Example 5: Understanding a Complex Research Paper](#example-5-understanding-a-complex-research-paper)
-- [Example 6: Spatial Design Problem (Leveraging Neurodivergent Patterns)](#example-6-spatial-design-problem-leveraging-neurodivergent-patterns)
+- [Example 6: Spatial Design Problem (Using Neurodivergent Patterns)](#example-6-spatial-design-problem-using-neurodivergent-patterns)
 - [Example 7: Data Analysis with ADHD and Autism Patterns](#example-7-data-analysis-with-adhd-and-autism-patterns)
-- [Example 8: Parallel Pattern Application for Comprehensive Analysis](#example-8-parallel-pattern-application-for-comprehensive-analysis)
+- [Example 8: Parallel Pattern Application for Full Analysis](#example-8-parallel-pattern-application-for-full-analysis)
 - [Key Principles for Pattern Combination](#key-principles-for-pattern-combination)
 - [Pattern Selection Decision Tree](#pattern-selection-decision-tree)
 
@@ -424,10 +424,10 @@ Self-assessment:
 
 ---
 
-## Example 6: Spatial Design Problem (Leveraging Neurodivergent Patterns)
+## Example 6: Spatial Design Problem (Using Neurodivergent Patterns)
 
 ### Task Analysis
-- **Type**: Spatial, Creative, Optimization
+- **Type**: Spatial, Creative, Optimisation
 - **Complexity**: Medium-High (3D constraints, multiple objectives)
 - **Optimal Patterns**: Spatial/Visual (Dyslexia) → Systems → Constraint-Based
 
@@ -480,7 +480,7 @@ Emergent properties:
 - Layout affects team cohesion
 ```
 
-**Phase 3: Constraint-Based Optimization**
+**Phase 3: Constraint-Based Optimisation**
 ```
 Hard constraints:
 - 500 sq ft total (immutable)
@@ -510,7 +510,7 @@ Final design emerges from constraint optimization:
 - Results in 15% more usable space than traditional layout
 ```
 
-**Outcome**: Optimized spatial design that satisfies all requirements and feels more spacious than square footage suggests, leveraging visual-spatial thinking strength.
+**Outcome**: Optimised spatial design that satisfies all requirements and feels more spacious than square footage suggests, using visual-spatial thinking strength.
 
 ---
 
@@ -523,7 +523,7 @@ Final design emerges from constraint optimization:
 
 ### Pattern Chain Execution
 
-**Problem**: Analyze customer behavior data to identify opportunities for improvement.
+**Problem**: Analyse customer behaviour data to identify opportunities for improvement.
 
 **Phase 1: Big-Picture Thinking (ADHD)**
 ```
@@ -609,7 +609,7 @@ Broader application:
 
 ---
 
-## Example 8: Parallel Pattern Application for Comprehensive Analysis
+## Example 8: Parallel Pattern Application for Full Analysis
 
 ### Task Analysis
 - **Type**: Complex Decision
@@ -701,7 +701,7 @@ This combines:
 - Emergent pattern recognition (Holistic)
 ```
 
-**Outcome**: Decision that leverages multiple thinking modes simultaneously, more robust than any single approach.
+**Outcome**: Decision that uses multiple thinking modes simultaneously, more reliable than any single approach.
 
 ---
 
@@ -727,12 +727,12 @@ Multiple simultaneous perspectives reveal more:
 - **Analytical + Holistic**: Parts and whole together
 - **Big-Picture + Detail-Oriented**: Strategy and precision
 
-### 4. Leverage Neurodivergent Strengths Intentionally
+### 4. Use Neurodivergent Strengths Intentionally
 Don't forget these valuable patterns:
 - **Hyperfocus**: For deep work on engaging problems
 - **Big-Picture**: For strategy and overview
 - **Detail-Oriented**: For precision and pattern finding
-- **Spatial/Visual**: For spatial problems and visualization
+- **Spatial/Visual**: For spatial problems and visualisation
 - **Non-Linear Associative**: For creative breakthroughs
 
 ### 5. Stay Flexible
@@ -742,7 +742,7 @@ If a pattern isn't working:
 - Try a completely different approach
 - Chain to a new pattern
 
-### 6. Validate Before Finalizing
+### 6. Validate Before Finalising
 Always include validation step:
 - Did I solve the right problem?
 - Is the solution complete?

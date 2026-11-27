@@ -2,10 +2,10 @@
 
 # thought-patterns
 
-Orchestrates cognitive thinking patterns for complex problem-solving. Analyses tasks to select optimal pattern(s) from foundational, reasoning, creative, metacognitive, specialised, and neurodivergent categories. Chains multiple patterns when needed and validates outputs before responding.
+Applies structured cognitive thinking patterns to a hard problem, selecting and chaining from foundational, reasoning, creative, metacognitive, specialised and neurodivergent categories. Use when asked to "think this through properly", "use thought patterns", "apply a thinking framework", "reason about this carefully", "what am I missing", or "approach this from a different angle"; when a decision or problem is genuinely complex or ambiguous and a single pass will not do it justice; or when first-principles, inversion, systems or lateral thinking is wanted by name. Do NOT use for straightforward factual questions or routine execution work where the path is already clear.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 2.0
+- **Version:** 3.0.0
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -35,4 +35,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

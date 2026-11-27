@@ -73,7 +73,7 @@ Line 42: Invalid JSON - Expecting property name enclosed in double quotes
 - Trailing commas
 
 **Fix:**
-- Ensure all quotes inside content are escaped with `\`
+- Make sure all quotes inside content are escaped with `\`
 - Use `\n` for newlines, not literal line breaks
 - Validate JSON before outputting
 
@@ -106,7 +106,7 @@ Line 8, Message 2: Invalid role 'Assistant' (should be lowercase 'assistant')
 - Typo in role name
 
 **Fix:**
-- Ensure roles are exactly: "system", "user", "assistant"
+- Make sure roles are exactly: "system", "user", "assistant"
 - Check case sensitivity in generation code
 
 #### Issue: Empty Content
@@ -344,7 +344,7 @@ A dataset is ready when:
 - Topic B under-represented
 
 **Solutions:**
-1. Analyze current distribution with scripts
+1. Analyse current distribution with scripts
 2. Generate targeted batch focused on Topic B
 3. Manually specify category quotas for additional examples
 4. Rebalance final dataset

@@ -105,7 +105,7 @@ typedef struct SectioningParallelizer {
 SectioningParallelizer* sectioning_create(const char* api_key, const char* prompt_template) {
     SectioningParallelizer* p = (SectioningParallelizer*)calloc(1, sizeof(SectioningParallelizer));
     p->api_key = strdup(api_key);
-    p->model = strdup("claude-sonnet-4-20250514");
+    p->model = strdup("claude-sonnet-5-5");
     p->prompt_template = strdup(prompt_template);
     p->max_concurrency = 0;  // No limit by default
     return p;
@@ -275,7 +275,7 @@ char* default_extract_answer(const char* response) {
 VotingParallelizer* voting_create(const char* api_key, int num_voters) {
     VotingParallelizer* v = (VotingParallelizer*)calloc(1, sizeof(VotingParallelizer));
     v->api_key = strdup(api_key);
-    v->model = strdup("claude-sonnet-4-20250514");
+    v->model = strdup("claude-sonnet-5-5");
     v->num_voters = num_voters > 0 ? num_voters : 3;
     v->extract_answer = default_extract_answer;
     return v;
@@ -482,7 +482,7 @@ typedef struct GuardrailsParallelizer {
 GuardrailsParallelizer* guardrails_create(const char* api_key, const char* task_prompt) {
     GuardrailsParallelizer* g = (GuardrailsParallelizer*)calloc(1, sizeof(GuardrailsParallelizer));
     g->api_key = strdup(api_key);
-    g->model = strdup("claude-sonnet-4-20250514");
+    g->model = strdup("claude-sonnet-5-5");
     g->task_prompt = strdup(task_prompt);
     g->guardrail_count = 0;
     g->stop_on_failure = true;

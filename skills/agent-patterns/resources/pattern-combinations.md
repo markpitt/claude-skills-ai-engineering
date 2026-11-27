@@ -42,7 +42,7 @@ Input → Classifier
 
 **Example: Customer Service**
 - Route: Classify ticket type
-  - REFUND → Refund Chain: Analyze → Check Policy → Generate Response
+  - REFUND → Refund Chain: Analyse → Check Policy → Generate Response
   - TECHNICAL → Technical Chain: Diagnose → Research Solutions → Recommend
   - COMPLAINT → Escalation Chain: Classify Severity → Route to Manager → Log
 
@@ -94,7 +94,7 @@ Input → Orchestrator Decomposes
 ```
 
 **Example: Complex Code Review**
-- Orchestrator analyzes: Determines aspects to check
+- Orchestrator analyses: Determines aspects to check
 - Workers run in parallel:
   - Worker 1: Functionality (parallelized: logic flow, error handling, edge cases)
   - Worker 2: Performance (sequential analysis)
@@ -491,7 +491,7 @@ Would multiple perspectives improve solution?
 - **Quality-Critical**: Use Orchestrator + Evaluator or combinations
 - **Unpredictable Workflows**: Use Orchestrator or Autonomous Agent
 - **Consistency Important**: Use Chaining or Routing
-- **Speed Critical**: Minimize complexity, use Parallelization where applicable
+- **Speed Critical**: Minimise complexity, use Parallelization where applicable
 
 ---
 

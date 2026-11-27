@@ -9,7 +9,7 @@
 script({
     title: "Parallelization Pattern - Concurrent LLM Operations",
     description: "Process multiple inputs in parallel with various strategies",
-    model: "claude-sonnet-4-20250514",
+    model: "claude-sonnet-5-5",
     parameters: {
         mode: {
             type: "string",
@@ -33,7 +33,7 @@ async function sectioningParallelize(sections: string[], promptTemplate: (sectio
                     _.$`${promptTemplate(section)}`
                 }, {
                     label: `section_${index}`,
-                    model: "claude-sonnet-4-20250514"
+                    model: "claude-sonnet-5-5"
                 })
 
                 return {
@@ -73,7 +73,7 @@ async function votingParallelize(prompt: string, numVoters: number = 3, extractA
                     _.$`${_.PROMPT}`
                 }, {
                     label: `voter_${index}`,
-                    model: "claude-sonnet-4-20250514",
+                    model: "claude-sonnet-5-5",
                     temperature: 0.7  // Slight variation for diversity
                 })
 
@@ -164,7 +164,7 @@ Respond with yes or no and a brief reason.
                         `
                     }, {
                         label: `guardrail_${guardrail.name}`,
-                        model: "claude-sonnet-4-20250514",
+                        model: "claude-sonnet-5-5",
                         maxTokens: 256
                     })
 
@@ -193,7 +193,7 @@ Input: ${_.INPUT}
             `
         }, {
             label: "main_task",
-            model: "claude-sonnet-4-20250514"
+            model: "claude-sonnet-5-5"
         })
     ])
 

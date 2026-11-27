@@ -1,419 +1,81 @@
 ---
 name: agent-patterns
-description: Modular orchestration of agent patterns from Anthropic's engineering guide. Intelligently selects and implements prompt chaining, routing, parallelisation, orchestrator-workers, evaluator-optimizer, and autonomous agents. Includes pattern combinations and language-specific implementations.
+description: Chooses and implements the LLM workflow and agent patterns from Anthropic's "Building Effective Agents" guide - the augmented LLM, prompt chaining, routing, parallelisation (sectioning and voting), orchestrator-workers, evaluator-optimiser and autonomous agents - plus combinations of them and tool interface design, with templates in Python, TypeScript, C#, Go, Rust, Dart, C and GenAIScript. Use when designing an LLM feature or agent, when asked "which agent pattern should I use", "should this be a workflow or an agent", "build an orchestrator-workers pipeline" or "add an evaluator loop", or when an agent's tools keep being misused. Do NOT use for setting up a coding agent harness such as Claude Code or Copilot (use ai-coding-agent-setup), for convening several agents to review a decision (use agent-council), or for prompt wording alone with no workflow to design.
 license: Apache-2.0
 metadata:
-  version: "2.0"
+  version: "3.0.0"
   source: Anthropic, "Building Effective Agents" engineering guide
   author: Anthropic
   attribution: Patterns restated and implemented independently. No source code reused.
 ---
 
-# Agent Patterns Orchestration Skill
-
-This skill implements AI agent patterns and workflows from Anthropic's "Building Effective Agents" engineering guide. It uses modular resources to help you select, design, and implement the right patterns for your needs.
-
-## Quick Reference: Which Pattern Do I Need?
-
-| Task Characteristics | Best Pattern(s) | Load Resource |
-|-----|------|------|
-| Fixed sequential steps, each requires different handling | Prompt Chaining | `core-patterns.md` |
-| Input falls into distinct categories | Routing | `core-patterns.md` |
-| Independent tasks to run in parallel | Parallelisation (Sectioning) | `core-patterns.md` |
-| Same task multiple times for reliability/consensus | Parallelisation (Voting) | `core-patterns.md` |
-| Unpredictable subtasks, determine at runtime | Orchestrator-Workers | `dynamic-orchestration.md` |
-| Fully open-ended exploration needed | Autonomous Agents | `dynamic-orchestration.md` |
-| Need iterative quality improvement | Evaluator-Optimizer | `iterative-refinement.md` |
-| Multiple pattern combination needed | See decision table | `pattern-combinations.md` |
-| Language-specific implementation | Choose language | `language-implementation.md` |
-| Tool design/optimisation | Interface design | `tool-design.md` |
-
-## Pattern Category Index
-
-### Core Patterns (Deterministic Workflows)
-**When to use:** Workflow fully predetermined upfront
-
-**Patterns:**
-1. **Prompt Chaining** - Sequential LLM calls with checkpoints
-2. **Routing** - Classify and route to specialised handlers
-3. **Parallelisation** - Concurrent execution (sectioning or voting)
-
-**Resource:** `resources/core-patterns.md` (350+ lines)
-- Complete pattern descriptions and architectures
-- When to use / when NOT to use
-- Real-world examples
-- Code skeletons for each pattern
-
-### Dynamic Orchestration Patterns (Unpredictable Workflows)
-**When to use:** Workflow cannot be predetermined
-
-**Patterns:**
-1. **Orchestrator-Workers** - Central LLM decomposes, workers execute
-2. **Autonomous Agents** - Open-ended exploration with tool usage
-
-**Resource:** `resources/dynamic-orchestration.md` (400+ lines)
-- Detailed pattern descriptions and requirements
-- When to use each approach
-- Critical requirements for agents
-- Worked implementation examples
-
-### Iterative Refinement
-**When to use:** Output quality needs improvement through feedback
-
-**Pattern:**
-1. **Evaluator-Optimizer** - Generator + Evaluator feedback loop
-
-**Resource:** `resources/iterative-refinement.md` (350+ lines)
-- Pattern implementation strategies
-- Evaluation criteria design
-- Stopping conditions
-- Cost and quality trade-offs
-
-### Advanced: Pattern Combinations
-**When to use:** Combining multiple patterns for complex problems
-
-**Examples:**
-- Routing + Prompt Chaining (different routes, different chains)
-- Orchestrator + Evaluator-Optimizer (decompose, then refine)
-- Routing by Complexity (route to appropriate pattern)
-- Parallel Orchestrators (multiple perspectives)
-
-**Resource:** `resources/pattern-combinations.md` (400+ lines)
-- 7 major combination patterns
-- Decision framework and tree
-- Cost-complexity trade-offs
-- Testing strategies
-
-### Tool Design & Implementation
-**When to use:** Designing tools for agent use
-
-**Topics:**
-- Poka-yoke (error-proofing) design
-- Natural format selection
-- Parameter design patterns
-- Common pitfalls
-
-**Resource:** `resources/tool-design.md` (560+ lines, full reference)
-- Core principles and best practices
-- Real-world insights from SWE-bench
-- Language-specific considerations
-- Testing tool interfaces
-
-### Language-Specific Implementation
-**When to use:** Implementing patterns in your chosen language
-
-**Languages:**
-- TypeScript/JavaScript
-- Python
-- Rust
-- C#/.NET
-- Go
-- Dart
-
-**Resource:** `resources/language-implementation.md` (450+ lines)
-- Full code examples for each language
-- Language strengths and weaknesses
-- Best practices and idioms
-- Concurrency models
-
-## Orchestration Protocol
-
-### Phase 1: Identify Your Task
-
-Ask yourself:
-
-**1. Is the workflow predetermined?**
-- YES → Use Core Patterns (Phase 2A)
-- NO → Use Dynamic Patterns (Phase 2B)
-
-**2. Is output quality iteration important?**
-- YES → Consider adding Evaluator-Optimizer
-- NO → Direct to execution
-
-**3. Are multiple patterns needed?**
-- YES → Review Pattern Combinations
-- NO → Single pattern sufficient
-
-### Phase 2A: Select Core Pattern (Predetermined Workflow)
-
-**Decision: Sequential or Parallel?**
-
-**Sequential (Fixed Steps in Sequence):**
-- Each step depends on previous → **Prompt Chaining**
-- Example: outline → write → proofread
-
-**Classification (Input Categories Determine Handling):**
-- Input can be classified → **Routing**
-- Example: customer service tickets (refund/technical/complaint)
-
-**Parallel (Independent Subtasks):**
-- Subtasks are independent → **Parallelisation (Sectioning)**
-- Example: evaluate code for security AND performance simultaneously
-
-**Parallel (Same Task Multiple Times):**
-- Need consensus/reliability → **Parallelisation (Voting)**
-- Example: security review by multiple specialists
-
-→ Load `resources/core-patterns.md` for implementation
-
-### Phase 2B: Select Dynamic Pattern (Unpredictable Workflow)
-
-**Decision: Can you predict subtask count?**
-
-**Predictable Subtasks:**
-- Know what needs doing, not how → **Orchestrator-Workers**
-- Example: code review (need to analyse, generate, test, document)
-- Example: research task (need search, analysis, synthesis)
-
-**Unpredictable Everything:**
-- Open-ended exploration → **Autonomous Agents**
-- Example: solve GitHub issue (steps completely unpredictable)
-- Example: computer use task (many decisions and directions possible)
-
-→ Load `resources/dynamic-orchestration.md` for implementation
-
-### Phase 3: Consider Quality & Refinement
-
-**Add Evaluator-Optimizer if:**
-- Clear evaluation criteria exist
-- Iteration improves quality
-- First attempts often have fixable issues
-- Quality matters more than speed
-
-**Patterns to combine with:**
-- Core patterns + Evaluator (refine outputs)
-- Orchestrator + Evaluator (refine each component)
-- Routing + Evaluator (route to different refinement strategies)
-
-→ Load `resources/iterative-refinement.md` for implementation
-
-### Phase 4: Handle Complex Patterns
-
-**If combining multiple patterns:**
-- Follow decision framework in `pattern-combinations.md`
-- Start simple; add complexity incrementally
-- Monitor costs at each stage
-- Test edge cases thoroughly
-
-### Phase 5: Implement in Your Language
-
-**Select language and load examples:**
-- Load `resources/language-implementation.md`
-- Find your language section
-- Adapt examples to your use case
-- Reference tool-design.md for interface best practices
-
----
-
-## Pattern Selection Heuristics
-
-### By Problem Structure
-
-**Well-Defined, Fixed Workflow** → Core Patterns
-- Use Prompt Chaining or Routing
-- Cost: 1-3x single call
-- Risk: Low
-
-**Flexible Workflow, Known Decomposition** → Orchestrator-Workers
-- Central planner decomposes dynamically
-- Cost: 3-10x single call
-- Risk: Medium
-
-**Open-Ended Exploration** → Autonomous Agents
-- Agent decides step by step
-- Cost: 10-100x single call
-- Risk: High (requires sandboxing)
-
-**Quality Iteration Important** → Evaluator-Optimizer
-- Add to any pattern above
-- Cost: Multiplicative by iterations
-- Benefit: 5-15% quality improvement
-
-**Multiple Perspectives Valuable** → Pattern Combinations
-- Combine patterns strategically
-- Cost: Depends on combination
-- Benefit: Reliability and coverage
-
-### By Domain
-
-**Customer Service** → Routing (+ Orchestrator-Workers for complex cases)
-**Content Generation** → Prompt Chaining (+ Evaluator-Optimizer)
-**Code Changes** → Orchestrator-Workers (decompose, parallelise)
-**Research** → Orchestrator-Workers (+ Evaluator-Optimizer)
-**Problem Solving** → Autonomous Agents (or Routing by Complexity)
-**Design** → Parallel Orchestrators (multiple perspectives)
-
----
-
-## Usage Workflows
-
-### Workflow 1: I Don't Know What Pattern to Use
-
-1. Describe your problem or use case
-2. I'll ask clarifying questions about:
-   - Workflow predictability
-   - Input variability
-   - Quality/cost trade-offs
-   - Complexity constraints
-3. I'll recommend appropriate pattern(s)
-4. You choose which resource to deep-dive into
-
-### Workflow 2: I Know the Pattern, Need Implementation
-
-1. Tell me:
-   - Specific pattern needed
-   - Programming language
-   - Any constraints or requirements
-2. I'll generate:
-   - Production-ready code
-   - Error handling and best practices
-   - Usage examples
-   - Testing recommendations
-
-### Workflow 3: I Need to Combine Multiple Patterns
-
-1. Describe your requirements
-2. I'll consult `pattern-combinations.md`
-3. Show you how to orchestrate the combination
-4. Provide integrated implementation
-
-### Workflow 4: I Need Tool Interface Design
-
-1. Describe your tool's purpose
-2. I'll review against best practices in `tool-design.md`
-3. Suggest improvements using poka-yoke principles
-4. Provide refined tool schema
-
----
-
-## Resource Navigation Guide
-
-| I Want To... | Load This | Timeframe |
-|--------|------|------|
-| Understand basic patterns | `core-patterns.md` | 15 min |
-| Learn dynamic orchestration | `dynamic-orchestration.md` | 20 min |
-| Understand iterative refinement | `iterative-refinement.md` | 15 min |
-| Design tool interfaces | `tool-design.md` | 20 min |
-| Combine multiple patterns | `pattern-combinations.md` | 20 min |
-| Implement in specific language | `language-implementation.md` | 20-30 min |
-| Quick reference for all patterns | Read this SKILL.md | 10 min |
-
----
-
-## Core Principles (All Patterns)
-
-1. **Start Simple** – Use simplest pattern that meets requirements
-2. **Measure Complexity** – Only add complexity if demonstrably beneficial
-3. **Tool Design First** – Invest in tool quality more than prompt engineering
-4. **Transparency** – Show planning and decisions to enable debugging
-5. **Test Rigorously** – Especially important for agents in production
-
----
-
-## Validation Checklist
-
-Before implementing your chosen pattern:
-
-**Design Phase:**
-- [ ] Workflow complexity justified by requirements
-- [ ] Pattern selection makes sense for problem
-- [ ] Cost implications understood and acceptable
-- [ ] Success metrics defined
-
-**Implementation Phase:**
-- [ ] Error handling at each step
-- [ ] Tool interfaces follow poka-yoke principles
-- [ ] Stopping conditions defined (especially for agents)
-- [ ] Monitoring and logging planned
-- [ ] **External/retrieved content delimited and treated as untrusted data (W011 prompt injection defence)**
-- [ ] **System prompts explicitly instruct model not to follow directives in retrieved content**
-
-**Testing Phase:**
-- [ ] Happy path tested thoroughly
-- [ ] Edge cases identified and handled
-- [ ] Cost tracking implemented
-- [ ] Production readiness verified
-
----
-
-## Key Files Reference
-
-| File | Purpose | Lines | Read When |
-|--------|---------|------|------|
-| `SKILL.md` (this file) | Orchestration hub and decision guide | 280 | First (overview) |
-| `resources/augmented-llm.md` | The foundational building block | 300+ | Before any pattern |
-| `resources/core-patterns.md` | Prompt Chaining, Routing, Parallelisation | 350+ | Need basic patterns |
-| `resources/dynamic-orchestration.md` | Orchestrator-Workers, Autonomous Agents | 400+ | Need dynamic patterns |
-| `resources/iterative-refinement.md` | Evaluator-Optimizer pattern | 350+ | Need quality iteration |
-| `resources/tool-design.md` | Tool interface design and optimisation | 560+ | Designing tools |
-| `resources/pattern-combinations.md` | Complex multi-pattern workflows | 400+ | Combining patterns |
-| `resources/language-implementation.md` | Language-specific code examples | 450+ | Need implementation |
-| `resources/patterns-reference.md` | Original full reference | 500+ | Deep dive reference |
-
----
-
-## Examples
-
-### Example 1: Customer Support System
-
-**Use Case:** Support tickets routed to appropriate handlers
-
-**Solution:**
-1. Route by category (routing pattern)
-2. Different handlers for each type:
-   - General → FAQ lookup (prompt chaining)
-   - Refunds → Policy check + response generation (prompt chaining)
-   - Technical → Diagnosis → Solution search → Response (orchestrator-workers)
-
-**Resources to load:**
-1. Start: `core-patterns.md` (routing)
-2. Then: `pattern-combinations.md` (routing + chaining combination)
-3. Finally: `language-implementation.md` (your language)
-
-### Example 2: High-Quality Content Generation
-
-**Use Case:** Marketing copy that meets strict quality criteria
-
-**Solution:**
-1. Generator creates content (simple LLM call)
-2. Evaluator checks against criteria
-3. If not passing: Generator refines based on feedback
-4. Iterate until criteria met
-
-**Resources to load:**
-1. Start: `iterative-refinement.md` (evaluator-optimizer)
-2. Then: `language-implementation.md` (your language)
-
-### Example 3: Complex Code Changes
-
-**Use Case:** Handle multi-file code modifications
-
-**Solution:**
-1. Orchestrator analyses requirements
-2. Workers decompose into: analyse codebase → generate code → write tests → document
-3. All workers run in parallel
-4. Orchestrator synthesises into coherent changeset
-5. Evaluator validates functionality
-
-**Resources to load:**
-1. Start: `dynamic-orchestration.md` (orchestrator-workers)
-2. Then: `pattern-combinations.md` (orchestrator + evaluation)
-3. Then: `tool-design.md` (design tools for code modification)
-4. Finally: `language-implementation.md` (your language)
-
----
-
-## Next Steps
-
-1. **Identify Your Task Type** → Use Quick Reference table above
-2. **Load Appropriate Resource** → Read focused guide (15-30 min)
-3. **Choose Implementation Language** → Load language examples
-4. **Start with Simple Version** → Add complexity only if needed
-5. **Iterate and Test** → Measure quality and cost continuously
-
----
-
-## Version History
-
-- 2.0 - Refactored to modular orchestration pattern with focused resource files
-- 1.0 - Original monolithic skill with all patterns in one document
+# Agent patterns
+
+The patterns in Anthropic's "Building Effective Agents" range from one model call with tools to an
+agent that plans its own steps. The guide's main point is the one most often skipped: start with
+the simplest thing that works, and add structure only when a measurement says it helps. Every step
+up costs latency, money and debuggability.
+
+## Choosing a pattern
+
+Work down this list and stop at the first that fits.
+
+| If the task... | Use | Reference |
+|---|---|---|
+| Is one call with retrieval, tools or memory | The augmented LLM, no pattern | `resources/augmented-llm.md` |
+| Splits into fixed steps, each easier than the whole | Prompt chaining, with checks between steps | `resources/core-patterns.md` |
+| Falls into distinct categories that need different handling | Routing | `resources/core-patterns.md` |
+| Has independent parts, or needs several attempts compared | Parallelisation: sectioning or voting | `resources/core-patterns.md` |
+| Needs subtasks that cannot be known until the input is seen | Orchestrator-workers | `resources/dynamic-orchestration.md` |
+| Has clear quality criteria and gains from feedback | Evaluator-optimiser | `resources/iterative-refinement.md` |
+| Is open-ended, with an unknown number of steps and a way to check progress | An autonomous agent | `resources/dynamic-orchestration.md` |
+
+The first five are workflows: your code decides the path. Only the last is an agent, where the
+model decides. Prefer a workflow whenever the path can be written down, because it is cheaper,
+faster and much easier to test. Combinations, such as routing into different chains or an
+orchestrator whose workers each run an evaluator loop, are in `resources/pattern-combinations.md`.
+
+## What decides whether it works
+
+**Tools matter more than prompts.** Most agent failures trace back to a tool that is easy to call
+wrongly. Give each tool a name and description a new colleague would understand, parameters that
+make the wrong call hard to express (absolute paths rather than relative ones, enums rather than
+free text), and errors that say what to do next. `resources/tool-design.md` covers this in depth.
+
+**Every loop needs a stop.** Evaluator loops and agents need a maximum iteration count and a
+budget, as well as a success test. Without them, a confused model runs until the bill stops it.
+
+**Retrieved content is data.** Anything fetched from a document, web page, tool result or user
+upload can contain text that reads as instructions. Delimit it, tell the model in the system prompt
+that it is data and must not be followed, and never let it pick which tool runs next without a
+check. The examples in `resources/augmented-llm.md` show the pattern.
+
+**Show the working.** Log each step's input, output and decision. An agent you cannot trace is an
+agent you cannot fix.
+
+**Measure before adding.** Compare a pattern against the simpler option on a small set of real
+inputs before keeping it. Voting and evaluator loops in particular multiply cost for gains that are
+sometimes zero.
+
+## Implementing
+
+`resources/language-implementation.md` explains the shared structure. `templates/<language>/` has
+one file per pattern for Python, TypeScript, C#, Go, Rust, Dart, C and GenAIScript; see
+`templates/README.md` for how to run them.
+
+The templates name `claude-sonnet-5-5` for general steps, `claude-haiku-5-5` for cheap routing and
+classification, and `claude-opus-5-5` for the hardest reasoning. Model IDs change, so check the
+provider's current list before shipping, and keep the ID in configuration rather than in code.
+
+## References
+
+| File | Covers |
+|---|---|
+| `resources/augmented-llm.md` | The building block: retrieval, tools and memory around one call |
+| `resources/core-patterns.md` | Prompt chaining, routing, parallelisation |
+| `resources/dynamic-orchestration.md` | Orchestrator-workers and autonomous agents |
+| `resources/iterative-refinement.md` | Evaluator-optimiser loops, criteria and stopping |
+| `resources/pattern-combinations.md` | Combining patterns for larger problems |
+| `resources/tool-design.md` | Designing tool interfaces agents use correctly |
+| `resources/language-implementation.md` | How the templates are structured, per language |
+| `resources/patterns-reference.md` | The full restatement of the guide, for a deep dive |

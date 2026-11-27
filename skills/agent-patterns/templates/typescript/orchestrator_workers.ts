@@ -43,7 +43,7 @@ class LLMWorker {
     client: Anthropic,
     workerType: string,
     systemPrompt: string,
-    model: string = "claude-sonnet-4-20250514"
+    model: string = "claude-sonnet-5-5"
   ) {
     this.client = client;
     this.workerType = workerType;
@@ -116,7 +116,7 @@ class Orchestrator {
   private workers: Map<string, LLMWorker> = new Map();
   private executionHistory: OrchestratorResult["executionHistory"] = [];
 
-  constructor(client: Anthropic, model: string = "claude-sonnet-4-20250514") {
+  constructor(client: Anthropic, model: string = "claude-sonnet-5-5") {
     this.client = client;
     this.model = model;
   }

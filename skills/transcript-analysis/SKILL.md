@@ -1,9 +1,9 @@
 ---
 name: transcript-analysis
-description: Inventory and aggregate coding-agent session transcripts across Claude Code, OMP, Codex CLI and pi, with explicit coverage, deduplication, subagent grouping and a user-only attribution filter. Produces per-session counts (prompts, tool calls by name, models, subagent files, time span) and never prints message text. Use when asked how an agent's sessions were used across harnesses, for recurring-request or tool-usage analysis over many transcripts, or when a JSONL corpus is too large for grep. Do NOT use to audit which instruction files loaded (use agent-instruction-load-audit), for an ordinary code search, to curate memory or rules from what was found, or to draw legal or personal conclusions from message content.
+description: Inventories and aggregates coding-agent session transcripts across Claude Code, OMP, Codex CLI and pi, with explicit coverage, deduplication, subagent grouping and a user-only attribution filter. Produces per-session counts (prompts, tool calls by name, models, subagent files, time span) and never prints message text. Use when asked how an agent's sessions were used across harnesses, for recurring-request or tool-usage analysis over many transcripts, or when a JSONL corpus is too large for grep. Do NOT use to audit which instruction files loaded (use agent-instruction-load-audit), for an ordinary code search, to curate memory or rules from what was found, or to draw legal or personal conclusions from message content.
 license: Apache-2.0
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   tags: "transcripts, jsonl, claude-code, codex, omp, pi, analytics, inventory, deduplication, subagents, attribution"
 ---
 
@@ -128,12 +128,16 @@ per-session aggregates. Its own behaviour checks are `scripts/test_scan_jsonl.py
 
 ## Verification
 
-Run the tests through the repository's sandbox wrapper, not directly:
+Run the tests inside a sandbox, not directly:
 
 ```bash
-mp-sandbox-test python3 -I <skill>/scripts/test_transcript_cli.py -v
-mp-sandbox-test python3 -I <skill>/scripts/test_scan_jsonl.py
+<sandbox> python3 -I <skill>/scripts/test_transcript_cli.py -v
+<sandbox> python3 -I <skill>/scripts/test_scan_jsonl.py
 ```
+
+`<sandbox>` stands for whatever runs test code in isolation on your machine, for example a
+bubblewrap (`bwrap`) wrapper that makes only the repository writable. Leave it out to run the tests
+directly.
 
 All fixtures are synthetic and written at test time. Each assertion sits beside a positive control in
 the same corpus, so a green run cannot come from a check that never fires. Before trusting a change to

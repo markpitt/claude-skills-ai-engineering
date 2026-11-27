@@ -83,7 +83,7 @@ class AutonomousAgent:
     def __init__(
         self,
         client: anthropic.Anthropic,
-        model: str = "claude-sonnet-4-20250514",
+        model: str = "claude-sonnet-5-5",
         system_prompt: Optional[str] = None
     ):
         self.client = client

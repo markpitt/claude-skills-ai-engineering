@@ -41,7 +41,7 @@ This resource covers formal and informal reasoning patterns used for logical inf
 1. Collect specific observations
 2. Identify patterns and regularities
 3. Formulate general principle
-4. Test generalization with new cases
+4. Test generalisation with new cases
 
 **Example**:
 - Observed: Swan 1 is white, Swan 2 is white, Swan 3 is white...
@@ -107,7 +107,7 @@ This resource covers formal and informal reasoning patterns used for logical inf
 
 **Note**: Peirce considered analogy a compound form integrating abduction and induction; important source of human creativity.
 
-**Limitations**: Analogies can mislead if domains differ in crucial ways.
+**Limitations**: Analogies can mislead if domains differ in important ways.
 
 ---
 
@@ -159,7 +159,7 @@ This resource covers formal and informal reasoning patterns used for logical inf
 
 **Example**:
 - Conventional: "Batteries are expensive"
-- First principles: "What are batteries made of? Cobalt, nickel, aluminum, carbon, polymers. What are the raw material costs? How can we acquire or produce these more efficiently?"
+- First principles: "What are batteries made of? Cobalt, nickel, aluminium, carbon, polymers. What are the raw material costs? How can we acquire or produce these more efficiently?"
 - Result: Rethink battery production from fundamentals
 
 **Elon Musk's approach**: "Boil things down to their fundamental truths and reason up from there, as opposed to reasoning by analogy."

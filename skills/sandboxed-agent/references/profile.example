@@ -16,4 +16,5 @@ PASS_ENV=( MYAPP_API_URL MYAPP_API_TOKEN )
 EXTRA_RO=( )                     # "host-path:sandbox-path" extra read-only binds (a directory holding a unix socket works: connect() needs no write access)
 EXTRA_RW=( )                     # "host-path:sandbox-path" extra WRITABLE binds, for a spool the host drains; the agent cannot replace the mount point. Create the source first; put the destination under /run, not ~
 TOOLS=( )                        # extra directories on PATH inside
+OVERLAY=( )                      # "dest|layer[|layer...]": the layers' files (CLAUDE.md, .claude/, AGENTS.md) shown read-only at their paths under dest (ROOT or a folder in it), top layer first
 SHARE_PID=0                      # 1: keep the host's process namespace (ps, kill reach host processes); only for a host-administering agent

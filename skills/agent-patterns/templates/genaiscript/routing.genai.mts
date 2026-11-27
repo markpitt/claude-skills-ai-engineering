@@ -9,7 +9,7 @@
 script({
     title: "Routing Pattern - Input Classification and Routing",
     description: "Route inputs to specialized handlers based on classification",
-    model: "claude-sonnet-4-20250514",
+    model: "claude-sonnet-5-5",
     parameters: {
         input: {
             type: "string",
@@ -68,7 +68,7 @@ Respond in JSON format:
     `
 }, {
     label: "classify",
-    model: "claude-sonnet-4-20250514",
+    model: "claude-sonnet-5-5",
     responseType: "json_object"
 })
 
@@ -107,7 +107,7 @@ User Query: ${_.INPUT}
         `
     }, {
         label: `handle_${category}`,
-        model: "claude-sonnet-4-20250514"
+        model: "claude-sonnet-5-5"
     })
 
     console.log(`✓ Routed to ${category} handler`)
@@ -123,7 +123,7 @@ ${_.INPUT}
         `
     }, {
         label: "fallback",
-        model: "claude-sonnet-4-20250514"
+        model: "claude-sonnet-5-5"
     })
 
     console.log(`✓ Used fallback handler (confidence too low: ${confidence})`)
@@ -162,9 +162,9 @@ export const routingResult = {
  */
 export async function routeByComplexity(input: string) {
     const models = {
-        simple: "claude-3-haiku-20240307",
-        moderate: "claude-sonnet-4-20250514",
-        complex: "claude-opus-4-20250514"
+        simple: "claude-haiku-5-5",
+        moderate: "claude-sonnet-5-5",
+        complex: "claude-opus-5-5"
     }
 
     // Assess complexity
@@ -189,7 +189,7 @@ Respond in JSON format:
         `
     }, {
         label: "assess_complexity",
-        model: "claude-sonnet-4-20250514",
+        model: "claude-sonnet-5-5",
         responseType: "json_object"
     })
 

@@ -36,7 +36,7 @@ type Subtask struct {
 //
 // Example:
 //
-//	parallelizer := NewSectioningParallelizer(client, "claude-sonnet-4-20250514")
+//	parallelizer := NewSectioningParallelizer(client, "claude-sonnet-5-5")
 //	result, err := parallelizer.ProcessCodeReview(ctx, code)
 type SectioningParallelizer struct {
 	client *AnthropicClient
@@ -413,7 +413,7 @@ func (g *GuardrailsParallelizer) ExecuteWithGuardrails(
 			defer wg.Done()
 
 			checkPrompt := strings.ReplaceAll(p, "{input}", input) + "\n\nRespond with only 'PASS' or 'FAIL'."
-			response, err := g.client.CreateMessage(ctx, checkPrompt, "claude-3-haiku-20240307", 10)
+			response, err := g.client.CreateMessage(ctx, checkPrompt, "claude-haiku-5-5", 10)
 
 			passed := false
 			if err == nil {
@@ -468,7 +468,7 @@ func ExampleCodeReview() error {
 		HTTPClient: &http.Client{},
 	}
 
-	parallelizer := NewSectioningParallelizer(client, "claude-sonnet-4-20250514")
+	parallelizer := NewSectioningParallelizer(client, "claude-sonnet-5-5")
 
 	code := `
 func getUser(id int) *User {

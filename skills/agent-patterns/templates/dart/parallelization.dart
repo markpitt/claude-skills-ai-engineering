@@ -17,7 +17,7 @@ class AnthropicClient {
 
   Future<String> createMessage({
     required String prompt,
-    String model = 'claude-sonnet-4-20250514',
+    String model = 'claude-sonnet-5-5',
     int maxTokens = 4096,
   }) async {
     final response = await httpClient.post(
@@ -93,7 +93,7 @@ class SectioningParallelizer {
   SectioningParallelizer({
     required this.client,
     required this.promptTemplate,
-    this.model = 'claude-sonnet-4-20250514',
+    this.model = 'claude-sonnet-5-5',
     this.maxConcurrency,
   });
 
@@ -238,7 +238,7 @@ class VotingParallelizer {
 
   VotingParallelizer({
     required this.client,
-    this.model = 'claude-sonnet-4-20250514',
+    this.model = 'claude-sonnet-5-5',
     this.numVoters = 3,
     this.extractAnswer,
   });
@@ -376,7 +376,7 @@ class GuardrailsParallelizer {
     required this.client,
     required this.taskPrompt,
     required this.guardrails,
-    this.model = 'claude-sonnet-4-20250514',
+    this.model = 'claude-sonnet-5-5',
     this.stopOnFailure = true,
   });
 
@@ -464,7 +464,7 @@ class ParallelCodeReviewer {
 
   ParallelCodeReviewer({
     required this.client,
-    this.model = 'claude-sonnet-4-20250514',
+    this.model = 'claude-sonnet-5-5',
   });
 
   /// Review code across multiple aspects in parallel

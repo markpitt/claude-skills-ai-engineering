@@ -2,10 +2,10 @@
 
 # transcript-analysis
 
-Inventory and aggregate coding-agent session transcripts across Claude Code, OMP, Codex CLI and pi, with explicit coverage, deduplication, subagent grouping and a user-only attribution filter. Produces per-session counts (prompts, tool calls by name, models, subagent files, time span) and never prints message text. Use when asked how an agent's sessions were used across harnesses, for recurring-request or tool-usage analysis over many transcripts, or when a JSONL corpus is too large for grep. Do NOT use to audit which instruction files loaded (use agent-instruction-load-audit), for an ordinary code search, to curate memory or rules from what was found, or to draw legal or personal conclusions from message content.
+Inventories and aggregates coding-agent session transcripts across Claude Code, OMP, Codex CLI and pi, with explicit coverage, deduplication, subagent grouping and a user-only attribution filter. Produces per-session counts (prompts, tool calls by name, models, subagent files, time span) and never prints message text. Use when asked how an agent's sessions were used across harnesses, for recurring-request or tool-usage analysis over many transcripts, or when a JSONL corpus is too large for grep. Do NOT use to audit which instruction files loaded (use agent-instruction-load-audit), for an ordinary code search, to curate memory or rules from what was found, or to draw legal or personal conclusions from message content.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 1.0.0
+- **Version:** 1.0.1
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -32,4 +32,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

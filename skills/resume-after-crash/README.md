@@ -2,10 +2,10 @@
 
 # resume-after-crash
 
-Recover an agent's work after a host crash, WSL restart, Windows update reboot or lost terminal. Establishes what happened (boot history, disk full, out-of-memory kills), inventories state without changing it (git status, stashes, worktrees, unpushed commits, in-progress git operations, lock files, half-written files, background jobs, containers, tmux panes), reads the plan and the last handover, reconciles each in-flight step as done, partial or not started from evidence, then resumes from the last verified step and reports what was lost and what was redone. Use when an agent or long task was interrupted by a reboot, crash or terminal loss, when asked to pick up work after the machine restarted, or when a git index lock or half-finished change blocks a resume. Do NOT use to set up tmux sessions that survive reboots (use tmux-persist), for ordinary merge conflict resolution, or for starting fresh work with no prior state.
+Recovers an agent's work after a host crash, WSL restart, Windows update reboot or lost terminal. Establishes what happened (boot history, disk full, out-of-memory kills), inventories state without changing it (git status, stashes, worktrees, unpushed commits, in-progress git operations, lock files, half-written files, background jobs, containers, tmux panes), reads the plan and the last handover, reconciles each in-flight step as done, partial or not started from evidence, then resumes from the last verified step and reports what was lost and what was redone. Use when an agent or long task was interrupted by a reboot, crash or terminal loss, when asked to pick up work after the machine restarted, or when a git index lock or half-finished change blocks a resume. Do NOT use to set up tmux sessions that survive reboots (use tmux-persist), for ordinary merge conflict resolution, or for starting fresh work with no prior state.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 1.0.0
+- **Version:** 1.0.1
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -31,4 +31,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

@@ -59,8 +59,8 @@ class EvaluatorOptimizer:
     def __init__(
         self,
         client: anthropic.Anthropic,
-        generator_model: str = "claude-sonnet-4-20250514",
-        evaluator_model: str = "claude-sonnet-4-20250514"
+        generator_model: str = "claude-sonnet-5-5",
+        evaluator_model: str = "claude-sonnet-5-5"
     ):
         self.client = client
         self.generator_model = generator_model
@@ -265,7 +265,7 @@ class ConfidenceBasedOptimizer:
     def __init__(
         self,
         client: anthropic.Anthropic,
-        model: str = "claude-sonnet-4-20250514"
+        model: str = "claude-sonnet-5-5"
     ):
         self.client = client
         self.model = model

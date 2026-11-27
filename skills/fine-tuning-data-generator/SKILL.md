@@ -1,281 +1,90 @@
 ---
 name: fine-tuning-data-generator
-description: Generates synthetic fine-tuning datasets in ChatML format (JSONL) for use with Unsloth, Axolotl, and similar training frameworks. Gathers requirements, creates datasets with diverse examples, validates quality, and provides framework integration guidance.
+description: Plans, generates and validates synthetic fine-tuning datasets as ChatML JSONL for Unsloth, Axolotl, Hugging Face TRL and similar trainers. Gathers what the model must learn, agrees a generation plan, writes diverse single- and multi-turn examples in batches, checks them with the bundled validator and analyser, and gives trainer configuration. Use when asked to "make a training dataset", "generate fine-tuning examples", "create ChatML data for Unsloth" or "check this JSONL before I train on it". Do NOT use for choosing or serving a model (use local-llm-serving), for evaluation suites or test prompts for an existing model, or for prompt engineering with no training involved.
 license: Apache-2.0
 allowed-tools: Read, Write, Edit, Bash
 metadata:
-  version: "2.0"
+  version: "3.0.0"
 ---
 
-# Fine-Tuning Data Generator
+# Fine-tuning data generator
 
-This skill generates high-quality synthetic training data in ChatML format for fine-tuning language models using frameworks like Unsloth, Axolotl, or similar tools.
-
-## What Do I Need?
-
-| Need | Resource |
-|------|----------|
-| **Planning my dataset** - requirements, strategy, quality checklist | [`resources/dataset-strategy.md`](resources/dataset-strategy.md) |
-| **How to create diverse examples** - variation techniques, multi-turn patterns, format-specific guidance | [`resources/generation-techniques.md`](resources/generation-techniques.md) |
-| **ChatML format details** - structure, specification, common issues, framework compatibility | [`resources/chatml-format.md`](resources/chatml-format.md) |
-| **Example datasets** - inspiration across domains, multi-turn samples, edge cases | [`resources/examples.md`](resources/examples.md) |
-| **Validating quality** - validation workflow, analysing datasets, troubleshooting | [`resources/quality-validation.md`](resources/quality-validation.md) |
-| **Training & deployment** - framework setup, hyperparameters, optimisation, deployment | [`resources/framework-integration.md`](resources/framework-integration.md) |
-
-## Workflow
-
-### Phase 1: Gather Requirements
-
-Start with these essential clarifying questions:
-
-**Task Definition:**
-- What is the model being trained to do? (e.g., customer support, code generation, creative writing)
-- What specific domain or subject matter? (e.g., legal, medical, e-commerce, software development)
-- How many training examples are needed? (Recommend: 100+ for simple tasks, 500-1000+ for complex)
-
-**Quality & Diversity:**
-- Complexity range: simple to complex mix, or focus on specific difficulty level?
-- Diversity: edge cases, error handling, unusual scenarios?
-- Tone/style: professional, friendly, technical, concise, detailed?
-- Response length preferences?
-- Any specific formats: code blocks, lists, tables, JSON?
-
-**Dataset Composition:**
-- Distribution across subtopics: evenly distributed or weighted?
-- Include negative examples (what NOT to do)?
-- Need validation split? (Recommend 10-20% of total)
-
-See [`resources/dataset-strategy.md`](resources/dataset-strategy.md) for detailed question templates.
-
-### Phase 2: Create Generation Plan
-
-Present a plan covering:
-- Number and distribution of examples across categories
-- Key topics/scenarios to cover
-- Diversity strategies (phrasing variations, complexity levels, edge cases)
-- System prompt approach (consistent vs. varied)
-- Quality assurance approach
-
-**Get user approval before generating.**
-
-### Phase 3: Generate Synthetic Data
-
-Create examples following these quality standards:
-
-**Key Principles:**
-- Realistic scenarios reflecting real-world use cases
-- Natural language with varied phrasing and formality levels
-- Accurate, helpful responses aligned with desired behaviour
-- Consistent ChatML formatting throughout
-- Balanced difficulty (unless specified)
-- Meaningful variety (no repetition)
-- Include edge cases and error scenarios
-
-**Diversity Techniques:**
-- Vary query phrasing (questions, commands, statements)
-- Include different expertise levels (beginner, intermediate, expert)
-- Cover both positive and negative examples
-- Mix short and long-form responses
-- Include multi-step reasoning when appropriate
-- Add context variations
-
-See [`resources/generation-techniques.md`](resources/generation-techniques.md) for detailed techniques, domain-specific guidance, and batch generation workflow.
-
-### Phase 4: Validate & Document
-
-Run validation tools and checks:
-
-```bash
-# Validate JSON formatting and structure
-python scripts/validate_chatml.py training_data.jsonl
-
-# Analyze dataset statistics and diversity
-python scripts/analyze_dataset.py training_data.jsonl
-
-# Export statistics
-python scripts/analyze_dataset.py training_data.jsonl --export stats.json
-```
-
-**Quality Checklist:**
-- [ ] JSON validation passed (no errors)
-- [ ] Analysis shows good diversity metrics
-- [ ] Manual sample review passed
-- [ ] No duplicate or near-duplicate examples
-- [ ] All required fields present
-- [ ] Realistic user queries
-- [ ] Accurate, helpful responses
-- [ ] Balanced category distribution
-- [ ] Dataset metadata documented
-
-See [`resources/quality-validation.md`](resources/quality-validation.md) for validation details, troubleshooting, and documentation templates.
-
-### Phase 5: Integration & Training
-
-Prepare for training with your framework of choice:
-
-**Output Files:**
-- `training_data.jsonl` - Main training set
-- `validation_data.jsonl` - Optional validation set
-- `dataset_info.txt` - Metadata and statistics
-
-**Framework Setup:**
-- Unsloth: Automatic ChatML detection, efficient 4-bit training
-- Axolotl: Specify `type: chat_template` and `chat_template: chatml`
-- Hugging Face: Use tokenizer's `apply_chat_template()` method
-- Custom: Load from JSONL, handle ChatML formatting
-
-See [`resources/framework-integration.md`](resources/framework-integration.md) for setup code, hyperparameters, deployment options, and best practices.
-
-## ChatML Format Overview
-
-Each training example is a JSON object with a `messages` array:
+This produces synthetic training data in ChatML JSONL, one example per line:
 
 ```json
 {"messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "How do I reverse a string in Python?"}, {"role": "assistant", "content": "Use slicing: `text[::-1]`"}]}
 ```
 
-**Roles:**
-- `system`: Sets assistant behaviour (optional but recommended)
-- `user`: User's input/query
-- `assistant`: Model's expected response
+A multi-turn example adds further user and assistant pairs. The `system` message is optional, but
+if the deployed model will get one, the training data should carry the same kind.
 
-**Multi-turn:** Add additional user/assistant message pairs for conversations.
+Synthetic data teaches a model whatever patterns it contains, including the ones you did not mean
+to put there. Repetitive phrasing, uniform lengths or a template that shows through all get learnt
+as faithfully as the content. Most of this skill is about avoiding that.
 
-See [`resources/chatml-format.md`](resources/chatml-format.md) for detailed specification, validation, common issues, and framework-specific notes.
+## How a dataset gets made
 
-## Tool Reference
+**1. Find out what the model must learn.** Ask what the model is for, the domain, the tone and
+length of a good answer, the formats it must produce (code, JSON, tables), how hard the inputs get,
+and whether it must learn to refuse or push back. Ask how it will be deployed, since the system
+prompt and turn structure should match. `resources/dataset-strategy.md` has the full question set.
 
-### Scripts in `scripts/`
+**2. Agree a plan before generating.** Set out the categories and how many examples each gets, the
+spread of difficulty, the edge cases (usually a fifth to a third of the set), the system prompt
+approach, and the validation split (10 to 20 per cent), using `templates/generation-plan.md`. Wait
+for the user to approve it. A plan is cheap to change, and a thousand generated examples are not.
 
-#### validate_chatml.py
-Validates ChatML format JSONL files:
+**3. Generate in batches.** Start with 10 to 20 examples and have the user review them; most
+problems show up here. Then generate 50 to 100 at a time, and check the spread after each batch to
+see what is over- or under-represented. Vary the phrasing (questions, commands, half-finished
+thoughts), the user's expertise, and the length and structure of answers. Write user turns the way
+people actually type, not as tidy, formal questions. `resources/generation-techniques.md` covers
+the techniques and domain-specific advice, and `resources/examples.md` has samples.
+
+**4. Validate.**
+
 ```bash
-python scripts/validate_chatml.py training_data.jsonl
-python scripts/validate_chatml.py training_data.jsonl --verbose
+python3 scripts/validate_chatml.py training_data.jsonl --verbose
+python3 scripts/analyze_dataset.py training_data.jsonl --export stats.json
 ```
 
-**Checks:**
-- Valid JSON formatting
-- Required fields (messages, role, content)
-- Valid role values (system, user, assistant)
-- Proper message order
-- Duplicate detection
-- Diversity metrics
+The validator checks JSON, required fields, roles, message order and duplicates. The analyser
+reports lengths, query and response patterns, a diversity score, balance and a token estimate. A
+clean validation is necessary and not sufficient: read a random sample of 20 or so by hand, because
+the scripts cannot tell a wrong answer from a right one. `resources/quality-validation.md` covers
+fixing what they find.
 
-#### analyze_dataset.py
-Provides detailed statistics and analysis:
-```bash
-python scripts/analyze_dataset.py training_data.jsonl
-python scripts/analyze_dataset.py training_data.jsonl --export stats.json
-```
+**5. Hand over.** Deliver `training_data.jsonl`, the optional `validation_data.jsonl`, and a short
+`dataset_info.txt` recording the plan, the counts and how the data was generated. Without that
+record, nobody can reproduce or extend the set later.
 
-**Provides:**
-- Dataset overview (total examples, message counts)
-- Message length statistics
-- System prompt variations
-- User query patterns (questions, commands, code-related, length categories)
-- Assistant response patterns (code blocks, lists, headers, length categories)
-- Quality indicators (diversity score, balance ratio)
-- Token estimates and cost projection
+## Trainer notes
 
-## Common Workflows
+- **Unsloth:** load with its chat template helper, set to `chatml`.
+- **Axolotl:** `type: chat_template` with `chat_template: chatml`.
+- **Hugging Face TRL:** the tokeniser's `apply_chat_template()` turns each `messages` list into
+  text.
 
-### Small Dataset (100-200 examples)
-1. Gather requirements
-2. Create generation plan for 1-2 categories
-3. Generate in single batch, review quality
-4. Validate and document
-5. Ready for training
+Setup code, hyperparameters and deployment are in `resources/framework-integration.md`, and format
+edge cases in `resources/chatml-format.md`.
 
-### Medium Dataset (500-1000 examples)
-1. Gather requirements
-2. Create detailed plan with multiple categories
-3. Generate in 2-3 batches, reviewing after each
-4. Analyse diversity and adjust approach
-5. Fill any gaps
-6. Final validation and documentation
+## How big
 
-### Large Dataset (2000+ examples)
-1. Gather full requirements
-2. Create multi-batch generation plan
-3. Batch 1 (50-100): Foundation examples
-4. Batch 2 (100-200): Complexity expansion
-5. Batch 3 (100-200): Coverage filling
-6. Batch 4 (50-100): Polish and validation
-7. Run full validation suite
-8. Generate full documentation
+| Task | Examples |
+|---|---|
+| Narrow and well defined | 100 to 500 |
+| Several scenarios, moderate variation | 500 to 2,000 |
+| Many edge cases, high variability | 2,000 to 10,000 or more |
+| Domain adaptation | 1,000 to 5,000 |
 
-## Best Practices
+Five hundred varied, correct examples beat five thousand near-copies. If a set has to grow, grow it
+where the analyser shows gaps, not evenly.
 
-### Start Small, Iterate
-1. Generate 10-20 examples first
-2. Review and get feedback
-3. Refine approach based on feedback
-4. Scale up to full dataset
+## What goes wrong
 
-### Quality Over Quantity
-- Better to have 500 diverse, high-quality examples than 5,000 repetitive ones
-- Each example should teach something new
-- Maintain consistent response quality throughout
-
-### Diversify Systematically
-- Vary query phrasing (questions, commands, statements)
-- Cover different expertise levels
-- Mix response complexities
-- Include edge cases (typically 20-30% of dataset)
-- Use batch generation workflow for large datasets
-
-### Test Before Deployment
-- Test dataset with actual training framework
-- Monitor training metrics for issues
-- Test fine-tuned model outputs before deployment
-- Compare results to base model
-
-### Document Everything
-- Keep notes on generation parameters
-- Save different dataset versions
-- Document any modifications made
-- Record generation strategies used
-- Track model performance metrics
-
-## Advanced Features
-
-### Batch Generation Strategy
-
-For datasets 500+ examples:
-- Generate 50-100 examples at a time
-- Review distribution and diversity after each batch
-- Adjust generation strategy based on identified gaps
-- Prevents repetition and maintains creativity
-
-### Common Pitfalls to Avoid
-
-- **Over-templating**: Creates repetitive patterns (vary naturally)
-- **Unrealistic Queries**: Overly formal/robotic user inputs (use varied phrasing)
-- **Narrow Coverage**: Limited scenarios and phrasing (ensure diversity)
-- **Inconsistent Quality**: Quality degradation over time (use quality checklist)
-- **JSON Errors**: Invalid formatting breaking training (always validate)
-- **Missing Context**: System prompts without detail (provide clear instructions)
-- **Response Mismatch**: Responses don't address queries (verify relevance)
-
-## Dataset Size Recommendations
-
-| Task Complexity | Recommended Size | Notes |
-|---|---|---|
-| Simple tasks | 100-500 | Well-defined, limited variation |
-| Medium tasks | 500-2,000 | Multiple scenarios, moderate complexity |
-| Complex tasks | 2,000-10,000+ | Many edge cases, high variability |
-| Domain adaptation | 1,000-5,000 | Specialised knowledge required |
-
-## Resources
-
-- **Planning & Strategy**: [`resources/dataset-strategy.md`](resources/dataset-strategy.md) - Requirements gathering, planning, quality checklists
-- **Generation Techniques**: [`resources/generation-techniques.md`](resources/generation-techniques.md) - Diversity techniques, domain-specific guidance, batch workflows
-- **ChatML Specification**: [`resources/chatml-format.md`](resources/chatml-format.md) - Format details, validation, framework notes
-- **Example Datasets**: [`resources/examples.md`](resources/examples.md) - Diverse domain examples, multi-turn patterns
-- **Quality Validation**: [`resources/quality-validation.md`](resources/quality-validation.md) - Validation workflow, analysis, troubleshooting
-- **Framework Integration**: [`resources/framework-integration.md`](resources/framework-integration.md) - Setup for Unsloth, Axolotl, HuggingFace; deployment options
-
----
-
-**Version**: 2.0 | **Updated**: 2024 | **Pattern**: Modular Orchestration
+- A visible template: every answer opens the same way, so the model does too.
+- Users who all write like the generator: polite, complete, grammatical.
+- Coverage that is wide on topics and narrow on phrasing.
+- Quality that drifts across batches. Review the last batch as hard as the first.
+- Answers that do not quite address the question, which a validator never catches.
+- A system prompt in training that differs from the one in production.

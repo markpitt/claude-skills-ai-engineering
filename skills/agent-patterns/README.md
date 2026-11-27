@@ -2,10 +2,10 @@
 
 # agent-patterns
 
-Modular orchestration of agent patterns from Anthropic's engineering guide. Intelligently selects and implements prompt chaining, routing, parallelisation, orchestrator-workers, evaluator-optimizer, and autonomous agents. Includes pattern combinations and language-specific implementations.
+Chooses and implements the LLM workflow and agent patterns from Anthropic's "Building Effective Agents" guide - the augmented LLM, prompt chaining, routing, parallelisation (sectioning and voting), orchestrator-workers, evaluator-optimiser and autonomous agents - plus combinations of them and tool interface design, with templates in Python, TypeScript, C#, Go, Rust, Dart, C and GenAIScript. Use when designing an LLM feature or agent, when asked "which agent pattern should I use", "should this be a workflow or an agent", "build an orchestrator-workers pipeline" or "add an evaluator loop", or when an agent's tools keep being misused. Do NOT use for setting up a coding agent harness such as Claude Code or Copilot (use ai-coding-agent-setup), for convening several agents to review a decision (use agent-council), or for prompt wording alone with no workflow to design.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 2.0
+- **Version:** 3.0.0
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -37,4 +37,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

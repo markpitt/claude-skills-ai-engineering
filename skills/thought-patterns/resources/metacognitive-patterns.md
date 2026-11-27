@@ -29,7 +29,7 @@ This resource covers patterns for thinking about thinking, learning from experie
 ### Metacognitive Monitoring
 - Awareness of comprehension
 - Detecting errors
-- Recognizing when you're stuck
+- Recognising when you're stuck
 - Assessing confidence
 
 ### Metacognitive Control
@@ -56,7 +56,7 @@ This resource covers patterns for thinking about thinking, learning from experie
 
 **Process**:
 1. **Describe**: What happened? What did I do?
-2. **Analyze**: What happened and why?
+2. **Analyse**: What happened and why?
 3. **Evaluate**: What went well? What didn't?
 4. **Consider**: What alternatives existed?
 5. **Plan**: How will I apply this learning?

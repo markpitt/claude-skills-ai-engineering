@@ -1,0 +1,145 @@
+# Mutation spec for the OVERLAY code in scripts/sandbox.sh: each control driven red against scripts/test-overlay.sh.
+# Run with a mutate tool that copies the instrument, applies each mutation and runs the probe with env set to the copy:
+#   python3 <mutate>/mutate.py --root . scripts/mutations-overlay.toml
+# Not mutated: a stub made for a path the host already has (overlay_stubs skips an existing path, so the mutant is equivalent).
+
+instrument = "scripts/sandbox.sh"
+probe = "scripts/test-overlay.sh"
+env = "SANDBOX_SH"
+
+[[mutation]]
+name = "M-1 a layer file is bound writable"
+old = '''OV_ARGS+=(--ro-bind "${provs[0]}" "$host"); OV_UNITS+=("$host"); OV_FILES+=("${provs[0]}|$host")'''
+new = '''OV_ARGS+=(--bind "${provs[0]}" "$host"); OV_UNITS+=("$host"); OV_FILES+=("${provs[0]}|$host")'''
+
+[[mutation]]
+name = "M-2 a folder from one layer is bound writable"
+old = '''-|e) if [ ${#provs[@]} = 1 ]; then OV_ARGS+=(--ro-bind "${provs[0]}" "$host")'''
+new = '''-|e) if [ ${#provs[@]} = 1 ]; then OV_ARGS+=(--bind "${provs[0]}" "$host")'''
+
+[[mutation]]
+name = "M-3 the bottom layer wins for a file"
+old = '''OV_ARGS+=(--ro-bind "${provs[0]}" "$host"); OV_UNITS+=("$host"); OV_FILES+=("${provs[0]}|$host")'''
+new = '''OV_ARGS+=(--ro-bind "${provs[-1]}" "$host"); OV_UNITS+=("$host"); OV_FILES+=("${provs[-1]}|$host")'''
+
+[[mutation]]
+name = "M-4 the layers of a merged folder are stacked upside down"
+old = '''for ((i = ${#provs[@]} - 1; i >= 0; i--)); do'''
+new = '''for ((i = 0; i < ${#provs[@]}; i++)); do'''
+
+[[mutation]]
+name = "M-5 a folder the host has is mounted whole"
+old = '''d) ov_walk "$dest" "$r" "${layers[@]}" ;;'''
+new = '''d) ;&'''
+
+[[mutation]]
+name = "M-6 an empty host folder is walked, not mounted whole"
+old = '''[ "$hk" = d ] && [ -z "$(ls -A "$host")" ] && hk=e'''
+new = '''true'''
+
+[[mutation]]
+name = "M-7 no mount points are made on the host"
+old = '''  build_args
+  overlay_stubs'''
+new = '''  build_args'''
+
+[[mutation]]
+name = "M-8 no mount point is made for a folder"
+old = '''OV_UNITS+=("$host"); [ "$hk" = - ] && OV_STUBS+=("d|$host"); ov_files'''
+new = '''OV_UNITS+=("$host"); ov_files'''
+
+[[mutation]]
+name = "M-9 a destination outside ROOT is accepted"
+old = '''*) overlay_fail "destination '$dest' is not ROOT or under it" ;;'''
+new = '''*) ;;'''
+
+[[mutation]]
+name = "M-10 a destination inside an earlier one is accepted"
+old = '''"$(realpath -e -- "$d")"/*) overlay_fail "destinations '$d' and '$dest' are nested" ;; esac'''
+new = '''"$(realpath -e -- "$d")"/*) ;; esac'''
+
+[[mutation]]
+name = "M-11 a destination holding an earlier one is accepted"
+old = '''"$(realpath -e -- "$dest")"/*) overlay_fail "destinations '$dest' and '$d' are nested" ;; esac'''
+new = '''"$(realpath -e -- "$dest")"/*) ;; esac'''
+
+[[mutation]]
+name = "M-12 a missing layer is accepted"
+old = '''[ -d "$L" ] || overlay_fail "layer '$L' is not a folder"'''
+new = '''true'''
+
+[[mutation]]
+name = "M-13 a layer inside its destination is accepted"
+old = '''overlay_fail "layer '$L' is inside its destination"'''
+new = '''true'''
+
+[[mutation]]
+name = "M-14 an entry with no layer is accepted"
+old = '''[ ${#layers[@]} -gt 0 ] || overlay_fail "'$spec' names no layer"'''
+new = '''true'''
+
+[[mutation]]
+name = "M-15 a path of two kinds across layers is accepted"
+old = '''[ "$k" = "$top" ] || overlay_fail "$r is a $k in $L but a $top in a higher layer"'''
+new = '''[ "$k" = "$top" ] || continue'''
+
+[[mutation]]
+name = "M-16 a layer file over a host folder is accepted"
+old = '''f) case $hk in f|-) ;; *) overlay_fail'''
+new = '''f) case $hk in *) ;; x) overlay_fail'''
+
+[[mutation]]
+name = "M-17 a layer folder over a host file is accepted"
+old = '''*) overlay_fail "$host is not a folder on the host, but the layer has one" ;;'''
+new = '''*) ;;'''
+
+[[mutation]]
+name = "M-18 a layer symlink with no matching host link is accepted"
+old = '''l) [ "$hk" = l ] && [ "$(readlink "$host")" = "$(readlink "${provs[0]}")" ] \'''
+new = '''l) true \'''
+
+[[mutation]]
+name = "M-19 the layer mounts are planned but not passed to bwrap"
+old = '''ARGS+=(${OV_ARGS[@]+"${OV_ARGS[@]}"})'''
+new = '''true'''
+
+[[mutation]]
+name = "M-20 show leaves out the overlay summary"
+old = '''[ ${#OV_SUMMARY[@]} = 0 ] || printf '%s\n' "${OV_SUMMARY[@]}"; printf 'bwrap''''
+new = '''printf 'bwrap''''
+
+[[mutation]]
+name = "M-21 test skips the layer checks"
+old = '''if [ ${#OV_UNITS[@]} -gt 0 ]; then'''
+new = '''if false; then'''
+
+[[mutation]]
+name = "M-22 the hash check always passes"
+old = '''sha256sum -c --quiet -' _ "$sums"'''
+new = '''true' _ "$sums"'''
+
+[[mutation]]
+name = "M-23 a single bound file is left out of the hash check"
+old = '''OV_UNITS+=("$host"); OV_FILES+=("${provs[0]}|$host")'''
+new = '''OV_UNITS+=("$host")'''
+
+[[mutation]]
+name = "M-24 the files of a whole folder are left out of the hash check"
+old = '''[ -f "$d/$f" ] && [ ! -L "$d/$f" ] && OV_FILES+=("$d/$f|$dst/$f")'''
+new = '''[ -f "$d/$f" ] && false && OV_FILES+=("$d/$f|$dst/$f")'''
+
+[[mutation]]
+name = "M-25 a lower layer's file is hashed as well as the top one's"
+old = '''[ -n "${seen[$f]+x}" ] && continue
+      seen[$f]=1'''
+new = '''seen[$f]=1'''
+
+[[mutation]]
+name = "M-26 the read-only check always passes"
+old = '''case ",${o% *}, ,${o#* }," in *,ro,*) ;;'''
+new = '''case x in *) ;;'''
+
+[[mutation]]
+name = "M-27 the read-only check reads only the mount options"
+old = '''o="$opts ${sb%% *}"'''
+new = '''o="$opts $opts"'''

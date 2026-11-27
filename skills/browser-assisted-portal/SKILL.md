@@ -1,9 +1,9 @@
 ---
 name: browser-assisted-portal
-description: Help a person through a government or service portal in a browser-automation session (for example Claude in Chrome). The person signs in and submits. The agent reads and captures pages, explains each question and the check-your-answers page, flags conflicts, and keeps a dated record of what was entered and seen. Use when a browser agent is asked to help with an online form, application, claim or account on a public or service portal and the person will do the sign-in and the final step. Do NOT use to submit, pay, sign, declare or confirm anything, to log in for the person or handle their passwords or codes, to scrape or bulk-download a site, or to test a web application as a developer (use a browser end-to-end testing tool). For a script to hand a person when a guard blocks a write, use remediation-script.
+description: Helps a person through a government or service portal in a browser-automation session (for example Claude in Chrome). The person signs in and submits. The agent reads and captures pages, explains each question and the check-your-answers page, flags conflicts, and keeps a dated record of what was entered and seen. Use when a browser agent is asked to help with an online form, application, claim or account on a public or service portal and the person will do the sign-in and the final step. Do NOT use to submit, pay, sign, declare or confirm anything, to log in for the person or handle their passwords or codes, to scrape or bulk-download a site, or to test a web application as a developer (use a browser end-to-end testing tool). For a script to hand a person when a guard blocks a write, use remediation-script.
 license: Apache-2.0
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   tags: "browser, portal, forms, government, service, claude-in-chrome, record-keeping, human-in-the-loop"
 ---
 

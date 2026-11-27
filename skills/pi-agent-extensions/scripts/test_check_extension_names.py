@@ -1,7 +1,7 @@
 """Tests for check_extension_names.py. Fixtures are written at run time in a temporary directory.
 
-Run through the sandbox wrapper for test runs:
-    mp-sandbox-test python3 -P claude-skills-ai-engineering/skills/pi-agent-extensions/scripts/test_check_extension_names.py -v
+Run inside a sandbox (for example a bubblewrap wrapper) for test runs:
+    python3 -P claude-skills-ai-engineering/skills/pi-agent-extensions/scripts/test_check_extension_names.py -v
 """
 
 from __future__ import annotations

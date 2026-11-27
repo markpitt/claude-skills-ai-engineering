@@ -52,14 +52,14 @@ Build prompts programmatically using JavaScript/TypeScript instead of string tem
 
 ### 2. File Processing
 
-Automatically import and optimize file context with support for multiple formats.
+Automatically import and optimise file context with support for multiple formats.
 
 **Supported formats:**
 - Code files (JS, TS, Python, etc.) with syntax highlighting
 - Documents (PDF, DOCX, TXT)
 - Data files (CSV, XLSX, JSON, YAML)
 
-**Automatic optimization:**
+**Automatic optimisation:**
 - Token counting and limiting
 - Intelligent slicing (head/tail for logs)
 - Format conversion (PDF pages → text)
@@ -74,7 +74,7 @@ defTool("getCurrentTime", "Gets current time", {}, async () => new Date().toISOS
 
 ### 4. Structured Output
 
-Define schemas for LLM responses to ensure consistent, parseable output.
+Define schemas for LLM responses to get consistent, parseable output.
 
 ```javascript
 const result = defSchema("RESULT", {
@@ -301,7 +301,7 @@ const report = defSchema("REPORT", {
 
 **When to use:**
 - Define expected output format
-- Ensure consistency of LLM responses
+- Keeps LLM responses consistent
 - Validate response structure before processing
 
 ---
@@ -453,7 +453,7 @@ def("COMPONENTS", env.files, { glob: "src/components/**/*.tsx" })
 
 ### Token Management
 
-Optimize token usage for large files:
+Optimise token usage for large files:
 
 ```javascript
 // Token limiting
@@ -494,7 +494,7 @@ const tsFiles = env.files.filter(f => f.endsWith(".ts"))
 User-provided variables passed when running the script.
 
 ```javascript
-// Passed via: genaiscript run script.genai.mjs --var TARGET_LANG=rust
+// Passed via: genaiscript run script.genai.mjs --vars TARGET_LANG=rust
 const targetLanguage = env.vars.TARGET_LANG || "javascript"
 const severity = env.vars.MIN_SEVERITY || "warning"
 ```
@@ -537,13 +537,13 @@ genaiscript run <script-name>
 genaiscript run script.genai.mjs file1.ts file2.ts
 
 # With variables
-genaiscript run script.genai.mjs --var KEY=value --var LANG=rust
+genaiscript run script.genai.mjs --vars KEY=value LANG=rust
 
 # Specify model
 genaiscript run script.genai.mjs --model large
 
 # Multiple variables
-genaiscript run script.genai.mjs --var MODE=detailed --var FORMAT=json
+genaiscript run script.genai.mjs --vars MODE=detailed FORMAT=json
 ```
 
 ### Script Organization
@@ -693,5 +693,5 @@ script({
 
 - [API Reference](api-reference.md) - Complete function documentation
 - [Examples](examples.md) - Practical code examples
-- [Patterns](patterns.md) - Advanced patterns and optimization
+- [Patterns](patterns.md) - Advanced patterns and optimisation
 

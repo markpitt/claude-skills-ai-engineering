@@ -2,10 +2,10 @@
 
 # fine-tuning-data-generator
 
-Generates synthetic fine-tuning datasets in ChatML format (JSONL) for use with Unsloth, Axolotl, and similar training frameworks. Gathers requirements, creates datasets with diverse examples, validates quality, and provides framework integration guidance.
+Plans, generates and validates synthetic fine-tuning datasets as ChatML JSONL for Unsloth, Axolotl, Hugging Face TRL and similar trainers. Gathers what the model must learn, agrees a generation plan, writes diverse single- and multi-turn examples in batches, checks them with the bundled validator and analyser, and gives trainer configuration. Use when asked to "make a training dataset", "generate fine-tuning examples", "create ChatML data for Unsloth" or "check this JSONL before I train on it". Do NOT use for choosing or serving a model (use local-llm-serving), for evaluation suites or test prompts for an existing model, or for prompt engineering with no training involved.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 2.0
+- **Version:** 3.0.0
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -37,4 +37,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

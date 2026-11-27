@@ -9,7 +9,7 @@
 script({
     title: "Autonomous Agent Pattern",
     description: "Agent that can explore and use tools to complete tasks",
-    model: "claude-sonnet-4-20250514",
+    model: "claude-sonnet-5-5",
     parameters: {
         task: {
             type: "string",
@@ -227,7 +227,7 @@ What is your next action?
             `
         }, {
             label: `agent_step_${state.totalSteps}`,
-            model: "claude-sonnet-4-20250514"
+            model: "claude-sonnet-5-5"
         })
 
         const action = parseAction(response.text)

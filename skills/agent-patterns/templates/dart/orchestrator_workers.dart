@@ -17,7 +17,7 @@ class AnthropicClient {
 
   Future<String> createMessage({
     required String prompt,
-    String model = 'claude-sonnet-4-20250514',
+    String model = 'claude-sonnet-5-5',
     int maxTokens = 4096,
   }) async {
     final response = await httpClient.post(
@@ -115,7 +115,7 @@ class LLMWorker implements Worker {
     required this.client,
     required this.workerType,
     required this.systemPrompt,
-    this.model = 'claude-sonnet-4-20250514',
+    this.model = 'claude-sonnet-5-5',
   });
 
   @override
@@ -206,7 +206,7 @@ class Orchestrator {
 
   Orchestrator({
     required this.client,
-    this.model = 'claude-sonnet-4-20250514',
+    this.model = 'claude-sonnet-5-5',
   });
 
   /// Register a worker

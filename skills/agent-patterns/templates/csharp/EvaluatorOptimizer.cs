@@ -67,8 +67,8 @@ namespace AgentPatterns
 
         public EvaluatorOptimizer(
             AnthropicClient client,
-            string generatorModel = "claude-sonnet-4-20250514",
-            string evaluatorModel = "claude-sonnet-4-20250514")
+            string generatorModel = "claude-sonnet-5-5",
+            string evaluatorModel = "claude-sonnet-5-5")
         {
             _client = client;
             _generatorModel = generatorModel;
@@ -296,7 +296,7 @@ Respond with JSON in this exact format:
 
         public ConfidenceBasedOptimizer(
             AnthropicClient client,
-            string model = "claude-sonnet-4-20250514")
+            string model = "claude-sonnet-5-5")
         {
             _client = client;
             _model = model;

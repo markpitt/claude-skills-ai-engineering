@@ -49,7 +49,7 @@ class SectioningParallelizer:
     def __init__(
         self,
         client: anthropic.Anthropic,
-        model: str = "claude-sonnet-4-20250514"
+        model: str = "claude-sonnet-5-5"
     ):
         self.client = client
         self.model = model
@@ -126,7 +126,7 @@ class VotingParallelizer:
     def __init__(
         self,
         client: anthropic.Anthropic,
-        model: str = "claude-sonnet-4-20250514"
+        model: str = "claude-sonnet-5-5"
     ):
         self.client = client
         self.model = model
@@ -214,7 +214,7 @@ class GuardrailsParallelizer:
     def __init__(
         self,
         client: anthropic.Anthropic,
-        model: str = "claude-sonnet-4-20250514"
+        model: str = "claude-sonnet-5-5"
     ):
         self.client = client
         self.model = model
@@ -222,7 +222,7 @@ class GuardrailsParallelizer:
     async def _check_safety(self, content: str) -> dict[str, Any]:
         """Check content for safety issues"""
         message = await self.client.messages.create(
-            model="claude-3-5-haiku-20241022",  # Fast model for safety check
+            model="claude-haiku-5-5",  # Fast model for safety check
             max_tokens=256,
             system="""You are a content safety classifier. Analyze the content for:
 - Harmful content

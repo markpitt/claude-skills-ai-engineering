@@ -2,10 +2,10 @@
 
 # sandboxed-agent
 
-Create a sandboxed coding agent for one folder, using a bubblewrap sandbox profile inferred from the folder (secrets and state hidden, least privilege, network none by default), launchers on PATH, an env template for its credentials, and a curated, secret-free set of notes harvested from the host's Claude history so the agent can orient itself. Use when asked to sandbox an agent to a directory, give an agent access to only one project, set up a restricted agent for a service folder, seed a new agent's memory from existing sessions, or find out why sandboxed agents did not start after a reboot or after their folders moved. Do NOT use for general container isolation, CI sandboxes, or running untrusted binaries.
+Creates a sandboxed coding agent for one folder, using a bubblewrap sandbox profile inferred from the folder (secrets and state hidden, least privilege, network none by default), launchers on PATH, an env template for its credentials, and a curated, secret-free set of notes harvested from the host's Claude history so the agent can orient itself. Use when asked to sandbox an agent to a directory, give an agent access to only one project, set up a restricted agent for a service folder, seed a new agent's memory from existing sessions, or find out why sandboxed agents did not start after a reboot or after their folders moved. Do NOT use for general container isolation, CI sandboxes, or running untrusted binaries.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 1.3.0
+- **Version:** 1.4.1
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -33,6 +33,7 @@ Loaded on demand, not up front. SKILL.md routes to them.
 - `scripts/client-env.sh`
 - `scripts/inspect.sh`
 - `scripts/install-proxy.sh`
+- `scripts/mutations-overlay.toml`
 - `scripts/new-agent.sh`
 - `scripts/protect-config.sh`
 - `scripts/restart-agents.sh`
@@ -43,6 +44,7 @@ Loaded on demand, not up front. SKILL.md routes to them.
 - `scripts/test-host-map.sh`
 - `scripts/test-new-agent-memory.sh`
 - `scripts/test-new-agent.sh`
+- `scripts/test-overlay.sh`
 - `scripts/test-restart-agents.sh`
 - `scripts/test-start-agents.sh`
 - `scripts/test-workdir.sh`
@@ -51,4 +53,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

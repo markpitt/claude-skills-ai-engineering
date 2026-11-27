@@ -5,7 +5,7 @@
 Writes, debugs and checks extensions for the pi coding agent, covering its ExtensionAPI events and tools, registerProvider and createProvider with auth.json and models.json credentials, live model-list refresh, Claude compatibility (rules, skills, memory, CLAUDE.md), OpenAI-compatible local servers such as llama.cpp, and the provider bugs that recur. Names are checked against the installed binary. Use when writing or changing a file under ~/.pi/agent/extensions or .pi/extensions, adding a pi provider, a model list that does not update, a key that is ignored, or Claude rules missing from pi. Do NOT use for omp configuration or extensions (use omp-harness), for writing AGENTS.md or CLAUDE.md content (use ai-coding-agent-setup), or for choosing a hosted model without pi involved.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 1.0.0
+- **Version:** 1.0.1
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -35,4 +35,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

@@ -114,7 +114,7 @@ type Route[T any] struct {
 //
 // Example:
 //
-//	router := NewRouter[string](client, "claude-sonnet-4-20250514")
+//	router := NewRouter[string](client, "claude-sonnet-5-5")
 //	router.AddRoute(Route[string]{
 //	    Category: "technical",
 //	    Description: "Technical issues",
@@ -280,13 +280,13 @@ func (r *ModelRouter) RouteByComplexity(ctx context.Context, input string) (stri
 	var model string
 	switch complexity {
 	case ComplexitySimple:
-		model = "claude-3-haiku-20240307"
+		model = "claude-haiku-5-5"
 	case ComplexityModerate:
-		model = "claude-sonnet-4-20250514"
+		model = "claude-sonnet-5-5"
 	case ComplexityComplex:
-		model = "claude-opus-4-20250514"
+		model = "claude-opus-5-5"
 	default:
-		model = "claude-sonnet-4-20250514"
+		model = "claude-sonnet-5-5"
 	}
 
 	return r.client.CreateMessage(ctx, input, model, 4096)
@@ -330,7 +330,7 @@ func ExampleCustomerServiceRouting() error {
 		HTTPClient: &http.Client{},
 	}
 
-	router := NewRouter[string](client, "claude-sonnet-4-20250514")
+	router := NewRouter[string](client, "claude-sonnet-5-5")
 
 	// Add routes
 	router.AddRoute(Route[string]{
@@ -338,7 +338,7 @@ func ExampleCustomerServiceRouting() error {
 		Description: "Technical issues, bugs, errors",
 		Handler: func(ctx context.Context, input string) (string, error) {
 			prompt := fmt.Sprintf("You are a technical support specialist. Help with: %s", input)
-			return client.CreateMessage(ctx, prompt, "claude-sonnet-4-20250514", 1024)
+			return client.CreateMessage(ctx, prompt, "claude-sonnet-5-5", 1024)
 		},
 	})
 
@@ -347,7 +347,7 @@ func ExampleCustomerServiceRouting() error {
 		Description: "Billing, payments, subscriptions",
 		Handler: func(ctx context.Context, input string) (string, error) {
 			prompt := fmt.Sprintf("You are a billing support specialist. Help with: %s", input)
-			return client.CreateMessage(ctx, prompt, "claude-sonnet-4-20250514", 1024)
+			return client.CreateMessage(ctx, prompt, "claude-sonnet-5-5", 1024)
 		},
 	})
 
@@ -356,13 +356,13 @@ func ExampleCustomerServiceRouting() error {
 		Description: "General inquiries, information requests",
 		Handler: func(ctx context.Context, input string) (string, error) {
 			prompt := fmt.Sprintf("Help the user with: %s", input)
-			return client.CreateMessage(ctx, prompt, "claude-3-haiku-20240307", 1024)
+			return client.CreateMessage(ctx, prompt, "claude-haiku-5-5", 1024)
 		},
 	})
 
 	// Set fallback
 	router.SetFallback(func(ctx context.Context, input string) (string, error) {
-		return client.CreateMessage(ctx, input, "claude-sonnet-4-20250514", 1024)
+		return client.CreateMessage(ctx, input, "claude-sonnet-5-5", 1024)
 	})
 
 	// Route a request

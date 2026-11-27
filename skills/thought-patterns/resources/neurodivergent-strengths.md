@@ -1,12 +1,12 @@
 # Neurodivergent Cognitive Strengths: Research Summary
 
-This document provides detailed research findings on cognitive patterns and strengths associated with neurodivergent conditions. These patterns represent tendencies and strengths, not universal characteristics—neurodivergence is highly individual.
+This document provides detailed research findings on cognitive patterns and strengths associated with neurodivergent conditions. These patterns represent tendencies and strengths, not universal characteristics: neurodivergence is highly individual.
 
 > **Related Resources**: These patterns integrate with all other thinking patterns. See the main `SKILL.md` for orchestration guidance. Particularly complementary with patterns in `foundational-patterns.md` (Systems, Gestalt) and `creative-patterns.md` (Associative, Lateral).
 
 ## Key Principle: Cognitive Diversity as Strength
 
-Around 15% of people are neurodivergent, meaning their brains function differently from what society considers "typical." This cognitive diversity brings distinct advantages in problem-solving, creativity, and specialized reasoning.
+Around 15% of people are neurodivergent, meaning their brains function differently from what society considers "typical." This cognitive diversity brings distinct advantages in problem-solving, creativity, and specialised reasoning.
 
 **Important**: Even when there's a consistent pattern that is statistically more likely in a specific area of neurodivergence, they are not hard and fast rules. Individual variation is substantial.
 
@@ -25,7 +25,7 @@ When engaged with tasks of high interest, individuals with ADHD can demonstrate 
 
 ### Challenges
 
-- Difficulty with organization and sustained attention on low-interest tasks
+- Difficulty with organisation and sustained attention on low-interest tasks
 - Struggles with sitting still or maintaining focus in unstimulating environments
 - Need for external structure and reminders
 
@@ -42,13 +42,13 @@ When engaged with tasks of high interest, individuals with ADHD can demonstrate 
 ### Strengths and Characteristics
 
 **Exceptional Pattern Recognition**:
-Those with autism often excel at recognizing patterns and attention to detail, especially in fields like mathematics, music, or data analysis.
+Those with autism often excel at recognising patterns and attention to detail, especially in fields like mathematics, music, or data analysis.
 
 **Detail Orientation**:
-Individuals with autism spectrum disorder (ASD) often possess an exceptional ability to focus on intricate details and identify patterns that others might miss, making them invaluable assets in data analysis, scientific research, and quality control.
+Individuals with autism spectrum disorder (ASD) often possess an exceptional ability to focus on complex details and identify patterns that others might miss, making them very useful assets in data analysis, scientific research, and quality control.
 
 **Systematic Processing**:
-Natural tendency toward systematic, consistent approaches to problems. High value placed on accuracy and thoroughness.
+Natural tendency towards systematic, consistent approaches to problems. High value placed on accuracy and thoroughness.
 
 **Deep Focus**:
 Ability to sustain attention on areas of interest with exceptional depth and persistence.
@@ -79,7 +79,7 @@ People with dyslexia usually have brains that are better at processing or mental
 84% of dyslexic people are above average in reasoning, understanding patterns, evaluating possibilities and making decisions.
 
 **Big Picture Orientation**:
-Strong tendency toward holistic, overview-level understanding. Natural ability to see the forest rather than getting lost in trees.
+Strong tendency towards holistic, overview-level understanding. Natural ability to see the forest rather than getting lost in trees.
 
 **Creative Problem-Solving**:
 Enhanced ability to think outside conventional pathways, find novel solutions, and approach problems from unique angles.
@@ -93,7 +93,7 @@ Enhanced ability to think outside conventional pathways, find novel solutions, a
 ### Optimal Use Cases
 
 - Graphic design, architecture, and engineering
-- Spatial reasoning and 3D modeling
+- Spatial reasoning and 3D modelling
 - Visual creativity and artistic work
 - Strategic planning and big-picture analysis
 - Pattern evaluation and decision-making
@@ -110,11 +110,11 @@ Present across multiple forms of neurodivergence, this pattern involves making c
 - Novel problem solutions
 - Innovation through unexpected connections
 
-**Variability**: There did not seem to be a consistent pattern on visualization with any specific neurodivergence, as folks with ADHD and Autism seemed to be equally likely to say they thought in words, pictures, a combination or something else intangible.
+**Variability**: There did not seem to be a consistent pattern on visualisation with any specific neurodivergence, as folks with ADHD and Autism seemed to be equally likely to say they thought in words, pictures, a combination or something else intangible.
 
 ## Integration with Neurotypical Patterns
 
-Neurodivergent patterns are not separate from "standard" cognitive patterns—they are additional cognitive strategies that can enhance problem-solving:
+Neurodivergent patterns are not separate from "standard" cognitive patterns: they are additional cognitive strategies that can enhance problem-solving:
 
 ### Complementary Combinations
 
@@ -127,7 +127,7 @@ Neurodivergent patterns are not separate from "standard" cognitive patterns—th
    - Achieve exceptional depth on engaging analytical problems
 
 3. **Spatial/Visual Thinking + Systems Thinking**:
-   - Leverage dyslexic spatial strength for system visualization
+   - Use dyslexic spatial strength for system visualisation
    - Understand complex system relationships through visual models
 
 4. **Non-Linear Associative + First Principles**:
@@ -151,7 +151,7 @@ When solving problems, consider:
 1. **Multiple Modalities**: Offer both visual and textual representations
 2. **Flexibility**: Allow for both sequential and non-linear approaches
 3. **Depth Options**: Support both quick overview and deep detail exploration
-4. **Interest Alignment**: Frame problems to maximize engagement where possible
+4. **Interest Alignment**: Frame problems to maximise engagement where possible
 
 ## Research Sources
 
@@ -159,11 +159,11 @@ This document synthesizes findings from multiple sources on neurodivergent think
 
 ### Key Findings Sources
 
-- **Neurodivergent Thinking Patterns** - Embracing Intensity: Comprehensive overview of ADHD, autism, and dyslexia cognitive styles
+- **Neurodivergent Thinking Patterns** - Embracing Intensity: Full overview of ADHD, autism, and dyslexia cognitive styles
 - **The Neurodivergent Spectrum** - Counseling Center Group: Guide to cognitive diversity across conditions
 - **Neurodiversity Research** - Cleveland Clinic, World Economic Forum: Medical and societal perspectives on neurodivergence
 - **Understanding Neurodivergent Brains** - AT4K: Detailed analysis of how neurodivergent cognition differs and why it matters
-- **Seven Neurodivergent Conditions** - The Brain Charity: Comprehensive overview of main neurodivergent conditions
+- **Seven Neurodivergent Conditions** - The Brain Charity: Full overview of main neurodivergent conditions
 
 ### Statistics and Research Data
 
@@ -176,7 +176,7 @@ This document synthesizes findings from multiple sources on neurodivergent think
 
 ### Strengths-Based Approach
 
-This resource takes a strengths-based approach to neurodivergence, focusing on cognitive advantages rather than deficits. This doesn't minimize challenges, but recognizes that:
+This resource takes a strengths-based approach to neurodivergence, focusing on cognitive advantages rather than deficits. This doesn't minimise challenges, but recognises that:
 
 1. Different ≠ deficient
 2. Cognitive diversity enhances collective problem-solving
@@ -205,14 +205,14 @@ When applying these patterns:
 
 ## Conclusion
 
-Neurodivergent cognitive patterns represent genuine alternative approaches to thinking and problem-solving. By understanding and leveraging these patterns—whether you are neurodivergent or not—you can:
+Neurodivergent cognitive patterns represent genuine alternative approaches to thinking and problem-solving. By understanding and using these patterns, whether you are neurodivergent or not, you can:
 
 - Access diverse cognitive strategies
-- Solve problems more comprehensively
+- Solve problems more fully
 - Appreciate cognitive diversity
 - Build more inclusive and effective approaches
 
-The goal is not to medicalize or categorize, but to expand the cognitive toolkit available for any given challenge.
+The goal is not to medicalize or categorise, but to expand the cognitive toolkit available for any given challenge.
 
 ---
 

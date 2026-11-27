@@ -46,7 +46,7 @@ Error: I tried sorting with .sort() but got a TypeError. My list has mixed types
 #### 4. Response Complexity Levels
 - **Brief**: 1-2 sentences, direct answer
 - **Standard**: Full explanation with example
-- **Detailed**: Comprehensive with multiple approaches, trade-offs, best practices
+- **Detailed**: Full with multiple approaches, trade-offs, best practices
 
 Example variations:
 ```
@@ -101,7 +101,7 @@ Tailor examples to your specific domain:
 
 ### Systematic Variation Template
 
-For comprehensive coverage, use this template:
+For full coverage, use this template:
 
 ```
 For each core scenario:
@@ -114,7 +114,7 @@ For each core scenario:
 ```
 
 **Benefits**:
-- Ensures systematic coverage
+- Gives systematic coverage
 - Reduces gaps and redundancy
 - Maintains consistency across examples
 - Scales efficiently for multiple scenarios
@@ -156,7 +156,7 @@ For each core scenario:
 **Key Elements:**
 - Clear problem definition
 - Step-by-step analytical approach
-- Relevant visualizations or summaries
+- Relevant visualisations or summaries
 - Actionable insights
 - Code for reproducibility
 
@@ -241,13 +241,13 @@ For each core scenario:
 
 ### Batch 3: Coverage Filling (30-50 examples)
 - Fill identified gaps in coverage
-- Ensure good distribution across categories
+- Spread examples well across categories
 - Add contextual variations
 - Validate diversity metrics
 
 ### Batch 4: Polish & Validation (10-20 examples)
 - Fill any remaining gaps
-- Ensure quality consistency
+- Keep quality consistent
 - Validate edge case coverage
 - Run full validation suite
 
@@ -290,7 +290,7 @@ For each core scenario:
 **Better Approach:**
 - Maintain consistent quality standards throughout
 - Use a checklist for each batch
-- Review for consistency before finalizing
+- Review for consistency before finalising
 - Keep quality bar visible
 
 ### Problem: Too Much Repetition
@@ -301,7 +301,7 @@ For each core scenario:
 - Redundant information
 
 **Better Approach:**
-- Ensure each example teaches something new
+- Make sure each example teaches something new
 - Vary not just the query but the concept/approach
 - Check for duplicates after generation
 - Use analyze_dataset.py to check diversity metrics

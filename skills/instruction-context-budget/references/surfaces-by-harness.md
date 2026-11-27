@@ -64,5 +64,5 @@ a canary has confirmed it (see `agent-instruction-load-audit`).
 ## What the estimate means
 
 Tokens are estimated as `ceil(bytes / 4)`. This is a rough rule for English prose and for Markdown
-with code. It is not a tokenizer, and it understates dense tables and code. Compare two measurements
+with code. It is not a tokeniser, and it understates dense tables and code. Compare two measurements
 made the same way, and report the byte counts, which are exact, alongside any token figure.

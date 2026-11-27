@@ -172,7 +172,7 @@ typedef struct Orchestrator {
 Orchestrator* orchestrator_create(const char* api_key, const char* model) {
     Orchestrator* o = (Orchestrator*)calloc(1, sizeof(Orchestrator));
     o->api_key = strdup(api_key);
-    o->model = model ? strdup(model) : strdup("claude-sonnet-4-20250514");
+    o->model = model ? strdup(model) : strdup("claude-sonnet-5-5");
     o->worker_count = 0;
     return o;
 }

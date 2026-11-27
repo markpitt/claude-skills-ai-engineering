@@ -58,7 +58,7 @@ type AgentAction struct {
 //
 // Example:
 //
-//	agent := NewAutonomousAgent(client, "claude-sonnet-4-20250514")
+//	agent := NewAutonomousAgent(client, "claude-sonnet-5-5")
 //	agent.RegisterTool(AgentTool{
 //	    Name: "search",
 //	    Description: "Search for information",
@@ -332,7 +332,7 @@ func ExampleResearchAgent() error {
 		HTTPClient: nil, // Would use http.Client in production
 	}
 
-	agent := NewAutonomousAgent(client, "claude-sonnet-4-20250514")
+	agent := NewAutonomousAgent(client, "claude-sonnet-5-5")
 
 	// Register tools
 	agent.RegisterTool(AgentTool{

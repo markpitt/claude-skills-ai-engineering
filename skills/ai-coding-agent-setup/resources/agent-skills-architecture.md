@@ -1,6 +1,6 @@
 # Agent Skills Architecture for Project-Specific Workflows
 
-Agent skills package specialized, reusable workflows as `SKILL.md`-based modules. While AGENTS.md defines *what the project is*, skills define *what the agent can do* within it. This resource covers how to design skills for your project's repeatable tasks.
+Agent skills package specialised, reusable workflows as `SKILL.md`-based modules. While AGENTS.md defines *what the project is*, skills define *what the agent can do* within it. This resource covers how to design skills for your project's repeatable tasks.
 
 ---
 
@@ -75,7 +75,7 @@ The `description` field in SKILL.md frontmatter determines when the skill loads.
 [What it does] + [When to use it] + [Exact trigger phrases]
 ```
 
-**Example — good:**
+**Example: good:**
 ```yaml
 description: Scaffolds a new REST API endpoint in this project following our
   layered architecture (router → service → repository). Use when asked to
@@ -84,7 +84,7 @@ description: Scaffolds a new REST API endpoint in this project following our
   directories with the project's naming conventions pre-applied.
 ```
 
-**Example — too vague:**
+**Example: too vague:**
 ```yaml
 description: Helps with API development.
 ```
@@ -200,7 +200,7 @@ Never place feature logic directly in `src/components/` or `src/pages/`.
 
 ## Skills for Architecture Migration
 
-When the team is migrating from one pattern to another, a skill ensures consistency:
+When the team is migrating from one pattern to another, a skill keeps the work consistent:
 
 ```yaml
 ---

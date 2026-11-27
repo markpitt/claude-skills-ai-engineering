@@ -77,7 +77,7 @@ func (w *LLMWorker) Execute(ctx context.Context, subtask *OrchestratorSubtask, d
 //
 // Example:
 //
-//	orch := NewOrchestrator(client, "claude-sonnet-4-20250514")
+//	orch := NewOrchestrator(client, "claude-sonnet-5-5")
 //	orch.RegisterWorker(NewLLMWorker(client, "researcher", "You research topics", model))
 //	result, err := orch.Execute(ctx, "Write an article about AI")
 type Orchestrator struct {
@@ -323,7 +323,7 @@ func ExampleResearchArticle() error {
 		HTTPClient: nil, // Would use http.Client in production
 	}
 
-	orchestrator := NewOrchestrator(client, "claude-sonnet-4-20250514")
+	orchestrator := NewOrchestrator(client, "claude-sonnet-5-5")
 
 	// Register specialized workers
 	orchestrator.
@@ -331,19 +331,19 @@ func ExampleResearchArticle() error {
 			client,
 			"researcher",
 			"You are a research specialist. Gather facts, statistics, and key information.",
-			"claude-sonnet-4-20250514",
+			"claude-sonnet-5-5",
 		)).
 		RegisterWorker(NewLLMWorker(
 			client,
 			"writer",
 			"You are a skilled writer. Create engaging, well-structured content.",
-			"claude-sonnet-4-20250514",
+			"claude-sonnet-5-5",
 		)).
 		RegisterWorker(NewLLMWorker(
 			client,
 			"editor",
 			"You are an editor. Review and improve content for clarity and accuracy.",
-			"claude-sonnet-4-20250514",
+			"claude-sonnet-5-5",
 		))
 
 	ctx := context.Background()

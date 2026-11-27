@@ -56,7 +56,7 @@ class Router:
     def __init__(
         self,
         client: anthropic.Anthropic,
-        model: str = "claude-sonnet-4-20250514"
+        model: str = "claude-sonnet-5-5"
     ):
         self.client = client
         self.model = model
@@ -173,7 +173,7 @@ Categories:
 Respond with just the category name: SIMPLE, MEDIUM, or COMPLEX"""
 
         message = self.client.messages.create(
-            model="claude-3-5-haiku-20241022",  # Use cheap model for classification
+            model="claude-haiku-5-5",  # Use cheap model for classification
             max_tokens=10,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -186,11 +186,11 @@ Respond with just the category name: SIMPLE, MEDIUM, or COMPLEX"""
 
         # Select model based on complexity
         if complexity == "SIMPLE":
-            model = "claude-3-5-haiku-20241022"
+            model = "claude-haiku-5-5"
         elif complexity == "MEDIUM":
-            model = "claude-sonnet-4-20250514"
+            model = "claude-sonnet-5-5"
         else:  # COMPLEX
-            model = "claude-sonnet-4-20250514"  # or opus for most complex
+            model = "claude-sonnet-5-5"  # or opus for most complex
 
         message = self.client.messages.create(
             model=model,
@@ -210,7 +210,7 @@ async def example_customer_service():
     async def handle_general(input_text: str) -> str:
         """Handle general inquiries"""
         message = client.messages.create(
-            model="claude-3-5-haiku-20241022",
+            model="claude-haiku-5-5",
             max_tokens=1024,
             system="You are a helpful customer service agent answering general inquiries.",
             messages=[{"role": "user", "content": input_text}]
@@ -220,7 +220,7 @@ async def example_customer_service():
     async def handle_refund(input_text: str) -> str:
         """Handle refund requests"""
         message = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
             max_tokens=1024,
             system="""You are a customer service agent specializing in refunds.
             
@@ -236,7 +236,7 @@ Policy:
     async def handle_technical(input_text: str) -> str:
         """Handle technical issues"""
         message = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5-5",
             max_tokens=2048,
             system="""You are a technical support specialist.
             

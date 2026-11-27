@@ -39,7 +39,7 @@ type IterationRecord struct {
 //
 // Example:
 //
-//	optimizer := NewEvaluatorOptimizer(client, "claude-sonnet-4-20250514")
+//	optimizer := NewEvaluatorOptimizer(client, "claude-sonnet-5-5")
 //	optimizer.AddCriterion(EvaluationCriterion{Name: "clarity", Description: "Clear writing", Weight: 1.5})
 //	result, err := optimizer.Optimize(ctx, "Write a blog post about AI", 3, 0.85)
 type EvaluatorOptimizer struct {
@@ -377,7 +377,7 @@ func ExampleWritingOptimization() error {
 		HTTPClient: nil, // Would use http.Client in production
 	}
 
-	optimizer := NewEvaluatorOptimizer(client, "claude-sonnet-4-20250514")
+	optimizer := NewEvaluatorOptimizer(client, "claude-sonnet-5-5")
 
 	// Add evaluation criteria
 	optimizer.

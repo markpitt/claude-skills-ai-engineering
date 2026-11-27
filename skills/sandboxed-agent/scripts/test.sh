@@ -144,7 +144,8 @@ def check(name, ok, detail=""):
     global bad
     print(("ok    " if ok else "FAIL  ") + name + ("" if ok else f"   [{detail}]"))
     bad += not ok
-ADDR = {"api.example.com": "160.79.104.10", "lan.example.com": "10.0.0.7", "other.example.com": "104.18.1.1"}
+# The proxy only dials global addresses, so the fixtures use public resolver addresses, never documentation ranges.
+ADDR = {"api.example.com": "9.9.9.9", "lan.example.com": "10.0.0.7", "other.example.com": "104.18.1.1"}
 lookups, dials, fail_dial = [], [], []
 def fake_getaddrinfo(host, port, *a, **kw):
     lookups.append(host)

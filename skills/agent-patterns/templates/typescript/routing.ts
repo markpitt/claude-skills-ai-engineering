@@ -44,7 +44,7 @@ class Router<T = string> {
   private handlers: Map<RouteType, RouteHandler<T>> = new Map();
   private fallbackHandler?: (input: string) => Promise<T>;
 
-  constructor(client: Anthropic, model: string = "claude-sonnet-4-20250514") {
+  constructor(client: Anthropic, model: string = "claude-sonnet-5-5") {
     this.client = client;
     this.model = model;
   }
@@ -159,7 +159,7 @@ Categories:
 Respond with just the category name: SIMPLE, MEDIUM, or COMPLEX`;
 
     const message = await this.client.messages.create({
-      model: "claude-3-5-haiku-20241022", // Use cheap model for classification
+      model: "claude-haiku-5-5", // Use cheap model for classification
       max_tokens: 10,
       messages: [{ role: "user", content: prompt }],
     });
@@ -179,13 +179,13 @@ Respond with just the category name: SIMPLE, MEDIUM, or COMPLEX`;
     let model: string;
     switch (complexity) {
       case "SIMPLE":
-        model = "claude-3-5-haiku-20241022";
+        model = "claude-haiku-5-5";
         break;
       case "MEDIUM":
-        model = "claude-sonnet-4-20250514";
+        model = "claude-sonnet-5-5";
         break;
       case "COMPLEX":
-        model = "claude-sonnet-4-20250514"; // or opus for most complex
+        model = "claude-sonnet-5-5"; // or opus for most complex
         break;
     }
 
@@ -206,7 +206,7 @@ async function exampleCustomerService() {
   // Define handlers
   async function handleGeneral(input: string): Promise<string> {
     const message = await client.messages.create({
-      model: "claude-3-5-haiku-20241022",
+      model: "claude-haiku-5-5",
       max_tokens: 1024,
       system:
         "You are a helpful customer service agent answering general inquiries.",
@@ -217,7 +217,7 @@ async function exampleCustomerService() {
 
   async function handleRefund(input: string): Promise<string> {
     const message = await client.messages.create({
-      model: "claude-sonnet-4-20250514",
+      model: "claude-sonnet-5-5",
       max_tokens: 1024,
       system: `You are a customer service agent specializing in refunds.
       
@@ -233,7 +233,7 @@ Policy:
 
   async function handleTechnical(input: string): Promise<string> {
     const message = await client.messages.create({
-      model: "claude-sonnet-4-20250514",
+      model: "claude-sonnet-5-5",
       max_tokens: 2048,
       system: `You are a technical support specialist.
       

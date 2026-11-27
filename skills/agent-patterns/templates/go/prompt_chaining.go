@@ -123,7 +123,7 @@ type ChainHistory struct {
 //
 // Example:
 //
-//	chain := NewPromptChain(client, "claude-3-5-sonnet-20241022")
+//	chain := NewPromptChain(client, "claude-sonnet-5-5")
 //	chain.AddStep(ChainStep{
 //	    Name: "outline",
 //	    PromptTemplate: func(ctx map[string]interface{}) string {
@@ -228,7 +228,7 @@ func ExampleDocumentGeneration() error {
 		HTTPClient: &http.Client{},
 	}
 
-	chain := NewPromptChain(client, "claude-3-5-sonnet-20241022")
+	chain := NewPromptChain(client, "claude-sonnet-5-5")
 
 	// Step 1: Generate outline
 	chain.AddStep(ChainStep{

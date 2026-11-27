@@ -1,6 +1,6 @@
 # Self-Improvement Patterns for AI Agents
 
-Agent configurations become stale over time — a phenomenon called "context rot." This resource covers strategies for keeping AI context accurate, establishing feedback loops, preventing context window poisoning, and building living documentation that improves with the project.
+Agent configurations become stale over time: a phenomenon called "context rot." This resource covers strategies for keeping AI context accurate, establishing feedback loops, preventing context window poisoning, and building living documentation that improves with the project.
 
 ---
 
@@ -12,7 +12,7 @@ Context rot occurs when:
 - The agent follows superseded patterns because no one updated the docs
 - Context windows fill with conflicting instructions, reducing signal quality
 
-Left unaddressed, context rot causes agents to regress — making mistakes that were previously corrected.
+Left unaddressed, context rot causes agents to regress: making mistakes that were previously corrected.
 
 ---
 
@@ -24,11 +24,11 @@ Every repeated agent error signals a gap or inaccuracy in AGENTS.md or a skill.
 
 When an agent makes a mistake:
 
-1. **Identify** — Was it a wrong command, wrong pattern, or wrong file path?
-2. **Locate** — Which file (AGENTS.md or a skill) should have prevented it?
-3. **Update** — Add an explicit instruction that corrects the behaviour
-4. **Test** — Repeat the original task; verify the agent now follows the correction
-5. **Commit** — Treat the doc update as a code fix; add it to the PR or commit
+1. **Identify**: Was it a wrong command, wrong pattern, or wrong file path?
+2. **Locate**: Which file (AGENTS.md or a skill) should have prevented it?
+3. **Update**: Add an explicit instruction that corrects the behaviour
+4. **Test**: Repeat the original task; verify the agent now follows the correction
+5. **Commit**: Treat the doc update as a code fix; add it to the PR or commit
 
 **Example:**
 ```
@@ -75,18 +75,18 @@ current codebase. List proposed changes.
 
 ## Strategy 3: Progressive Disclosure to Prevent Context Overload
 
-Loading everything into context simultaneously causes "context collapse" — the agent loses coherence as the window fills.
+Loading everything into context simultaneously causes "context collapse": the agent loses coherence as the window fills.
 
 ### Tiered Loading Architecture
 
 | Level | Content | Tokens | When Loaded |
 |-------|---------|--------|-------------|
-| 1 — Always present | AGENTS.md + skill metadata (name/description only) | ~500 | Session start |
-| 2 — On demand | Full SKILL.md when a skill is triggered | ~2,000 per skill | Matching task |
-| 3 — Reference pull | Resource files within a skill | ~5,000 per file | When referenced |
+| 1: Always present | AGENTS.md + skill metadata (name/description only) | ~500 | Session start |
+| 2: On demand | Full SKILL.md when a skill is triggered | ~2,000 per skill | Matching task |
+| 3: Reference pull | Resource files within a skill | ~5,000 per file | When referenced |
 
 **Design for this in AGENTS.md:**
-- Keep AGENTS.md under 500 lines — move detailed docs to skills and references
+- Keep AGENTS.md under 500 lines: move detailed docs to skills and references
 - Use skills instead of long AGENTS.md appendices for workflow procedures
 - Write skill descriptions that are specific enough to trigger only when relevant
 
@@ -211,7 +211,7 @@ This prevents the agent from bypassing AGENTS.md rules during long edits.
 
 ---
 
-## Strategy 7: Observability — Detecting When Agents Go Off-Track
+## Strategy 7: Observability. Detecting When Agents Go Off-Track
 
 Signs that agent configuration needs attention:
 
@@ -259,12 +259,12 @@ Template:
 ## Emerging Approaches (Experimental)
 
 ### SAGE (Skill Augmented GRPO for Self-Evolution)
-A reinforcement-learning framework where agents generate and refine skills across sequential tasks. Skills produced in earlier tasks are preserved in a library and reused in later tasks. Achieves ~8.9% improvement in goal completion with 59% fewer tokens. Not yet production-ready for typical codebases — relevant for teams building fine-tuned agents.
+A reinforcement-learning framework where agents generate and refine skills across sequential tasks. Skills produced in earlier tasks are preserved in a library and reused in later tasks. Achieves ~8.9% improvement in goal completion with 59% fewer tokens. Not yet production-ready for typical codebases: relevant for teams building fine-tuned agents.
 
 ### SEAgent (Self-Evolving Agent)
 Enables autonomous skill discovery for unseen software via a World State Model and Curriculum Generator. Trains a specialist-to-generalist approach from software documentation. Significantly outperforms static-prompt baselines on OSWorld benchmarks.
 
 ### Agentic Context Engineering
-Agents acting as "context engineers" — rewriting and pruning their own context files to mitigate brevity bias and context collapse. Uses `start_focus` / `complete_focus` checkpoints where intermediate reasoning is compressed into a persistent "knowledge block," reducing token usage by 20%+ without accuracy loss.
+Agents acting as "context engineers": rewriting and pruning their own context files to mitigate brevity bias and context collapse. Uses `start_focus` / `complete_focus` checkpoints where intermediate reasoning is compressed into a persistent "knowledge block," reducing token usage by 20%+ without accuracy loss.
 
-For practical projects today, the human-curated approaches in Strategies 1–6 above remain more reliable and easier to audit.
+For practical projects today, the human-curated approaches in Strategies 1 to 6 above remain more reliable and easier to audit.

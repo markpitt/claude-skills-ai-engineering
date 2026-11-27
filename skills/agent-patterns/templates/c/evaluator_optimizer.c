@@ -111,7 +111,7 @@ char* call_anthropic_api(const char* api_key, const char* model,
 EvaluatorOptimizer* evaluator_create(const char* api_key) {
     EvaluatorOptimizer* e = (EvaluatorOptimizer*)calloc(1, sizeof(EvaluatorOptimizer));
     e->api_key = strdup(api_key);
-    e->model = strdup("claude-sonnet-4-20250514");
+    e->model = strdup("claude-sonnet-5-5");
     e->criteria = (EvaluationCriterion*)calloc(MAX_CRITERIA, sizeof(EvaluationCriterion));
     e->criteria_count = 0;
     e->target_score = 0.8;
@@ -410,7 +410,7 @@ typedef struct ConfidenceOptimizer {
 ConfidenceOptimizer* confidence_create(const char* api_key) {
     ConfidenceOptimizer* c = (ConfidenceOptimizer*)calloc(1, sizeof(ConfidenceOptimizer));
     c->api_key = strdup(api_key);
-    c->model = strdup("claude-sonnet-4-20250514");
+    c->model = strdup("claude-sonnet-5-5");
     c->confidence_threshold = 0.9;
     c->max_attempts = 3;
     return c;

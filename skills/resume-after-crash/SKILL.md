@@ -1,9 +1,9 @@
 ---
 name: resume-after-crash
-description: Recover an agent's work after a host crash, WSL restart, Windows update reboot or lost terminal. Establishes what happened (boot history, disk full, out-of-memory kills), inventories state without changing it (git status, stashes, worktrees, unpushed commits, in-progress git operations, lock files, half-written files, background jobs, containers, tmux panes), reads the plan and the last handover, reconciles each in-flight step as done, partial or not started from evidence, then resumes from the last verified step and reports what was lost and what was redone. Use when an agent or long task was interrupted by a reboot, crash or terminal loss, when asked to pick up work after the machine restarted, or when a git index lock or half-finished change blocks a resume. Do NOT use to set up tmux sessions that survive reboots (use tmux-persist), for ordinary merge conflict resolution, or for starting fresh work with no prior state.
+description: Recovers an agent's work after a host crash, WSL restart, Windows update reboot or lost terminal. Establishes what happened (boot history, disk full, out-of-memory kills), inventories state without changing it (git status, stashes, worktrees, unpushed commits, in-progress git operations, lock files, half-written files, background jobs, containers, tmux panes), reads the plan and the last handover, reconciles each in-flight step as done, partial or not started from evidence, then resumes from the last verified step and reports what was lost and what was redone. Use when an agent or long task was interrupted by a reboot, crash or terminal loss, when asked to pick up work after the machine restarted, or when a git index lock or half-finished change blocks a resume. Do NOT use to set up tmux sessions that survive reboots (use tmux-persist), for ordinary merge conflict resolution, or for starting fresh work with no prior state.
 license: Apache-2.0
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   tags: "recovery, crash, reboot, wsl2, git, handover, resume, reconciliation"
 ---
 

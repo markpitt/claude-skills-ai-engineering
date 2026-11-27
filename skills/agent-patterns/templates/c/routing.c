@@ -146,7 +146,7 @@ bool parse_classification(const char* json, ClassificationResult* result) {
 Router* router_create(const char* api_key, const char* model) {
     Router* router = (Router*)calloc(1, sizeof(Router));
     router->api_key = strdup(api_key);
-    router->model = model ? strdup(model) : strdup("claude-sonnet-4-20250514");
+    router->model = model ? strdup(model) : strdup("claude-sonnet-5-5");
     router->route_count = 0;
     router->confidence_threshold = 0.7;
     router->fallback_handler = NULL;
@@ -297,10 +297,10 @@ typedef struct ModelRouter {
 ModelRouter* model_router_create(const char* api_key) {
     ModelRouter* router = (ModelRouter*)calloc(1, sizeof(ModelRouter));
     router->api_key = strdup(api_key);
-    router->fast_model = strdup("claude-3-haiku-20240307");
-    router->standard_model = strdup("claude-sonnet-4-20250514");
-    router->powerful_model = strdup("claude-opus-4-20250514");
-    router->classification_model = strdup("claude-sonnet-4-20250514");
+    router->fast_model = strdup("claude-haiku-5-5");
+    router->standard_model = strdup("claude-sonnet-5-5");
+    router->powerful_model = strdup("claude-opus-5-5");
+    router->classification_model = strdup("claude-sonnet-5-5");
     return router;
 }
 
@@ -377,21 +377,21 @@ char* handle_code_question(const char* input, void* user_data) {
     const char* api_key = (const char*)user_data;
     char prompt[MAX_INPUT_SIZE];
     snprintf(prompt, sizeof(prompt), "As a coding expert, answer: %s", input);
-    return call_anthropic_api(api_key, "claude-sonnet-4-20250514", prompt, 4096);
+    return call_anthropic_api(api_key, "claude-sonnet-5-5", prompt, 4096);
 }
 
 char* handle_math_question(const char* input, void* user_data) {
     const char* api_key = (const char*)user_data;
     char prompt[MAX_INPUT_SIZE];
     snprintf(prompt, sizeof(prompt), "As a math expert, solve: %s", input);
-    return call_anthropic_api(api_key, "claude-sonnet-4-20250514", prompt, 4096);
+    return call_anthropic_api(api_key, "claude-sonnet-5-5", prompt, 4096);
 }
 
 char* handle_general_question(const char* input, void* user_data) {
     const char* api_key = (const char*)user_data;
     char prompt[MAX_INPUT_SIZE];
     snprintf(prompt, sizeof(prompt), "Answer this question: %s", input);
-    return call_anthropic_api(api_key, "claude-sonnet-4-20250514", prompt, 4096);
+    return call_anthropic_api(api_key, "claude-sonnet-5-5", prompt, 4096);
 }
 
 char* handle_fallback(const char* input, void* user_data) {

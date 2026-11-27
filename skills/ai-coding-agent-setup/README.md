@@ -2,10 +2,10 @@
 
 # ai-coding-agent-setup
 
-Configures AI agents (GitHub Copilot, Claude Code, Cursor, Codex) to understand a codebase and self-improve as the project evolves. Use when setting up a new project for AI-assisted development, onboarding AI agents to an existing repo, creating AGENTS.md, configuring MCP servers for code navigation, packaging project workflows as agent skills, or establishing self-improvement feedback loops. Covers AGENTS.md authoring, skill packaging, MCP configuration, context management, and living-documentation strategies.
+Sets a repository up so AI coding agents (GitHub Copilot, Claude Code, Cursor, Codex) understand it and keep improving as the project changes. Covers writing AGENTS.md and the tool-specific instruction files, packaging repeatable project workflows as agent skills, configuring MCP servers for code navigation, and the feedback loops that stop instructions going stale. Use when setting up a new project for AI-assisted development, onboarding agents to an existing repo, writing or fixing AGENTS.md, configuring .vscode/mcp.json, or when asked "why does the agent keep making the same mistake" or "the agent ignores our conventions". Do NOT use for writing or testing a single skill in depth (use skill-creator), for sandboxing an agent (use sandboxed-agent), or for choosing an LLM workflow pattern in application code (use agent-patterns).
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 1.1.0
+- **Version:** 2.0.0
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -32,4 +32,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

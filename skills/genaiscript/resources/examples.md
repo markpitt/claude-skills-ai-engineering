@@ -646,7 +646,7 @@ Generate MIGRATION_NOTES.md with:
 `
 ```
 
-### File Organizer
+### File Organiser
 
 ```javascript
 script({

@@ -141,7 +141,7 @@ struct AgentAction {
 ///
 /// # Example
 /// ```rust
-/// let agent = AutonomousAgent::new(client, "claude-sonnet-4-20250514".to_string());
+/// let agent = AutonomousAgent::new(client, "claude-sonnet-5-5".to_string());
 /// agent.register_tool(AgentTool {
 ///     name: "search".to_string(),
 ///     description: "Search for information".to_string(),
@@ -413,7 +413,7 @@ pub async fn example_research_agent() -> Result<()> {
         .context("ANTHROPIC_API_KEY environment variable not set")?;
 
     let client = Arc::new(AnthropicClient::new(api_key));
-    let mut agent = AutonomousAgent::new(client, "claude-sonnet-4-20250514".to_string());
+    let mut agent = AutonomousAgent::new(client, "claude-sonnet-5-5".to_string());
 
     // Register tools
     agent.register_tool(AgentTool {

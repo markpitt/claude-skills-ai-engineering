@@ -38,7 +38,7 @@ class PromptChain:
     def __init__(
         self,
         client: anthropic.Anthropic,
-        model: str = "claude-3-5-sonnet-20241022"
+        model: str = "claude-sonnet-5-5"
     ):
         self.client = client
         self.model = model

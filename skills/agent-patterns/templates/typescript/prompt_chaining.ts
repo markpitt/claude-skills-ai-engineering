@@ -25,7 +25,7 @@ export class PromptChain<TContext extends Record<string, any> = Record<string, a
 
   constructor(
     private client: Anthropic,
-    private model: string = "claude-3-5-sonnet-20241022"
+    private model: string = "claude-sonnet-5-5"
   ) {}
 
   /**

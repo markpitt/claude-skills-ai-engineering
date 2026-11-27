@@ -1,173 +1,69 @@
 ---
 name: thought-patterns
-description: Orchestrates cognitive thinking patterns for complex problem-solving. Analyses tasks to select optimal pattern(s) from foundational, reasoning, creative, metacognitive, specialised, and neurodivergent categories. Chains multiple patterns when needed and validates outputs before responding.
+description: "Applies structured cognitive thinking patterns to a hard problem, selecting and chaining from foundational, reasoning, creative, metacognitive, specialised and neurodivergent categories. Use when asked to \"think this through properly\", \"use thought patterns\", \"apply a thinking framework\", \"reason about this carefully\", \"what am I missing\", or \"approach this from a different angle\"; when a decision or problem is genuinely complex or ambiguous and a single pass will not do it justice; or when first-principles, inversion, systems or lateral thinking is wanted by name. Do NOT use for straightforward factual questions or routine execution work where the path is already clear."
 license: Apache-2.0
 metadata:
-  version: "2.0"
+  version: "3.0.0"
   source: Neurodiversity research articles, cited in full at resources/neurodivergent-strengths.md
   attribution: Concepts synthesised from the cited articles. No text reproduced.
 ---
 
-# Thought Patterns Orchestration Skill
+# Thought patterns
 
-This skill provides access to a library of human cognitive thinking patterns. It includes an intelligent orchestration system that selects and chains appropriate patterns based on task requirements.
+A thinking pattern is a deliberate way of working a problem: break it into parts, reason backwards
+from the result, look for the system around it, generate options before judging any. Picking the
+right one, and knowing when to switch, does more for a hard problem than thinking harder in the
+same groove. This skill picks patterns from a library, chains them where one feeds the next, and
+says which it used.
 
-## Quick Reference: When to Load Which Resource
+Most questions need none of this. If the answer is a fact or the path is already clear, answer it.
 
-| Task Type | Load Resource |
-|-----------|---------------|
-| Debugging, troubleshooting, system analysis | `resources/foundational-patterns.md` |
-| Logic problems, hypothesis generation, learning new concepts | `resources/reasoning-patterns.md` |
-| Brainstorming, innovation, creative ideation | `resources/creative-patterns.md` |
-| Learning from experience, improving processes, self-regulation | `resources/metacognitive-patterns.md` |
-| User-centred design, constrained optimisation, iteration | `resources/specialized-patterns.md` |
-| Leveraging ADHD/autism/dyslexia cognitive strengths | `resources/neurodivergent-strengths.md` |
-| Complex multi-pattern examples, pattern chaining | `resources/pattern-combinations.md` |
+## Picking a pattern
 
-## Orchestration Protocol
+Start from what kind of problem it is.
 
-### Phase 1: Task Analysis
+| The problem | Patterns that fit | Read |
+|---|---|---|
+| Well defined, with a right answer | Sequential, analytical, deductive, convergent | `resources/foundational-patterns.md` |
+| Ill defined: the question itself is unclear | Divergent, lateral, abductive, design thinking | `resources/creative-patterns.md`, `resources/reasoning-patterns.md` |
+| Lots of parts that affect each other | Systems, holistic, parallel processing | `resources/foundational-patterns.md` |
+| Needs new ideas | Divergent, lateral, associative, analogical | `resources/creative-patterns.md` |
+| Why did this happen? | Analytical, abductive, counterfactual | `resources/reasoning-patterns.md` |
+| A decision that matters or is new | First principles, counterfactual, slow (System 2) thinking | `resources/reasoning-patterns.md`, `resources/metacognitive-patterns.md` |
+| Learning from something that went wrong | Reflective, double-loop, metacognitive | `resources/metacognitive-patterns.md` |
+| Working inside hard limits, or for a user | Constraint-based, design thinking, iterative refinement | `resources/specialized-patterns.md` |
+| Precision, pattern finding, spatial or cross-domain insight | Detail-oriented pattern recognition, spatial thinking, non-linear association | `resources/neurodivergent-strengths.md` |
 
-Before selecting a pattern, analyse the task:
+Read only the files the problem needs.
 
-**Task Type Classification:**
-- **Analytical**: Breaking down complex information, logical reasoning → Load foundational
-- **Creative**: Novel ideas, innovative solutions → Load creative
-- **Exploratory**: Investigating possibilities, understanding relationships → Load reasoning
-- **Strategic**: Planning, decision-making, optimisation → Load foundational + metacognitive
-- **Reflective**: Learning from experience, examining assumptions → Load metacognitive
-- **Explanatory**: Root causes, generating hypotheses → Load reasoning
-- **Integrative**: Combining perspectives, synthesis → Load multiple resources
+## Chaining
 
-**Complexity Indicators:**
-- Single vs. multiple objectives
-- Well-defined vs. ambiguous constraints
-- Known vs. unknown solution space
-- Independent vs. interdependent components
+Hard problems usually take more than one pattern, in an order. These chains recur, and
+`resources/pattern-combinations.md` works through each:
 
-### Phase 2: Pattern Selection
+- creative problem-solving: divergent, then convergent;
+- root cause: analytical, then abductive, then systems;
+- innovation: first principles, then lateral, then design thinking;
+- learning: reflective, then double-loop, then metacognitive;
+- the whole picture: analytical, then holistic, then systems;
+- a strategic decision: big-picture, then analytical, then counterfactual.
 
-Based on task analysis, load the appropriate resource file(s) and select patterns:
+Patterns can also run side by side, when several views of the same thing each add something, or
+in a loop, when the answer improves each time round.
 
-- **Single Pattern**: When task clearly maps to one approach
-- **Sequential Chain**: When one pattern feeds into another (e.g., divergent → convergent)
-- **Parallel Patterns**: When multiple simultaneous perspectives add value
-- **Iterative Loop**: When refinement through repeated application is needed
+## The neurodivergent patterns
 
-### Phase 3: Execution & Validation
+`resources/neurodivergent-strengths.md` covers ways of thinking associated with ADHD, autism and
+dyslexia: hyperfocus and big-picture thinking, detail-oriented pattern recognition, spatial and
+visual reasoning, and non-linear association. They are patterns like any other, chosen when the
+problem suits them, and the file cites the research they come from. Consider them for problems
+that need sustained depth, exact consistency, spatial reasoning or a jump between domains.
 
-**During Execution:**
-- Explicitly apply the selected pattern(s)
-- Show your work when beneficial to user understanding
-- Monitor whether the pattern is yielding progress
-- Switch patterns if current approach is ineffective
+## While working
 
-**Before Responding:**
-- Validate completeness: Did you address all aspects of the task?
-- Check coherence: Does the output logically follow from the thinking process?
-- Assess quality: Does this meet the standard the user expects?
+- Say which pattern you are using and why, briefly, when it helps the user follow the answer.
+- Watch whether it is getting anywhere. If a pattern has stalled, switch rather than push on.
+- Before answering, check that every part of the question is covered and that the conclusion
+  follows from the working. A neat framework does not make a wrong answer right.
 
-## Pattern Selection Heuristics
-
-### By Problem Type
-
-**Well-Defined Problems** → Load `foundational-patterns.md`
-- Sequential, Analytical, Deductive, Convergent patterns
-
-**Ill-Defined Problems** → Load `creative-patterns.md` + `reasoning-patterns.md`
-- Divergent, Lateral, Abductive, Design Thinking patterns
-
-**Complex Systems** → Load `foundational-patterns.md`
-- Systems Thinking, Holistic/Gestalt, Parallel Processing patterns
-
-**Creative Tasks** → Load `creative-patterns.md`
-- Divergent, Lateral, Associative, Analogical patterns
-
-**Learning/Improvement** → Load `metacognitive-patterns.md`
-- Reflective, Metacognitive, Double-Loop Learning patterns
-
-**Strategic Decisions** → Load `foundational-patterns.md` + `reasoning-patterns.md`
-- Big-Picture, Systems, Counterfactual, First Principles patterns
-
-**Detailed Analysis** → Load `foundational-patterns.md` + `neurodivergent-strengths.md`
-- Analytical, Detail-Oriented Pattern Recognition, Critical Thinking
-
-**Quick Responses** → No resource load needed
-- System 1, Pattern Recognition, Associative
-
-**Important/Novel Decisions** → Load `metacognitive-patterns.md` + `reasoning-patterns.md`
-- System 2, Critical, Analytical, First Principles patterns
-
-### Neurodivergent Pattern Integration
-
-Always consider whether neurodivergent patterns might enhance the solution:
-
-- **ADHD patterns** (Hyperfocus, Big-Picture): For engaging problems requiring sustained effort or strategic overview
-- **Autism patterns** (Detail-Oriented): For precision, consistency, pattern finding
-- **Dyslexia patterns** (Spatial/Visual): For spatial problems, visual creativity, 3D reasoning
-- **Non-Linear Associative**: For creative breakthroughs, cross-domain insights
-
-→ Load `resources/neurodivergent-strengths.md` when these would add value
-
-## Common Pattern Chains
-
-For complex tasks requiring multiple patterns, see `resources/pattern-combinations.md` for detailed examples:
-
-1. **Creative Problem-Solving**: Divergent → Convergent
-2. **Root Cause Analysis**: Analytical → Abductive → Systems
-3. **Innovation**: First Principles → Lateral → Design Thinking
-4. **Learning**: Reflective → Double-Loop → Metacognitive
-5. **Whole-picture Understanding**: Analytical → Gestalt → Systems
-6. **Strategic Decision**: Big-Picture → Analytical → Counterfactual
-
-## Resource Files Summary
-
-### `resources/foundational-patterns.md`
-- Sequential/Linear Thinking
-- Analytical Thinking
-- Critical Thinking
-- Systems Thinking
-- Gestalt/Holistic Perception
-
-### `resources/reasoning-patterns.md`
-- Deductive Reasoning
-- Inductive Reasoning
-- Abductive Reasoning
-- Analogical Reasoning
-- Counterfactual Reasoning
-- First Principles Thinking
-
-### `resources/creative-patterns.md`
-- Divergent Thinking
-- Convergent Thinking
-- Lateral Thinking
-- Associative Thinking
-
-### `resources/metacognitive-patterns.md`
-- Metacognitive Thinking
-- Reflective Thinking
-- Double-Loop Learning
-- Triple-Loop Learning
-- System 1 Thinking (Fast, Intuitive)
-- System 2 Thinking (Slow, Analytical)
-
-### `resources/specialized-patterns.md`
-- Design Thinking
-- Constraint-Based Thinking
-- Parallel Processing
-- Iterative Refinement
-
-### `resources/neurodivergent-strengths.md`
-- ADHD-Associated Patterns (Hyperfocus, Big-Picture)
-- Autism-Associated Patterns (Detail-Oriented Pattern Recognition)
-- Dyslexia-Associated Patterns (Spatial/Visual Thinking)
-- Non-Linear Associative Thinking
-
-### `resources/pattern-combinations.md`
-- Detailed examples of pattern chaining
-- Multi-pattern execution walkthroughs
-- Pattern selection decision tree
-
----
-
-**Remember**: This is a tool for enhancing thinking, not a rigid prescription. Stay flexible, monitor effectiveness, and adapt as needed. Load only the resources you need for the current task.
+The patterns are tools, not a procedure. Use the ones that help and drop the rest.

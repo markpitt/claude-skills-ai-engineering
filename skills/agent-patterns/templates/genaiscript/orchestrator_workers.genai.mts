@@ -9,7 +9,7 @@
 script({
     title: "Orchestrator-Workers Pattern",
     description: "Break down complex tasks and delegate to specialized workers",
-    model: "claude-sonnet-4-20250514",
+    model: "claude-sonnet-5-5",
     parameters: {
         task: {
             type: "string",
@@ -119,7 +119,7 @@ Respond in JSON format:
         `
     }, {
         label: "create_plan",
-        model: "claude-sonnet-4-20250514",
+        model: "claude-sonnet-5-5",
         responseType: "json_object"
     })
 
@@ -158,7 +158,7 @@ Provide your result:
             `
         }, {
             label: `worker_${task.type}_${task.id}`,
-            model: "claude-sonnet-4-20250514"
+            model: "claude-sonnet-5-5"
         })
 
         return {
@@ -263,7 +263,7 @@ Provide a comprehensive final result:
         `
     }, {
         label: "synthesize",
-        model: "claude-sonnet-4-20250514"
+        model: "claude-sonnet-5-5"
     })
 
     return response.text

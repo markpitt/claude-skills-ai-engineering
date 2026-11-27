@@ -2,8 +2,8 @@
 
 decide is a C# file-based app, so these build it with the dotnet SDK on PATH. The first run builds
 and caches it (a few seconds to a minute); later runs reuse the build. Run from this directory
-through the sandbox wrapper:
-    mp-sandbox-test python3 -m unittest test_decide -v
+inside a sandbox (for example a bubblewrap wrapper):
+    python3 -m unittest test_decide -v
 
 Inside the sandbox the home directory is read-only and there is no network, so the packages the
 build needs must already be in the NuGet cache (run `dotnet restore decide.cs` once outside it).
@@ -89,9 +89,9 @@ class ServedModelCheck(unittest.TestCase):
     def test_renamed_model_is_refused_without_an_alias(self) -> None:
         # Exact by design: a gateway answering with its own deployment name is not guessed at.
         for requested, served in [
-            ("cloudflare/clef-flash", "clef-flash"),
+            ("example/decide-model", "decide-model"),
             ("inception/mercury-decide:free", "inception/mercury-decide"),
-            ("cloudflare/clef-flash", "clef-flash-lite"),
+            ("example/decide-model", "decide-model-lite"),
         ]:
             with self.subTest(requested=requested, served=served):
                 result = self.ask(requested, served)
@@ -99,17 +99,17 @@ class ServedModelCheck(unittest.TestCase):
                 self.assertIn(f"served by {served};", result.stderr)
 
     def test_alias_flag_accepts_the_named_reply(self) -> None:
-        result = self.ask("cloudflare/clef-flash", "clef-flash", extra=["--served-as", "clef-flash"])
+        result = self.ask("example/decide-model", "decide-model", extra=["--served-as", "decide-model"])
         self.assertEqual(result.returncode, EXIT_YES, result.stderr)
 
     def test_alias_variable_accepts_the_named_reply(self) -> None:
-        result = self.ask("cloudflare/clef-flash", "clef-flash", env={"DECIDE_SERVED_MODEL": "clef-flash"})
+        result = self.ask("example/decide-model", "decide-model", env={"DECIDE_SERVED_MODEL": "decide-model"})
         self.assertEqual(result.returncode, EXIT_YES, result.stderr)
 
     def test_alias_still_refuses_a_third_model(self) -> None:
-        result = self.ask("cloudflare/clef-flash", "openai/gpt-4o-mini", extra=["--served-as", "clef-flash"])
+        result = self.ask("example/decide-model", "openai/gpt-4o-mini", extra=["--served-as", "decide-model"])
         self.assertEqual(result.returncode, EXIT_API, result.stdout)
-        self.assertIn("expected clef-flash", result.stderr)
+        self.assertIn("expected decide-model", result.stderr)
 
     def test_missing_model_field_answers_with_a_warning(self) -> None:
         result = self.ask("inception/mercury-decide:free", None)

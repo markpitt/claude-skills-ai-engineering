@@ -2,7 +2,7 @@
 
 ## Overview
 
-ChatML (Chat Markup Language) is a standardized format for representing conversational data in language model fine-tuning. It's widely supported by training frameworks like Unsloth, Axolotl, and others.
+ChatML (Chat Markup Language) is a standardised format for representing conversational data in language model fine-tuning. It's widely supported by training frameworks like Unsloth, Axolotl, and others.
 
 ## File Format
 
@@ -57,13 +57,13 @@ Each line in the JSONL file represents one conversation example:
 
 **Consistent System Prompt** (Recommended for most cases):
 - Use the same system prompt across all examples
-- Defines consistent behavior for the model
+- Defines consistent behaviour for the model
 - Example: "You are a helpful, harmless, and honest assistant."
 
 **Varied System Prompts** (Advanced use cases):
 - Different system prompts for different task types
 - Useful for multi-task models
-- Ensure sufficient examples per system prompt variation
+- Include enough examples for each system prompt variation
 
 ### Content Guidelines
 
@@ -167,7 +167,7 @@ with open('training_data.jsonl', 'r') as f:
 ### Unsloth
 - Supports standard ChatML format
 - Can specify chat template in training config
-- Handles tokenization automatically
+- Handles tokenisation automatically
 
 ### Axolotl
 - Use `type: chat_template` in dataset config
@@ -183,7 +183,7 @@ with open('training_data.jsonl', 'r') as f:
 
 ## Token Counting
 
-Different models tokenize differently. Example lengths:
+Different models tokenise differently. Example lengths:
 
 - Short user query: ~10-20 tokens
 - Medium assistant response: ~50-150 tokens

@@ -16,7 +16,7 @@ class AnthropicClient {
 
   Future<String> createMessage({
     required String prompt,
-    String model = 'claude-sonnet-4-20250514',
+    String model = 'claude-sonnet-5-5',
     int maxTokens = 4096,
   }) async {
     final response = await httpClient.post(
@@ -160,7 +160,7 @@ class EvaluatorOptimizer {
   EvaluatorOptimizer({
     required this.client,
     required this.criteria,
-    this.model = 'claude-sonnet-4-20250514',
+    this.model = 'claude-sonnet-5-5',
     this.targetScore = 0.8,
     this.maxIterations = 5,
   });
@@ -349,7 +349,7 @@ class ConfidenceBasedOptimizer {
 
   ConfidenceBasedOptimizer({
     required this.client,
-    this.model = 'claude-sonnet-4-20250514',
+    this.model = 'claude-sonnet-5-5',
     this.confidenceThreshold = 0.9,
     this.maxAttempts = 3,
   });

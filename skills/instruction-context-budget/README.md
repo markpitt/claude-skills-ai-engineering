@@ -5,7 +5,7 @@
 Measures what a coding-agent harness always loads (CLAUDE.md and AGENTS.md chains, unscoped rules, memory indexes and skill descriptions) in bytes and estimated tokens per file, then trims rationale and history out of those files into companion files while keeping the imperatives. Tags the repository first, verifies that no removed line was lost, and re-checks the result with agent-instruction-load-audit. Use when a session starts with too much instruction text loaded, a memory index is over its cap, skill descriptions crowd the context, or asked to slim CLAUDE.md, rules or memory. Do NOT use to prove which files a session actually loaded (use agent-instruction-load-audit), to write new instruction content (use ai-coding-agent-setup), or to change what a skill does (use skill-creator).
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 1.0.0
+- **Version:** 1.0.1
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -32,4 +32,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

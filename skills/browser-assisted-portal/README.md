@@ -2,10 +2,10 @@
 
 # browser-assisted-portal
 
-Help a person through a government or service portal in a browser-automation session (for example Claude in Chrome). The person signs in and submits. The agent reads and captures pages, explains each question and the check-your-answers page, flags conflicts, and keeps a dated record of what was entered and seen. Use when a browser agent is asked to help with an online form, application, claim or account on a public or service portal and the person will do the sign-in and the final step. Do NOT use to submit, pay, sign, declare or confirm anything, to log in for the person or handle their passwords or codes, to scrape or bulk-download a site, or to test a web application as a developer (use a browser end-to-end testing tool). For a script to hand a person when a guard blocks a write, use remediation-script.
+Helps a person through a government or service portal in a browser-automation session (for example Claude in Chrome). The person signs in and submits. The agent reads and captures pages, explains each question and the check-your-answers page, flags conflicts, and keeps a dated record of what was entered and seen. Use when a browser agent is asked to help with an online form, application, claim or account on a public or service portal and the person will do the sign-in and the final step. Do NOT use to submit, pay, sign, declare or confirm anything, to log in for the person or handle their passwords or codes, to scrape or bulk-download a site, or to test a web application as a developer (use a browser end-to-end testing tool). For a script to hand a person when a guard blocks a write, use remediation-script.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 1.0.0
+- **Version:** 1.0.1
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -29,4 +29,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

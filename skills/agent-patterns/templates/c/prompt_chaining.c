@@ -301,7 +301,7 @@ int main() {
     }
 
     // Create chain
-    PromptChain* chain = prompt_chain_create(api_key, "claude-3-5-sonnet-20241022");
+    PromptChain* chain = prompt_chain_create(api_key, "claude-sonnet-5-5");
 
     // Add steps
     prompt_chain_add_step(chain, chain_step_create(

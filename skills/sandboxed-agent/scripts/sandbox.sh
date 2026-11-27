@@ -13,11 +13,12 @@
 #   NET=host|none|proxy, PROXY_ADDR=host:port (NET=proxy), PASS_ENV=(NAMES), ENV_FILE, AGENT_HOME,
 #   EXTRA_RO=("src:dst" ...), EXTRA_RW=("src:dst" ...) (a writable bind: a spool the host drains; the agent cannot replace the mount point),
 #   TOOLS=(dirs added to PATH), SHARE_PID=0|1 (1: keep the host's process namespace, so `ps` and `kill` reach host processes),
+#   OVERLAY=("dest|layer[|layer...]" ...) instruction layers (top first) shown read-only at their paths under dest (ROOT or a folder in it),
 #   CHECKS=("0|description|command" ...)  extra tests for `test`: expect exit 0 (pass) or 1 (must fail)
 set -euo pipefail
 
 PROFILE=${1:-}; CMD=${2:-}
-[ -f "$PROFILE" ] || { sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//'; exit 2; }
+[ -f "$PROFILE" ] || { sed -n '2,17p' "$0" | sed 's/^# \{0,1\}//'; exit 2; }
 shift 2 || true
 
 # A profile at <repo>/hosts/<host>/<agent>/profile runs only on a machine that <repo>/hosts/map lists against <host>.
@@ -31,7 +32,7 @@ if [ "$(basename "$(dirname "$HOST_DIR")")" = hosts ] && [ -f "$HOST_MAP" ]; the
     echo "sandbox: hostname '$HOST_NAME' maps to hosts/$MAPPED in $HOST_MAP, not to the profile's hosts/$(basename "$HOST_DIR")" >&2; exit 1; }
 fi
 
-NAME=agent ROOT_MODE=ro NET=none PROXY_ADDR=127.0.0.1:8888 BLANK=() READONLY=() PASS_ENV=() EXTRA_RO=() EXTRA_RW=() TOOLS=() CHECKS=()
+NAME=agent ROOT_MODE=ro NET=none PROXY_ADDR=127.0.0.1:8888 BLANK=() READONLY=() PASS_ENV=() EXTRA_RO=() EXTRA_RW=() TOOLS=() CHECKS=() OVERLAY=()
 ENV_FILE="" AGENT_HOME="" ROOT="" WORKDIR="" SHARE_PID=0
 # shellcheck disable=SC1090
 . "$PROFILE"
@@ -98,6 +99,105 @@ seccomp_fd() {
   rm -f "$f"
 }
 
+# OVERLAY: each layer path is mounted read-only at the same path under dest; the top layer wins.
+# A folder the host lacks is mounted whole; a folder the host has is walked, so its other files stay the repository's.
+# The results: OV_ARGS (bwrap mounts), OV_UNITS (mount points), OV_FILES ("layer file|path"), OV_STUBS ("f|path" or "d|path" missing on the host).
+OV_ARGS=() OV_UNITS=() OV_FILES=() OV_STUBS=() OV_SUMMARY=()
+overlay_fail() { echo "sandbox: OVERLAY: $*" >&2; exit 1; }
+ov_kind() {  # l, d, f, x (another kind) or - (absent)
+  if [ -L "$1" ]; then echo l; elif [ -d "$1" ]; then echo d; elif [ -f "$1" ]; then echo f; elif [ -e "$1" ]; then echo x; else echo -; fi
+}
+ov_files() {  # ov_files <path> <dir>...: the regular files of the union of dirs, top first, into OV_FILES
+  local dst=$1 d f; shift
+  local -A seen=()
+  for d in "$@"; do
+    while IFS= read -r -d '' f; do
+      [ -n "${seen[$f]+x}" ] && continue
+      seen[$f]=1
+      [ -f "$d/$f" ] && [ ! -L "$d/$f" ] && OV_FILES+=("$d/$f|$dst/$f")
+    done < <(cd "$d" && find . -mindepth 1 \( -type f -o -type l \) -printf '%P\0')
+  done
+  return 0
+}
+ov_walk() {  # ov_walk <dest> <rel> <layer>...
+  local dest=$1 rel=$2; shift 2
+  local -a layers=("$@") names=() provs=()
+  local -A seen=()
+  local L n r host top k hk i
+  for L in "${layers[@]}"; do
+    { [ -d "$L/$rel" ] && [ ! -L "$L/$rel" ]; } || continue
+    while IFS= read -r -d '' n; do
+      [ -n "${seen[$n]+x}" ] || { seen[$n]=1; names+=("$n"); }
+    done < <(find "$L/$rel" -mindepth 1 -maxdepth 1 -printf '%f\0')
+  done
+  for n in ${names[@]+"${names[@]}"}; do
+    r=${rel:+$rel/}$n host=$dest/$r provs=() top=""
+    for L in "${layers[@]}"; do
+      k=$(ov_kind "$L/$r")
+      [ "$k" = - ] && continue
+      [ -n "$top" ] || top=$k
+      [ "$k" = "$top" ] || overlay_fail "$r is a $k in $L but a $top in a higher layer"
+      provs+=("$L/$r")
+    done
+    hk=$(ov_kind "$host")
+    # An empty folder on the host (a mount point left by an earlier run) holds nothing of the repository's own.
+    [ "$hk" = d ] && [ -z "$(ls -A "$host")" ] && hk=e
+    case $top in
+      f) case $hk in f|-) ;; *) overlay_fail "$host is not a plain file on the host, but the layer has one" ;; esac
+         OV_ARGS+=(--ro-bind "${provs[0]}" "$host"); OV_UNITS+=("$host"); OV_FILES+=("${provs[0]}|$host")
+         [ "$hk" = - ] && OV_STUBS+=("f|$host") ;;
+      d) case $hk in
+           d) ov_walk "$dest" "$r" "${layers[@]}" ;;
+           -|e) if [ ${#provs[@]} = 1 ]; then OV_ARGS+=(--ro-bind "${provs[0]}" "$host")
+              else  # bwrap stacks --overlay-src bottom first
+                for ((i = ${#provs[@]} - 1; i >= 0; i--)); do OV_ARGS+=(--overlay-src "${provs[i]}"); done
+                OV_ARGS+=(--ro-overlay "$host")
+              fi
+              OV_UNITS+=("$host"); [ "$hk" = - ] && OV_STUBS+=("d|$host"); ov_files "$host" "${provs[@]}" ;;
+           *) overlay_fail "$host is not a folder on the host, but the layer has one" ;;
+         esac ;;
+      l) [ "$hk" = l ] && [ "$(readlink "$host")" = "$(readlink "${provs[0]}")" ] \
+           || overlay_fail "${provs[0]} is a symlink: the host must hold the same link, or not hold $(dirname "$host")" ;;
+      *) overlay_fail "${provs[0]} is not a file, folder or symlink" ;;
+    esac
+  done
+  return 0
+}
+overlay_plan() {
+  OV_ARGS=() OV_UNITS=() OV_FILES=() OV_STUBS=() OV_SUMMARY=()
+  local spec dest L d root n0; local -a parts layers dests=()
+  root=$(realpath -e -- "$ROOT")
+  for spec in ${OVERLAY[@]+"${OVERLAY[@]}"}; do
+    IFS='|' read -r -a parts <<<"$spec"
+    dest=${parts[0]%/}; layers=("${parts[@]:1}")
+    [ ${#layers[@]} -gt 0 ] || overlay_fail "'$spec' names no layer"
+    [ -d "$dest" ] || overlay_fail "destination '$dest' is not a folder"
+    case "$(realpath -e -- "$dest")/" in "$root"/*) ;; *) overlay_fail "destination '$dest' is not ROOT or under it" ;; esac
+    for d in ${dests[@]+"${dests[@]}"}; do
+      case "$(realpath -e -- "$dest")/" in "$(realpath -e -- "$d")"/*) overlay_fail "destinations '$d' and '$dest' are nested" ;; esac
+      case "$(realpath -e -- "$d")/" in "$(realpath -e -- "$dest")"/*) overlay_fail "destinations '$dest' and '$d' are nested" ;; esac
+    done
+    for L in "${layers[@]}"; do
+      [ -d "$L" ] || overlay_fail "layer '$L' is not a folder"
+      case "$(realpath -e -- "$L")/" in "$(realpath -e -- "$dest")"/*) overlay_fail "layer '$L' is inside its destination" ;; esac
+    done
+    dests+=("$dest"); n0=${#OV_UNITS[@]}
+    ov_walk "$dest" "" "${layers[@]}"
+    OV_SUMMARY+=("overlay $dest: $((${#OV_UNITS[@]} - n0)) read-only mounts from ${layers[*]}")
+  done
+  return 0
+}
+# A missing mount point is made on the host (bwrap cannot make one in a read-only root): an empty file or folder that stays.
+overlay_stubs() {
+  local s p
+  for s in ${OV_STUBS[@]+"${OV_STUBS[@]}"}; do
+    p=${s#?|}
+    [ -e "$p" ] || [ -L "$p" ] && continue
+    case $s in f\|*) : > "$p" ;; d\|*) mkdir "$p" ;; esac
+  done
+  return 0
+}
+
 build_args() {
   seccomp_fd
   if [ "$SHARE_PID" = 1 ]; then
@@ -143,6 +243,8 @@ build_args() {
     for p in "$ROOT"/$g; do [ -e "$p" ] && ARGS+=(--ro-bind "$p" "$p"); done
   done
   shopt -u nullglob globstar
+  overlay_plan
+  ARGS+=(${OV_ARGS[@]+"${OV_ARGS[@]}"})
   local pair
   # A bind source that does not exist stops bwrap with an unhelpful error; name it. A spool is made by a host service,
   # so create the directory before the agent starts. The destination must not be under $HOME (use /run/...): the self-test
@@ -192,6 +294,7 @@ run() {
   # A changed WORKDIR takes the agent's transcripts and memory with it (see carry-project.sh).
   bash "$(dirname "$(readlink -f "$0")")/carry-project.sh" "$AGENT_HOME" "$WORKDIR" || exit 1
   build_args
+  overlay_stubs
   if [ "$NET" = proxy ]; then
     start_proxy_bridge
     # not exec: the trap must clean the bridge up
@@ -237,6 +340,22 @@ selftest() {
   t "no /etc/shadow"                           1 sh -c "cat /etc/shadow"
   t "awk runs (alternatives links resolve)"   0 sh -c "awk 'BEGIN { exit 0 }'"
   t "root cannot be gained"                    1 sh -c "su -c true root </dev/null"
+  overlay_plan
+  if [ ${#OV_UNITS[@]} -gt 0 ]; then
+    local s sums=""
+    for s in ${OV_FILES[@]+"${OV_FILES[@]}"}; do sums+="$(sha256sum < "${s%%|*}" | cut -d' ' -f1)  ${s#*|}"$'\n'; done
+    t "instruction files match their layers (${#OV_FILES[@]} files)" 0 sh -c 'printf "%s" "$1" | sha256sum -c --quiet -' _ "$sums"
+    # A mount point whose last mountinfo entry is ro, in its mount or its superblock options; mountinfo writes a space as \040.
+    t "instruction paths are read-only mounts (${#OV_UNITS[@]})" 0 sh -c '
+      for p; do
+        e=$(printf "%s" "$p" | sed "s/ /\\\\040/g") o=""
+        while read -r _ _ _ _ m opts rest; do
+          [ "$m" = "$e" ] || continue
+          sb=" $rest"; sb=${sb#* - }; sb=${sb#* }; sb=${sb#* }; o="$opts ${sb%% *}"
+        done < /proc/self/mountinfo
+        case ",${o% *}, ,${o#* }," in *,ro,*) ;; *) echo "not a read-only mount: $p"; exit 1 ;; esac
+      done' _ "${OV_UNITS[@]}"
+  fi
   local c w d cmd
   for c in "${CHECKS[@]}"; do
     w=${c%%|*}; c=${c#*|}; d=${c%%|*}; cmd=${c#*|}
@@ -254,7 +373,7 @@ selftest() {
 case "$CMD" in
   run)   [ "${1:-}" = "--" ] && shift; [ $# -gt 0 ] || { echo "run needs a command" >&2; exit 2; }; run "$@" ;;
   shell) run bash -l ;;
-  show)  build_args; printf 'bwrap'; printf ' %q' "${ARGS[@]}"; echo ;;
+  show)  build_args; [ ${#OV_SUMMARY[@]} = 0 ] || printf '%s\n' "${OV_SUMMARY[@]}"; printf 'bwrap'; printf ' %q' "${ARGS[@]}"; echo ;;
   test)  selftest ;;
-  *)     sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//'; exit 2 ;;
+  *)     sed -n '2,17p' "$0" | sed 's/^# \{0,1\}//'; exit 2 ;;
 esac

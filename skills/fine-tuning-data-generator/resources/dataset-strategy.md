@@ -8,7 +8,7 @@ When a user requests fine-tuning data generation, gather these requirements:
 
 #### Task Definition
 - **Task Type**: What is the model being trained to do?
-  - Examples: customer support, code generation, creative writing, technical Q&A, instruction following, classification, summarization
+  - Examples: customer support, code generation, creative writing, technical Q&A, instruction following, classification, summarisation
 - **Domain/Topic**: What specific domain or subject matter?
   - Examples: legal, medical, e-commerce, software development, finance
 - **Number of Examples**: How many training examples are needed?
@@ -28,13 +28,13 @@ When a user requests fine-tuning data generation, gather these requirements:
   - Examples: code blocks, lists, tables, JSON
 
 #### Dataset Composition
-- **Distribution**: Evenly distributed across subtopics or weighted toward specific areas?
+- **Distribution**: Evenly distributed across subtopics or weighted towards specific areas?
 - **Include Negatives**: Examples of what NOT to do or incorrect approaches?
 - **Validation Split**: Need separate validation set? (Recommend 10-20% of total)
 
 ### Creating a Generation Plan
 
-After gathering requirements, present a comprehensive plan:
+After gathering requirements, present a full plan:
 
 **Plan Components:**
 - Number of examples and distribution across categories
@@ -51,7 +51,7 @@ After gathering requirements, present a comprehensive plan:
 
 - **Realistic Scenarios**: Reflect real-world use cases
 - **Natural Language**: Varied phrasing, different formality levels, human-like queries
-- **Accurate Responses**: Correct, helpful, aligned with desired behavior
+- **Accurate Responses**: Correct, helpful, aligned with desired behaviour
 - **Consistent Formatting**: Proper ChatML structure throughout
 - **Balanced Difficulty**: Mix of simple and complex (unless specified)
 - **Avoid Repetition**: Each example meaningfully different
@@ -94,10 +94,10 @@ Before delivering the dataset:
 - **Over-templating**: Rigid templates create repetitive patterns
 - **Unrealistic Queries**: Overly formal or robotic user inputs
 - **Inconsistent Quality**: Maintain consistent response quality
-- **Narrow Coverage**: Ensure sufficient diversity in scenarios
+- **Narrow Coverage**: Include enough variety of scenarios
 - **JSON Errors**: Always validate JSON formatting
 - **Missing Context**: Include necessary context in system prompts
-- **Response Mismatch**: Ensure responses actually address queries
+- **Response Mismatch**: Make sure responses actually address queries
 
 ## Dataset Size Recommendations
 
@@ -106,7 +106,7 @@ Before delivering the dataset:
 | Simple tasks | 100-500 | Well-defined, limited variation |
 | Medium tasks | 500-2,000 | Multiple scenarios, moderate complexity |
 | Complex tasks | 2,000-10,000+ | Many edge cases, high variability |
-| Domain adaptation | 1,000-5,000 | Specialized knowledge required |
+| Domain adaptation | 1,000-5,000 | Specialised knowledge required |
 
 **Quality > Quantity**: Better to have 500 diverse, high-quality examples than 5,000 repetitive ones.
 

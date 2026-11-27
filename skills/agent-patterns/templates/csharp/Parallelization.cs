@@ -40,7 +40,7 @@ namespace AgentPatterns
 
         public SectioningParallelizer(
             AnthropicClient client,
-            string model = "claude-sonnet-4-20250514")
+            string model = "claude-sonnet-5-5")
         {
             _client = client;
             _model = model;
@@ -159,7 +159,7 @@ Identify logic errors, edge cases, and potential runtime issues.")
 
         public VotingParallelizer(
             AnthropicClient client,
-            string model = "claude-sonnet-4-20250514")
+            string model = "claude-sonnet-5-5")
         {
             _client = client;
             _model = model;
@@ -310,7 +310,7 @@ Respond with only 'SAFE' or 'UNSAFE'.";
 
         public GuardrailsParallelizer(
             AnthropicClient client,
-            string model = "claude-sonnet-4-20250514")
+            string model = "claude-sonnet-5-5")
         {
             _client = client;
             _model = model;
@@ -379,7 +379,7 @@ Respond with only 'SAFE' or 'UNSAFE'.";
             var parameters = new MessageParameters
             {
                 Messages = messages,
-                Model = "claude-3-haiku-20240307", // Faster model for guardrails
+                Model = "claude-haiku-5-5", // Faster model for guardrails
                 MaxTokens = 10
             };
 

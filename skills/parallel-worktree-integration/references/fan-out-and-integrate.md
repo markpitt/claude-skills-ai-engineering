@@ -2,6 +2,8 @@
 
 Read `SKILL.md` first for the rules. This file gives the commands in order. Shell snippets are for a POSIX
 shell or bash. In zsh, store lists in arrays and do not rely on word splitting of an unquoted variable.
+`<sandbox>` stands for whatever runs test code in isolation on your machine, for example a bubblewrap
+wrapper that makes only the repository writable.
 
 ## 0. Set the variables and check the starting point
 
@@ -34,7 +36,7 @@ Keep the plan outside the repository, or in an ignored path. It records, for eac
 | Worktree path | `$WT_ROOT/t1-parser` |
 | Files the task may write | `src/parser.py`, `tests/test_parser.py` |
 | Integration order | 1 |
-| Expected test command | `mp-sandbox-test python3 -m unittest discover -s tests` |
+| Expected test command | `<sandbox> python3 -m unittest discover -s tests` |
 
 Two tasks that write the same file are sequential, not parallel. Put them in one task, or order them and expect a
 conflict at integration time.
@@ -90,7 +92,7 @@ for sha in $TASK_SHAS; do git cherry-pick -x "$sha" || break; done
 
 - `-x` appends the source SHA to the message, so the origin of each commit can be traced.
 - The loop stops at the first conflict (`|| break`). Do not continue past a conflict with a later task.
-- Run the task's test command after its picks, wrapped in `mp-sandbox-test`, and record the exit code.
+- Run the task's test command after its picks, inside the sandbox, and record the exit code.
 - After each task, confirm its patches are on the integration branch with `git cherry HEAD wt-<task>`. The
   pass condition is that there is no `+` line. A `+` line is a commit whose patch is not on HEAD. A `-` line is
   a commit picked under a new SHA. A commit can also be absent from the output because the pick kept its SHA
@@ -122,7 +124,7 @@ only, and say so in the report). It is an aid, not a substitute for reading the 
 ```bash
 git -C "$WT_ROOT/integrate" log --oneline "$BASE_SHA..HEAD"
 git -C "$WT_ROOT/integrate" diff --stat "$BASE_SHA" HEAD
-mp-sandbox-test <the repository's full test command>; echo "exit=$?"
+<sandbox> <the repository's full test command>; echo "exit=$?"
 ```
 
 Run the full suite once on the integrated result. A green task test is not proof that the combined result is

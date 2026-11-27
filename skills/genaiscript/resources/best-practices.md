@@ -50,7 +50,7 @@ Use `def` controls to shape context:
 
 ### Inline prompts and composition
 
-`runPrompt` / `prompt` are ideal for staged workflows (rewrite, classify, summarize, judge).
+`runPrompt` / `prompt` are ideal for staged workflows (rewrite, classify, summarise, judge).
 
 Critical pattern for inner prompts:
 
@@ -77,7 +77,7 @@ follows your environment.
 
 - Request-level cache: `script({ cache: true })` or named cache.
 - Prompt-caching hint: `cacheControl: "ephemeral"` on `def`/prompt blocks.
-- Treat ephemeral behavior as provider-dependent.
+- Treat ephemeral behaviour as provider-dependent.
 
 ---
 
@@ -187,7 +187,7 @@ Guidance:
 
 - Use `json_schema` for strict machine contracts when provider supports it.
 - Use `json` + schema when portability is needed with runtime repair/validation.
-- Document schema constraints and failure behavior in production scripts.
+- Document schema constraints and failure behaviour in production scripts.
 
 ```javascript
 script({

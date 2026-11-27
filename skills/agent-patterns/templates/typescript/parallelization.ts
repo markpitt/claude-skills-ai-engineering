@@ -38,7 +38,7 @@ class SectioningParallelizer {
   private model: string;
   public results: Record<string, string> = {};
 
-  constructor(client: Anthropic, model: string = "claude-sonnet-4-20250514") {
+  constructor(client: Anthropic, model: string = "claude-sonnet-5-5") {
     this.client = client;
     this.model = model;
   }
@@ -109,7 +109,7 @@ class VotingParallelizer {
   private client: Anthropic;
   private model: string;
 
-  constructor(client: Anthropic, model: string = "claude-sonnet-4-20250514") {
+  constructor(client: Anthropic, model: string = "claude-sonnet-5-5") {
     this.client = client;
     this.model = model;
   }
@@ -205,7 +205,7 @@ class GuardrailsParallelizer {
   private client: Anthropic;
   private model: string;
 
-  constructor(client: Anthropic, model: string = "claude-sonnet-4-20250514") {
+  constructor(client: Anthropic, model: string = "claude-sonnet-5-5") {
     this.client = client;
     this.model = model;
   }
@@ -214,7 +214,7 @@ class GuardrailsParallelizer {
     content: string
   ): Promise<{ safe: boolean; reason?: string }> {
     const message = await this.client.messages.create({
-      model: "claude-3-5-haiku-20241022", // Fast model for safety check
+      model: "claude-haiku-5-5", // Fast model for safety check
       max_tokens: 256,
       system: `You are a content safety classifier. Analyze the content for:
 - Harmful content

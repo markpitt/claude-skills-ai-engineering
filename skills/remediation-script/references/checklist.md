@@ -24,8 +24,8 @@ Test against a throwaway repository with inert names. Never run the script again
 happens. Use names that show quoting works, such as a file called `draft with spaces.md` or `keep; echo PWNED.md`.
 Its name is data, so a correct script never runs it.
 
-Where the estate has a sandbox wrapper for test code, run the fixture through it, for example
-`mp-sandbox-test bash <script>`.
+Where you have a sandbox for test code, run the fixture inside it, for example a bubblewrap wrapper
+around `bash <script>` that makes only the working directory writable.
 
 ```bash
 fixture="$(mktemp -d)"

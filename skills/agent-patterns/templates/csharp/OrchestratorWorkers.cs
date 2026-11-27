@@ -60,7 +60,7 @@ namespace AgentPatterns
             AnthropicClient client,
             string workerType,
             string systemPrompt,
-            string model = "claude-sonnet-4-20250514")
+            string model = "claude-sonnet-5-5")
         {
             _client = client;
             WorkerType = workerType;
@@ -116,7 +116,7 @@ Provide your result:")
 
         public Orchestrator(
             AnthropicClient client,
-            string model = "claude-sonnet-4-20250514")
+            string model = "claude-sonnet-5-5")
         {
             _client = client;
             _model = model;
@@ -390,16 +390,16 @@ Provide a well-organized final result that addresses the original task:";
             orchestrator
                 .RegisterWorker(new LLMWorker(client, "architect",
                     "You design software architecture and data models.",
-                    "claude-sonnet-4-20250514"))
+                    "claude-sonnet-5-5"))
                 .RegisterWorker(new LLMWorker(client, "implementer",
                     "You write clean, efficient code implementations.",
-                    "claude-sonnet-4-20250514"))
+                    "claude-sonnet-5-5"))
                 .RegisterWorker(new LLMWorker(client, "tester",
                     "You write comprehensive unit tests.",
-                    "claude-sonnet-4-20250514"))
+                    "claude-sonnet-5-5"))
                 .RegisterWorker(new LLMWorker(client, "documenter",
                     "You write clear documentation and API docs.",
-                    "claude-sonnet-4-20250514"));
+                    "claude-sonnet-5-5"));
 
             var result = await orchestrator.ExecuteAsync(
                 "Create a REST API for a todo list application with CRUD operations");

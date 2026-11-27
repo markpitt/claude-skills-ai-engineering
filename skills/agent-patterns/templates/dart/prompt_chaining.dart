@@ -16,7 +16,7 @@ class AnthropicClient {
 
   Future<String> createMessage({
     required String prompt,
-    String model = 'claude-3-5-sonnet-20241022',
+    String model = 'claude-sonnet-5-5',
   }) async {
     final response = await httpClient.post(
       Uri.parse('https://api.anthropic.com/v1/messages'),
@@ -113,7 +113,7 @@ class PromptChain<T> {
 
   PromptChain({
     required this.client,
-    this.model = 'claude-3-5-sonnet-20241022',
+    this.model = 'claude-sonnet-5-5',
   });
 
   /// Add a step to the chain (builder pattern)

@@ -52,7 +52,7 @@ namespace AgentPatterns
 
         public Router(
             AnthropicClient client,
-            string model = "claude-sonnet-4-20250514")
+            string model = "claude-sonnet-5-5")
         {
             _client = client;
             _model = model;
@@ -206,7 +206,7 @@ Respond with JSON in this exact format:
 
         public ModelRouter(
             AnthropicClient client,
-            string classificationModel = "claude-sonnet-4-20250514")
+            string classificationModel = "claude-sonnet-5-5")
         {
             _client = client;
             _classificationModel = classificationModel;
@@ -223,10 +223,10 @@ Respond with JSON in this exact format:
 
             var model = complexity switch
             {
-                Complexity.Simple => "claude-3-haiku-20240307",
-                Complexity.Moderate => "claude-sonnet-4-20250514",
-                Complexity.Complex => "claude-opus-4-20250514",
-                _ => "claude-sonnet-4-20250514"
+                Complexity.Simple => "claude-haiku-5-5",
+                Complexity.Moderate => "claude-sonnet-5-5",
+                Complexity.Complex => "claude-opus-5-5",
+                _ => "claude-sonnet-5-5"
             };
 
             var messages = new List<Message>
@@ -338,7 +338,7 @@ Provide clear troubleshooting steps.")
             var parameters = new MessageParameters
             {
                 Messages = messages,
-                Model = "claude-sonnet-4-20250514",
+                Model = "claude-sonnet-5-5",
                 MaxTokens = 1024
             };
 
@@ -361,7 +361,7 @@ Be empathetic and provide clear next steps.")
             var parameters = new MessageParameters
             {
                 Messages = messages,
-                Model = "claude-sonnet-4-20250514",
+                Model = "claude-sonnet-5-5",
                 MaxTokens = 1024
             };
 
@@ -381,7 +381,7 @@ Be empathetic and provide clear next steps.")
             var parameters = new MessageParameters
             {
                 Messages = messages,
-                Model = "claude-3-haiku-20240307",
+                Model = "claude-haiku-5-5",
                 MaxTokens = 1024
             };
 

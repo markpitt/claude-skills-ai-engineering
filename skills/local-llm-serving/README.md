@@ -2,10 +2,10 @@
 
 # local-llm-serving
 
-Serve local GGUF models on a single consumer GPU (for example 24 GB) through llama-swap, optionally fronted by LiteLLM, with Ollama and LM Studio as alternatives. Covers the llama-swap config.yaml (models, llama-server flags, ttl, routing sets, proxy port), GGUF placement and disk planning, VRAM-fit arithmetic for weights and KV cache, a systemd --user unit with linger, health checks, diagnosing load failures and cold-start timeouts, LiteLLM aliases, and WSL2 GPU passthrough. Use when setting up, sizing, debugging or routing a local model server, when a local model will not load, runs out of memory or is slow after a swap, or when an agent must reach a local model through LiteLLM. Do NOT use to ask a System One decision model a question or to triage with the decide tool (use decision-models), for choosing a hosted API model, or for GPU driver or CUDA development.
+Serves local GGUF models on a single consumer GPU (for example 24 GB) through llama-swap, optionally fronted by LiteLLM, with Ollama and LM Studio as alternatives. Covers the llama-swap config.yaml (models, llama-server flags, ttl, routing sets, proxy port), GGUF placement and disk planning, VRAM-fit arithmetic for weights and KV cache, a systemd --user unit with linger, health checks, diagnosing load failures and cold-start timeouts, LiteLLM aliases, and WSL2 GPU passthrough. Use when setting up, sizing, debugging or routing a local model server, when a local model will not load, runs out of memory or is slow after a swap, or when an agent must reach a local model through LiteLLM. Do NOT use to ask a System One decision model a question or to triage with the decide tool (use decision-models), for choosing a hosted API model, or for GPU driver or CUDA development.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 1.0.0
+- **Version:** 1.0.1
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -35,4 +35,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

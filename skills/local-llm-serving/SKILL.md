@@ -1,9 +1,9 @@
 ---
 name: local-llm-serving
-description: Serve local GGUF models on a single consumer GPU (for example 24 GB) through llama-swap, optionally fronted by LiteLLM, with Ollama and LM Studio as alternatives. Covers the llama-swap config.yaml (models, llama-server flags, ttl, routing sets, proxy port), GGUF placement and disk planning, VRAM-fit arithmetic for weights and KV cache, a systemd --user unit with linger, health checks, diagnosing load failures and cold-start timeouts, LiteLLM aliases, and WSL2 GPU passthrough. Use when setting up, sizing, debugging or routing a local model server, when a local model will not load, runs out of memory or is slow after a swap, or when an agent must reach a local model through LiteLLM. Do NOT use to ask a System One decision model a question or to triage with the decide tool (use decision-models), for choosing a hosted API model, or for GPU driver or CUDA development.
+description: Serves local GGUF models on a single consumer GPU (for example 24 GB) through llama-swap, optionally fronted by LiteLLM, with Ollama and LM Studio as alternatives. Covers the llama-swap config.yaml (models, llama-server flags, ttl, routing sets, proxy port), GGUF placement and disk planning, VRAM-fit arithmetic for weights and KV cache, a systemd --user unit with linger, health checks, diagnosing load failures and cold-start timeouts, LiteLLM aliases, and WSL2 GPU passthrough. Use when setting up, sizing, debugging or routing a local model server, when a local model will not load, runs out of memory or is slow after a swap, or when an agent must reach a local model through LiteLLM. Do NOT use to ask a System One decision model a question or to triage with the decide tool (use decision-models), for choosing a hosted API model, or for GPU driver or CUDA development.
 license: Apache-2.0
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   tags: "llama-swap, llama.cpp, gguf, vram, kv-cache, litellm, systemd, wsl2, local-llm"
 ---
 

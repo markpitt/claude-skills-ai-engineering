@@ -116,7 +116,7 @@ pub struct IterationRecord {
 ///
 /// # Example
 /// ```rust
-/// let optimizer = EvaluatorOptimizer::new(client, "claude-sonnet-4-20250514".to_string());
+/// let optimizer = EvaluatorOptimizer::new(client, "claude-sonnet-5-5".to_string());
 /// optimizer.add_criterion(EvaluationCriterion {
 ///     name: "clarity".to_string(),
 ///     description: "Clear and understandable".to_string(),
@@ -490,7 +490,7 @@ pub async fn example_writing_optimization() -> Result<()> {
         .context("ANTHROPIC_API_KEY environment variable not set")?;
 
     let client = Arc::new(AnthropicClient::new(api_key));
-    let mut optimizer = EvaluatorOptimizer::new(client, "claude-sonnet-4-20250514".to_string());
+    let mut optimizer = EvaluatorOptimizer::new(client, "claude-sonnet-5-5".to_string());
 
     // Add evaluation criteria
     optimizer

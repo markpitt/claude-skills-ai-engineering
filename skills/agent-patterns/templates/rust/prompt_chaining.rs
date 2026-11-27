@@ -100,7 +100,7 @@ pub struct ChainHistory {
 /// # Example
 ///
 /// ```rust
-/// let mut chain = PromptChain::new(client, "claude-3-5-sonnet-20241022".to_string());
+/// let mut chain = PromptChain::new(client, "claude-sonnet-5-5".to_string());
 ///
 /// chain.add_step(ChainStep {
 ///     name: "outline".to_string(),
@@ -199,7 +199,7 @@ pub async fn example_document_generation() -> Result<()> {
         .context("ANTHROPIC_API_KEY environment variable not set")?;
 
     let client = Arc::new(AnthropicClient::new(api_key));
-    let mut chain = PromptChain::new(client, "claude-3-5-sonnet-20241022".to_string());
+    let mut chain = PromptChain::new(client, "claude-sonnet-5-5".to_string());
 
     // Step 1: Generate outline
     chain.add_step(ChainStep {

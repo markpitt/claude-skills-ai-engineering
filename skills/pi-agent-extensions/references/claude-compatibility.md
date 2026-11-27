@@ -19,7 +19,7 @@ has a smaller `claude-rules.ts` that does the rules part alone.
 
 ## Finding the project folders
 
-Walk from the working directory toward the root, stopping at the first folder with a `.git` entry, or at the
+Walk from the working directory towards the root, stopping at the first folder with a `.git` entry, or at the
 home directory when there is no repository. Collect each `.claude/` folder found on the way, so a nested repo
 gets its parent's rules too. Deduplicate the folders before returning them: from the home directory the walk
 reaches `~/.claude/skills`, which `settings.json` may already supply, and pi warns on name collisions and

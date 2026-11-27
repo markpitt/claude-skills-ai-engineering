@@ -124,7 +124,7 @@ changing settings.
   `/etc/ssl/certs` may point into `/var/lib/ca-certificates`; `sandbox.sh` binds only what is there.
 - **Interactive login.** Run `<name>-sandbox shell`, then `claude` and `/login`. The login lands in the
   agent's config directory, not the host's. A scoped token in the env file (`PASS_ENV`) is the alternative.
-- **Testing under `mp-sandbox-test`.** `$HOME` is read-only there, so give every test profile an
+- **Testing inside a read-only sandbox.** When the tests run in a wrapper that leaves `$HOME` read-only, so give every test profile an
   `AGENT_HOME` and `XDG_RUNTIME_DIR` inside its temp dir (`scripts/test.sh` does).
 - **`NET=proxy` is only as strict as the allowlist**, and the proxy is a host-wide service shared by every
   agent on the machine: an allowance for one agent is an allowance for all.

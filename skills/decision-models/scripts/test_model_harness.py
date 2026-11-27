@@ -1,7 +1,7 @@
 """Tests for model_harness.py. Offline: every reply is a fixture, no route is contacted.
 
-Run from this directory through the sandbox wrapper:
-    mp-sandbox-test python3 -m unittest test_model_harness -v
+Run from this directory inside a sandbox (for example a bubblewrap wrapper):
+    python3 -m unittest test_model_harness -v
 """
 
 from __future__ import annotations

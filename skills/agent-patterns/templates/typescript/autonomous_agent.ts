@@ -84,7 +84,7 @@ class AutonomousAgent {
 
   constructor(
     client: Anthropic,
-    model: string = "claude-sonnet-4-20250514",
+    model: string = "claude-sonnet-5-5",
     systemPrompt?: string
   ) {
     this.client = client;
@@ -469,7 +469,7 @@ async function exampleResearchAgent() {
 
   const agent = new AutonomousAgent(
     client,
-    "claude-sonnet-4-20250514",
+    "claude-sonnet-5-5",
     `You are a research agent. Your job is to find information 
     and synthesize it into a clear answer. Use the search tool to find 
     relevant information. When you have enough information, use finish 

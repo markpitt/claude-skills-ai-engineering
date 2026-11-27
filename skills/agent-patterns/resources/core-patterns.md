@@ -15,13 +15,13 @@ Input → LLM₁ → Output₁ → [Processing] → LLM₂ → Output₂ → ...
 - Sequential execution with programmatic checkpoints
 - Each step can validate or transform data
 - Predictable flow, fully deterministic
-- Well-suited for specialization by step
+- Well-suited for specialisation by step
 
 **When to Use:**
 ✅ Fixed subtask sequence known in advance
 ✅ Each step requires different expertise or prompting
 ✅ Validation or transformation needed between steps
-✅ Higher accuracy through step specialization
+✅ Higher accuracy through step specialisation
 ✅ Clear, linear workflow with no branching
 
 **When NOT to Use:**
@@ -48,7 +48,7 @@ Input → LLM₁ → Output₁ → [Processing] → LLM₂ → Output₂ → ...
    - Step 5: Write conclusion and summary
    - Step 6: Proofread, verify tone, and format
 
-2. **Localization Pipeline**
+2. **Localisation Pipeline**
    - Step 1: Generate content in source language
    - Step 2: Extract translatable strings and segments
    - Step 3: Translate to target language
@@ -57,7 +57,7 @@ Input → LLM₁ → Output₁ → [Processing] → LLM₂ → Output₂ → ...
    - Step 6: Test with target locale examples
 
 3. **Code Review and Improvement**
-   - Step 1: Analyze code for issues
+   - Step 1: Analyse code for issues
    - Step 2: Identify refactoring opportunities
    - Step 3: Generate improved version
    - Step 4: Validate functionality preservation
@@ -104,7 +104,7 @@ async def prompt_chaining(input_text: str):
 
 ## Pattern: Routing
 
-**Core Concept:** Classify input and route to specialized downstream processes or models based on classification.
+**Core Concept:** Classify input and route to specialised downstream processes or models based on classification.
 
 **Architecture:**
 ```
@@ -116,7 +116,7 @@ Input → Classifier LLM → Route Decision
 
 **Key Characteristics:**
 - Single classification decision upfront
-- Multiple specialized downstream handlers
+- Multiple specialised downstream handlers
 - Can route to different models, prompts, or processes
 - Often combined with other patterns for power
 
@@ -124,7 +124,7 @@ Input → Classifier LLM → Route Decision
 ✅ Distinct input categories with clear decision criteria
 ✅ Categories benefit from significantly different handling
 ✅ Classification accuracy is reliably high
-✅ Cost/performance optimization opportunities
+✅ Cost/performance optimisation opportunities
 ✅ Different complexity levels requiring different model capabilities
 
 **When NOT to Use:**
@@ -146,15 +146,15 @@ Input → Classifier LLM → Route Decision
 1. **Customer Service Routing**
    - General inquiry → FAQ bot or knowledge base
    - Refund request → Refund processing system
-   - Technical issue → Specialized technical support agent
+   - Technical issue → Specialised technical support agent
    - Complaint → Human escalation or complaint handler
    - Feature request → Feedback collection system
 
 2. **Model Selection by Query Type**
    - Simple factual question → Fast, cheap model
    - Complex analysis or reasoning → Capable, expensive model
-   - Code generation → Specialized code generation model
-   - Creative writing → Model optimized for creative tasks
+   - Code generation → Specialised code generation model
+   - Creative writing → Model optimised for creative tasks
 
 3. **Content Moderation**
    - Safe content → Publish directly
@@ -239,7 +239,7 @@ Input → Split into Subtasks
 
 **Real-World Examples:**
 - Multiple guardrails running on content simultaneously
-- Analyzing different sections of a document in parallel
+- Analysing different sections of a document in parallel
 - Evaluating multiple performance/quality aspects in parallel
 - Multi-language translation of independent sections
 - Parallel content moderation checks

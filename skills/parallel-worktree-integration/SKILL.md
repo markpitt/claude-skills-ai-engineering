@@ -3,7 +3,7 @@ name: parallel-worktree-integration
 description: Runs several subagents in parallel git worktrees, one branch per task pinned to a base commit, then integrates their commits by cherry-pick in plan order with conflict handling, verifies the result, prunes the wt-* worktrees and reports what is left. Covers the shared stash stack (never a bare git stash), worktrees inside an un-ignored folder that show as untracked in the main checkout, and a read-only report of every worktree's state. Use when fanning work out to parallel agents in git worktrees, cherry-picking task branches into an integration branch, cleaning up leftover wt-* worktrees, or asking what worktrees and stashes remain. Do NOT use for splitting one dirty tree into commits (use atomic-commit-organiser), for an audit-fix-review cycle (use audit-remediation-loop), or for resolving a single merge conflict with no worktrees involved.
 license: Apache-2.0
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   tags: "git, worktree, parallel, subagents, cherry-pick, integration, stash, prune, multi-agent, workflow"
 ---
 
@@ -102,10 +102,10 @@ flag, the shared stash, the prefix filter and the usage error.
 
 ```bash
 cd "$REPO"   # any directory inside the repository being tested from
-mp-sandbox-test python3 -P "$SKILL_DIR/scripts/test_worktree_report.py" -v; echo "exit=$?"
+<sandbox> python3 -P "$SKILL_DIR/scripts/test_worktree_report.py" -v; echo "exit=$?"
 ```
 
-Run them through the wrapper, from a directory inside the repository, as the sandbox rule requires. The
+`<sandbox>` stands for whatever runs test code in isolation on your machine, for example a bubblewrap (`bwrap`) wrapper that makes only the repository writable. Leave it out to run the tests directly. Run them from a directory inside the repository. The
 repositories they build live under the wrapper's private `/tmp`.
 
 ## Limits

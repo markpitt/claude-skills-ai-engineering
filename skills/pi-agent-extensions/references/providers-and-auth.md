@@ -131,5 +131,5 @@ the server implements another protocol pi supports. Points to get right:
 2. One ordinary prompt returns text, and one prompt with a tool call returns a tool result.
 3. A deliberately wrong key produces an authentication error, not a silent empty answer.
 4. The name check (`scripts/check_extension_names.py`) passes for the file.
-5. Run the provider's own tests where the project has them, through `mp-sandbox-test` if they run code
-   from the repository.
+5. Run the provider's own tests where the project has them, inside a sandbox if they run code from the
+   repository.

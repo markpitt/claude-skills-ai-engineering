@@ -3,7 +3,7 @@ name: pi-agent-extensions
 description: Writes, debugs and checks extensions for the pi coding agent, covering its ExtensionAPI events and tools, registerProvider and createProvider with auth.json and models.json credentials, live model-list refresh, Claude compatibility (rules, skills, memory, CLAUDE.md), OpenAI-compatible local servers such as llama.cpp, and the provider bugs that recur. Names are checked against the installed binary. Use when writing or changing a file under ~/.pi/agent/extensions or .pi/extensions, adding a pi provider, a model list that does not update, a key that is ignored, or Claude rules missing from pi. Do NOT use for omp configuration or extensions (use omp-harness), for writing AGENTS.md or CLAUDE.md content (use ai-coding-agent-setup), or for choosing a hosted model without pi involved.
 license: Apache-2.0
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   tags: "pi, coding-agent, extensions, providers, auth, models, openai-compatible, llama-cpp, claude-compat, typescript"
 ---
 
@@ -80,8 +80,9 @@ SKILL_DIR=/absolute/path/to/pi-agent-extensions
    - Claude compatibility: a fresh session shows the rule text or the path pointer, and the rule's effect is
      visible in the answer. The session's own context report is the evidence, not the model's recitation.
 
-6. **Run any project test suite** through `mp-sandbox-test`, from a directory inside the repository. A suite
-   started through a task runner is not wrapped by the guard, so check the wrapper or run the underlying
+6. **Run any project test suite inside a sandbox**, such as a bubblewrap wrapper that makes only the
+   repository writable, from a directory inside the repository. A suite started through a task runner may
+   escape a wrapper applied to the outer command, so check what the task runs, or run the underlying
    command wrapped.
 
 7. **Report** the pi version, the names checked and their exit code, the tests run, and which claims were

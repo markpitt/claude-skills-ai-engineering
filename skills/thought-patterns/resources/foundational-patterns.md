@@ -77,16 +77,16 @@ This resource covers the core analytical and systems thinking patterns used for 
 1. Identify system boundaries
 2. Map components and relationships
 3. Identify feedback loops (reinforcing/balancing)
-4. Recognize delays and non-linearities
-5. Consider emergence and system behavior
+4. Recognise delays and non-linearities
+5. Consider emergence and system behaviour
 6. Use DSRP framework: Distinctions, Systems, Relationships, Perspectives
 
 **Key Skills**:
 - **Dynamic thinking**: Understanding how systems evolve over time
-- **System-as-cause thinking**: Recognizing system structure drives behavior
+- **System-as-cause thinking**: Recognising system structure drives behaviour
 - **Holistic thinking**: Seeing whole systems, not just parts
 - **Operational thinking**: Understanding how things actually work
-- **Closed-loop thinking**: Recognizing feedback effects
+- **Closed-loop thinking**: Recognising feedback effects
 - **Stock-and-flow thinking**: Distinguishing accumulations from flows
 
 **Limitations**: Can be overwhelming with complex systems; requires significant cognitive load.

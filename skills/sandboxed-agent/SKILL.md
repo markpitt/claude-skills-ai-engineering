@@ -1,9 +1,9 @@
 ---
 name: sandboxed-agent
-description: Create a sandboxed coding agent for one folder, using a bubblewrap sandbox profile inferred from the folder (secrets and state hidden, least privilege, network none by default), launchers on PATH, an env template for its credentials, and a curated, secret-free set of notes harvested from the host's Claude history so the agent can orient itself. Use when asked to sandbox an agent to a directory, give an agent access to only one project, set up a restricted agent for a service folder, seed a new agent's memory from existing sessions, or find out why sandboxed agents did not start after a reboot or after their folders moved. Do NOT use for general container isolation, CI sandboxes, or running untrusted binaries.
+description: Creates a sandboxed coding agent for one folder, using a bubblewrap sandbox profile inferred from the folder (secrets and state hidden, least privilege, network none by default), launchers on PATH, an env template for its credentials, and a curated, secret-free set of notes harvested from the host's Claude history so the agent can orient itself. Use when asked to sandbox an agent to a directory, give an agent access to only one project, set up a restricted agent for a service folder, seed a new agent's memory from existing sessions, or find out why sandboxed agents did not start after a reboot or after their folders moved. Do NOT use for general container isolation, CI sandboxes, or running untrusted binaries.
 license: Apache-2.0
 metadata:
-  version: "1.3.0"
+  version: "1.4.1"
 ---
 
 # Sandboxed agent
@@ -50,16 +50,37 @@ A copy taken from the public repository has no executable bits. The copies `new-
   other architecture the runner refuses to start.
 - Credentials come from `~/.config/<name>-agent/env` (chmod 600) as environment variables, never
   from the profile or the command line.
-- Host services the agent may use, with no network: `EXTRA_RO=("src:dst")` binds a path read-only (a directory that holds a
-  unix socket works: `connect()` needs no write access, and a restarted service's new socket is still reachable through a
-  directory bind, not through a file bind). `EXTRA_RW=("src:dst")` binds a path writable: a spool the host drains. The agent
-  cannot remove or rename the mount point, so it cannot point the host's reader at another directory. What it can still
-  create inside is anything: a symlink to any path (it resolves on the host, where the agent could not read the target), a
-  FIFO (a reader that `open()`s it blocks forever), a subdirectory, and files of any size with no quota. So the host reader
-  must check the type before it reads: open with `O_NOFOLLOW|O_NONBLOCK`, accept only `S_ISREG`, cap the size and the number
-  of files, and refuse a symlinked spool directory. Create the source directory before the agent starts (a missing source
-  stops bwrap), and keep the destination out of `~` (use `/run/...`): a mount below `~/.claude` or `~/.config` makes the
-  self-test report a leak of the real home.
+- Host services the agent may use, with no network:
+  - `EXTRA_RO=("src:dst")` binds a path read-only. A directory holding a unix socket works:
+    `connect()` needs no write access, and a restarted service's new socket is still reachable
+    through a directory bind, though not through a file bind.
+  - `EXTRA_RW=("src:dst")` binds a path writable, for a spool the host drains. The agent cannot
+    remove or rename the mount point, so it cannot point the host's reader at another directory.
+  - Inside a writable bind the agent can still create anything: a symlink to any path (it resolves
+    on the host, where the agent could not read the target), a FIFO (a reader that `open()`s it
+    blocks forever), a subdirectory, and files of any size with no quota. The host reader must check
+    the type before it reads: open with `O_NOFOLLOW|O_NONBLOCK`, accept only `S_ISREG`, cap the size
+    and the number of files, and refuse a symlinked spool directory.
+  - Create the source directory before the agent starts, because a missing source stops bwrap.
+    Keep the destination out of `~` (use `/run/...`): a mount below `~/.claude` or `~/.config`
+    makes the self-test report a leak of the real home.
+- Instructions kept outside the working folder:
+  - `OVERLAY=("dest|layer[|layer...]")` shows each layer's files at the same paths under `dest`
+    (ROOT or a folder in it), read-only, top layer first, so a repository's `CLAUDE.md`, `.claude/`
+    and `AGENTS.md` can live in another repository.
+  - They are read-only bind mounts, not overlayfs. An overlay over the working folder goes stale
+    when the host changes the folder while the agent runs (a deleted file stays readable, a file
+    replaced by rename keeps its old content, and a write to it is lost); binds do not.
+  - A folder the host lacks, or holds empty, is mounted whole (one layer) or as a read-only overlay
+    of the layers (several). A folder the host has is walked, so its other files stay the
+    repository's and stay writable.
+  - A path the host lacks gets an empty file or folder as its mount point, made on the host before
+    the start and reused on every later run, so the repository should ignore those paths. A layer
+    symlink needs the same link on the host, or a folder the host lacks around it.
+  - `show` prints one `overlay` line per destination, and `test` checks that every layer file shows
+    byte for byte at its path and that every mount is read-only.
+  `test` starts the sandbox, so it makes the same mount points on the host as a run does; `show` makes none.
+  A layer changed on the host while the agent runs keeps its old content inside until the next start.
 
 Least privilege first: read-only, network none, nothing passed in. Widen only when the user says so.
 

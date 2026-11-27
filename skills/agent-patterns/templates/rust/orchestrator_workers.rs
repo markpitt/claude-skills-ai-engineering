@@ -185,7 +185,7 @@ impl Worker for LLMWorker {
 ///
 /// # Example
 /// ```rust
-/// let orchestrator = Orchestrator::new(client, "claude-sonnet-4-20250514".to_string());
+/// let orchestrator = Orchestrator::new(client, "claude-sonnet-5-5".to_string());
 /// orchestrator.register_worker(Box::new(LLMWorker::new(client, "researcher", "You research topics", model)));
 /// let result = orchestrator.execute("Write an article about AI").await?;
 /// ```
@@ -432,7 +432,7 @@ pub async fn example_research_article() -> Result<()> {
         .context("ANTHROPIC_API_KEY environment variable not set")?;
 
     let client = Arc::new(AnthropicClient::new(api_key));
-    let mut orchestrator = Orchestrator::new(client.clone(), "claude-sonnet-4-20250514".to_string());
+    let mut orchestrator = Orchestrator::new(client.clone(), "claude-sonnet-5-5".to_string());
 
     // Register specialized workers
     orchestrator
@@ -440,19 +440,19 @@ pub async fn example_research_article() -> Result<()> {
             client.clone(),
             "researcher",
             "You are a research specialist. Gather facts, statistics, and key information.",
-            "claude-sonnet-4-20250514",
+            "claude-sonnet-5-5",
         )))
         .register_worker(Box::new(LLMWorker::new(
             client.clone(),
             "writer",
             "You are a skilled writer. Create engaging, well-structured content.",
-            "claude-sonnet-4-20250514",
+            "claude-sonnet-5-5",
         )))
         .register_worker(Box::new(LLMWorker::new(
             client,
             "editor",
             "You are an editor. Review and improve content for clarity and accuracy.",
-            "claude-sonnet-4-20250514",
+            "claude-sonnet-5-5",
         )));
 
     let result = orchestrator

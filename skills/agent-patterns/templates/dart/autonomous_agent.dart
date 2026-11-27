@@ -17,7 +17,7 @@ class AnthropicClient {
 
   Future<String> createMessage({
     required String prompt,
-    String model = 'claude-sonnet-4-20250514',
+    String model = 'claude-sonnet-5-5',
     int maxTokens = 4096,
     String? systemPrompt,
   }) async {
@@ -167,7 +167,7 @@ class AutonomousAgent {
 
   AutonomousAgent({
     required this.client,
-    this.model = 'claude-sonnet-4-20250514',
+    this.model = 'claude-sonnet-5-5',
   });
 
   /// Register a tool for the agent

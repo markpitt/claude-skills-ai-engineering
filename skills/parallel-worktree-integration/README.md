@@ -5,7 +5,7 @@
 Runs several subagents in parallel git worktrees, one branch per task pinned to a base commit, then integrates their commits by cherry-pick in plan order with conflict handling, verifies the result, prunes the wt-* worktrees and reports what is left. Covers the shared stash stack (never a bare git stash), worktrees inside an un-ignored folder that show as untracked in the main checkout, and a read-only report of every worktree's state. Use when fanning work out to parallel agents in git worktrees, cherry-picking task branches into an integration branch, cleaning up leftover wt-* worktrees, or asking what worktrees and stashes remain. Do NOT use for splitting one dirty tree into commits (use atomic-commit-organiser), for an audit-fix-review cycle (use audit-remediation-loop), or for resolving a single merge conflict with no worktrees involved.
 
 - **Entry point:** [SKILL.md](SKILL.md)
-- **Version:** 1.0.0
+- **Version:** 1.0.1
 - **Licence:** Apache-2.0, see [LICENSE](LICENSE)
 
 ## Install
@@ -33,4 +33,4 @@ Loaded on demand, not up front. SKILL.md routes to them.
 ## Part of a larger set
 
 One of the AI engineering skills (`claude-skills-ai-engineering`). See the [group's list](../../README.md),
-or every group in [claude-skills](https://github.com/markpitt/claude-skills).
+or every group in [claude-skills](https://markpitt.dev/claude-skills/).

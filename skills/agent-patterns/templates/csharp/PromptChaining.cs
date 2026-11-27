@@ -70,7 +70,7 @@ namespace AgentPatterns
 
         public PromptChain(
             AnthropicClient client,
-            string model = "claude-3-5-sonnet-20241022")
+            string model = "claude-sonnet-5-5")
         {
             _client = client;
             _model = model;
@@ -227,7 +227,7 @@ namespace AgentPatterns
 
             var kernel = Kernel.CreateBuilder()
                 .AddAnthropicChatCompletion(
-                    modelId: "claude-3-5-sonnet-20241022",
+                    modelId: "claude-sonnet-5-5",
                     apiKey: Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
                 )
                 .Build();

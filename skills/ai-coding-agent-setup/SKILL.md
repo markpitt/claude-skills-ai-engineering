@@ -1,122 +1,90 @@
 ---
 name: ai-coding-agent-setup
-description: Configures AI agents (GitHub Copilot, Claude Code, Cursor, Codex) to understand a codebase and self-improve as the project evolves. Use when setting up a new project for AI-assisted development, onboarding AI agents to an existing repo, creating AGENTS.md, configuring MCP servers for code navigation, packaging project workflows as agent skills, or establishing self-improvement feedback loops. Covers AGENTS.md authoring, skill packaging, MCP configuration, context management, and living-documentation strategies.
+description: Sets a repository up so AI coding agents (GitHub Copilot, Claude Code, Cursor, Codex) understand it and keep improving as the project changes. Covers writing AGENTS.md and the tool-specific instruction files, packaging repeatable project workflows as agent skills, configuring MCP servers for code navigation, and the feedback loops that stop instructions going stale. Use when setting up a new project for AI-assisted development, onboarding agents to an existing repo, writing or fixing AGENTS.md, configuring .vscode/mcp.json, or when asked "why does the agent keep making the same mistake" or "the agent ignores our conventions". Do NOT use for writing or testing a single skill in depth (use skill-creator), for sandboxing an agent (use sandboxed-agent), or for choosing an LLM workflow pattern in application code (use agent-patterns).
 license: Apache-2.0
 metadata:
-  version: 1.1.0
+  version: "2.0.0"
   tags: [agents, ai, codebase, mcp, agents-md, self-improvement]
 ---
 
-# AI Coding Agent Setup
+# AI coding agent setup
 
-Configure AI agents to deeply understand a codebase and continuously improve as the project grows. This skill covers the three-layer architecture: **AGENTS.md** for project identity, **agent skills** for packaged workflows, and **MCP servers** for live tool access, plus self-improvement strategies to prevent context rot.
+An agent works well in a repository when three things are in place: a short file that says what
+the project is and how to build and test it, packaged workflows for the jobs that repeat, and tools
+that let it look things up instead of guessing. This skill covers each, and how to keep them true
+as the code moves on.
 
-## Quick Reference Table
+| Layer | What it holds | Reference |
+|---|---|---|
+| AGENTS.md | Project identity: overview, build and test commands, conventions, layout | `resources/agents-md-guide.md` |
+| Agent skills | Repeatable workflows, loaded only when needed | `resources/agent-skills-architecture.md` |
+| MCP servers | Live tools: code search, GitHub, databases | `resources/mcp-codebase-tools.md` |
+| Feedback loops | Keeping all of the above current | `resources/self-improvement-patterns.md` |
 
-| Goal | Load Resource | Key Concepts |
-|------|---------------|--------------|
-| Create or improve AGENTS.md | `resources/agents-md-guide.md` | project identity, hierarchical discovery, conventions |
-| Package project workflows as skills | `resources/agent-skills-architecture.md` | progressive disclosure, SKILL.md, trigger phrases |
-| Add remote/codebase tools via MCP | `resources/mcp-codebase-tools.md` | VS Code built-in tools, GitHub MCP remote, vscode-mcp-server, semantic search |
-| Reduce context rot, build feedback loops | `resources/self-improvement-patterns.md` | living docs, meta-skills, context compression |
+## Where to start
 
----
+| The user says | Start with |
+|---|---|
+| "Set up AI for this project" | `agents-md-guide.md`, then decide whether skills or MCP are needed at all |
+| "The agent ignores our conventions" | `agents-md-guide.md`, conventions section |
+| "It keeps making the same mistake" | `self-improvement-patterns.md`, feedback loops |
+| "It can't find its way round the code" | `mcp-codebase-tools.md` |
+| "Can we package this workflow for the agent?" | `agent-skills-architecture.md` |
 
-## Orchestration Protocol
+Produce the files themselves (AGENTS.md, SKILL.md, `mcp.json`), not advice about them.
 
-### Phase 1: Classify the Request
+## A new project
 
-Determine which layer the user needs help with:
+1. Write `AGENTS.md` at the repository root from the template in `agents-md-guide.md`: what the
+   project is, the exact build and test commands, the conventions a newcomer would get wrong, and a
+   map of the folders. Keep it short. Every line costs context in every session.
+2. Point the tool-specific files at it rather than copying it. In `CLAUDE.md`, a line reading
+   `Read @AGENTS.md` is enough. `copilot-instructions.md` can say the same.
+3. Add MCP only for what the built-in tools cannot do. VS Code's own tools already give errors,
+   symbol navigation and semantic search. The GitHub MCP remote server (`type: http`, OAuth) adds
+   cross-repository access without a token in the file.
+4. Package a workflow as a skill only once it has been done by hand more than once and the steps are
+   stable.
+5. Commit all of it. These files are part of the project, and reviewing changes to them matters as
+   much as reviewing code.
 
-- **"Set up AI for my project"** → start with `agents-md-guide.md`, then assess if skills and MCP are needed
-- **"AI keeps making the same mistake"** → `self-improvement-patterns.md` (feedback loops section)
-- **"AI can't navigate my code / doesn't understand the structure"** → `mcp-codebase-tools.md`
-- **"How do I package this workflow for AI reuse?"** → `agent-skills-architecture.md`
-- **"Agent ignores my conventions"** → `agents-md-guide.md` (conventions and enforcement section)
+## An existing repository
 
-### Phase 2: Select Resource
+Read the README for content an agent needs and a human reader does not: build flags, test scripts,
+folder purposes. Move that into AGENTS.md. In a monorepo, put global rules in the root AGENTS.md and
+package-specific ones in an AGENTS.md beside each package; the closest file wins.
 
-Load the relevant resource file from the table above. Most setups require `agents-md-guide.md` as the foundation, with other resources added on top.
+## Keeping it true
 
-### Phase 3: Execute
+Treat a repeated agent mistake as a documentation bug. When it happens, find the missing or wrong
+instruction, fix it in AGENTS.md or the relevant skill, and ask the agent to do the same task again
+to check the fix took. After a long debugging session, ask the agent what one line in AGENTS.md
+would have prevented it, and review that line before committing it.
 
-Follow the specific guidance in the loaded resource. Output actionable file content (AGENTS.md, SKILL.md, mcp.json), not just advice.
+Instructions also go stale the other way: a rule for code that no longer exists still costs
+context and can mislead. Prune them on a regular review, using the prompts in
+`self-improvement-patterns.md`.
 
----
+## Choices worth getting right
 
-## Common Task Workflows
+- **Identity in AGENTS.md, procedure in skills.** AGENTS.md is read every session, so keep
+  step-by-step workflows out of it.
+- **Skills stay small.** Keep SKILL.md under 500 lines, put heavy reference material in
+  `resources/`, and link every reference directly from SKILL.md rather than chaining one reference to
+  another.
+- **Name MCP tools in full** in AGENTS.md, as `ServerName:tool_name` (for example
+  `GitHub:search_code`), so the agent knows which server to call.
+- **Share skills across tools.** Keep them in `.agents/skills/`, which Copilot and other Agent Skills
+  tools read, and link `.claude/skills/` to it for Claude Code. Use one tool's path only for a skill
+  that only that tool will use.
+- **Delegate the big jobs.** Research, audits and large refactors go to subagents, which keep the
+  main session's context clear.
 
-### Workflow 1: New Project AI Setup (15 minutes)
+## References
 
-1. Load `resources/agents-md-guide.md` → create `AGENTS.md` at repo root using the template
-2. Add project overview, build commands, test instructions, code conventions
-3. Configure `.vscode/mcp.json` with the GitHub MCP remote server: `type: http`, OAuth, VS Code 1.101+, no token needed (see `mcp-codebase-tools.md`)
-4. If the project has complex, repeatable workflows → package them as skills (see `agent-skills-architecture.md`)
-5. Commit all AI configuration files to version control alongside the codebase
-
-### Workflow 2: AGENTS.md for an Existing Repo
-
-1. Load `resources/agents-md-guide.md`
-2. Audit the existing `README.md` for technical content that belongs in AGENTS.md
-3. Extract: build commands, test scripts, folder structure map, conventions → move to AGENTS.md
-4. For monorepos: create root AGENTS.md + sub-directory AGENTS.md files for each package
-5. Add a "pointer" to `CLAUDE.md` or `copilot-instructions.md` referencing AGENTS.md
-
-### Workflow 3: Preventing Agent Mistakes from Recurring
-
-1. Identify the pattern: did the agent use a wrong pattern/file/command?
-2. Load `resources/self-improvement-patterns.md`
-3. Update the relevant `AGENTS.md` section with an explicit correction
-4. If the mistake is workflow-specific → update or create a skill (`agent-skills-architecture.md`)
-5. Test: ask the agent to perform the same task; verify it now follows the corrected instruction
-
-### Workflow 4: Giving Agents Deep Code Navigation
-
-1. Load `resources/mcp-codebase-tools.md`
-2. Check VS Code's built-in tools first: `get_errors`, semantic search and symbol navigation need no configuration
-3. For cross-repository access → add the GitHub MCP remote server (`type: http`, OAuth, VS Code 1.101+)
-4. For semantic search over large codebases → configure a vector-store MCP server (Qdrant or Azure AI Search)
-5. Document the available MCP tools in AGENTS.md, with fully qualified names, so the agent knows when to use them
-
-### Workflow 5: Self-Improving Agent Configuration
-
-1. After each significant debugging session, ask the agent: "What should we add to AGENTS.md to prevent this?"
-2. Review proposed update → approve and commit
-3. Monthly: use a "review" prompt against `self-improvement-patterns.md` to audit all config files
-4. Over time: stale instructions become "context rot". Prune or update them proactively
-
----
-
-## Resource Summaries
-
-| Resource | Purpose | Line Count |
-|----------|---------|-----------|
-| `resources/agents-md-guide.md` | AGENTS.md template, recommended sections, hierarchical discovery, comparison with CLAUDE.md/copilot-instructions.md | ~350 |
-| `resources/agent-skills-architecture.md` | How to package project workflows as reusable SKILL.md-based skills with progressive disclosure | ~300 |
-| `resources/mcp-codebase-tools.md` | MCP servers for codebase navigation: GitHub MCP (remote HTTP), vscode-mcp-server, semantic search, DB access; VS Code variable reference and auth patterns | ~260 |
-| `resources/self-improvement-patterns.md` | Context rot prevention, feedback loops, living documentation, meta-skills, memory architecture | ~300 |
-
----
-
-## Best Practices
-
-- **Identity vs. Capability**: Use AGENTS.md for static project rules (identity); use skills for dynamic, executable workflows (capability). Do not put workflow logic in AGENTS.md.
-- **Commit AI config to version control**: AGENTS.md, skills, and mcp.json are first-class project files. Track them in git alongside code.
-- **Hierarchical AGENTS.md for monorepos**: Root file holds global rules; sub-directory files override for local packages. Closest file wins.
-- **Treat agent mistakes as documentation bugs**: Every repeated agent error is a missing or incorrect instruction in AGENTS.md or a skill. Fix the docs, not just the output.
-- **Pointer pattern**: In `CLAUDE.md` write `Read @AGENTS.md`, which avoids duplication across tool-specific instruction files.
-- **Progressive disclosure in skills**: Keep SKILL.md under 500 lines; move heavy reference content to `resources/` files loaded only when needed. Keep references one level deep: SKILL.md links to each file directly, and reference files do not chain to further files.
-- **Name MCP tools explicitly**: Use the fully qualified `ServerName:tool_name` form (for example `GitHub:search_code`) in AGENTS.md so agents know which tool to invoke and from which server.
-- **Cross-tool skill paths**: Keep shared skills in `.agents/skills/`, which VS Code Copilot and other Agent Skills tools read, and link `.claude/skills/` to them for Claude Code. Use a single tool's path only when the skill targets that tool alone.
-- **Prefer subagents for complex tasks**: Delegate research, audits, large refactors and content-heavy analysis to subagents; the `agent-patterns` skill helps choose an orchestration pattern.
-
----
-
-## External References
-
-- [AGENTS.md Open Standard, AAIF](https://agentprotocol.ai/agents-md)
-- [Anthropic Skills Documentation](https://docs.anthropic.com/en/docs/agents-and-tools/agent-skills)
-- [Agent Skills Best Practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
-- [Model Context Protocol Specification](https://modelcontextprotocol.io)
+- [AGENTS.md](https://agents.md)
+- [Agent Skills overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)
+- [Agent Skills best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
+- [Model Context Protocol](https://modelcontextprotocol.io)
 - [GitHub MCP Server](https://github.com/github/github-mcp-server)
-- [VS Code MCP Servers Documentation](https://code.visualstudio.com/docs/copilot/customization/mcp-servers)
+- [VS Code MCP servers](https://code.visualstudio.com/docs/copilot/customization/mcp-servers)
